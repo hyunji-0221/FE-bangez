@@ -9,7 +9,7 @@ import Testimonial from "@/components/home/home-v9/Testimonial";
 import Hero from "@/components/home/home-v9/Hero";
 import ApartmentType from "@/components/home/home-v9/ApartmentType";
 import Link from "next/link";
-import SellingBlock from "../../../components/home/home-v9/SellingBlock";
+import SellingBlock from "../../../../components/home/home-v9/SellingBlock";
 import About from "@/components/home/home-v9/about";
 import Pricing from "@/components/home/home-v9/Pricing";
 import Cta from "@/components/home/home-v9/Cta";
