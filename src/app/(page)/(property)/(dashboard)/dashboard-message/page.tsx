@@ -1,4 +1,5 @@
 'use client';
+import { API } from "@/app/api/common/API";
 import DashboardHeader from "@/components/common/DashboardHeader";
 import MobileMenu from "@/components/common/mobile-menu";
 import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
@@ -8,7 +9,6 @@ import ChatBoxForm from "@/components/property/dashboard/dashboard-message/ChatB
 import SearchBox from "@/components/property/dashboard/dashboard-message/SearchBox";
 import UserChatBoxContent from "@/components/property/dashboard/dashboard-message/UserChatBoxContent";
 import UserInboxList from "@/components/property/dashboard/dashboard-message/UserInboxList";
-import { API } from "@/redux/API";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
