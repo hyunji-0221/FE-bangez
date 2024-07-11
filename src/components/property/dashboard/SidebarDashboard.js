@@ -1,37 +1,26 @@
-"use client";
-import Link from "next/link";
-import React from "react";
-import { usePathname } from "next/navigation";
+"use client"
+import Link from "next/link"
+import React from "react"
+import { usePathname } from "next/navigation"
 
-interface SidebarItem {
-  href: string;
-  icon: string;
-  text: string;
-}
+const SidebarDashboard = () => {
+  const pathname = usePathname()
 
-interface SidebarSection {
-  title: string;
-  items: SidebarItem[];
-}
-
-const SidebarDashboard: React.FC = () => {
-  const pathname = usePathname();
-
-  const sidebarItems: SidebarSection[] = [
+  const sidebarItems = [
     {
       title: "MAIN",
       items: [
         {
           href: "/dashboard-home",
           icon: "flaticon-discovery",
-          text: "Dashboard",
+          text: "Dashboard"
         },
         {
           href: "/dashboard-message",
           icon: "flaticon-chat-1",
-          text: "Message",
-        },
-      ],
+          text: "Message"
+        }
+      ]
     },
     {
       title: "MANAGE LISTINGS",
@@ -39,29 +28,29 @@ const SidebarDashboard: React.FC = () => {
         {
           href: "/dashboard-add-property",
           icon: "flaticon-new-tab",
-          text: "Add New Property",
+          text: "Add New Property"
         },
         {
           href: "/dashboard-my-properties",
           icon: "flaticon-home",
-          text: "My Properties",
+          text: "My Properties"
         },
         {
           href: "/dashboard-my-favourites",
           icon: "flaticon-like",
-          text: "My Favorites",
+          text: "My Favorites"
         },
         {
           href: "/dashboard-saved-search",
           icon: "flaticon-search-2",
-          text: "Saved Search",
+          text: "Saved Search"
         },
         {
           href: "/dashboard-reviews",
           icon: "flaticon-review",
-          text: "Reviews",
-        },
-      ],
+          text: "Reviews"
+        }
+      ]
     },
     {
       title: "MANAGE ACCOUNT",
@@ -69,21 +58,21 @@ const SidebarDashboard: React.FC = () => {
         {
           href: "/dashboard-my-package",
           icon: "flaticon-protection",
-          text: "My Package",
+          text: "My Package"
         },
         {
           href: "/dashboard-my-profile",
           icon: "flaticon-user",
-          text: "My Profile",
+          text: "My Profile"
         },
         {
           href: "/login",
           icon: "flaticon-logout",
-          text: "Logout",
-        },
-      ],
-    },
-  ];
+          text: "Logout"
+        }
+      ]
+    }
+  ]
 
   return (
     <div className="dashboard__sidebar d-none d-lg-block">
@@ -114,7 +103,7 @@ const SidebarDashboard: React.FC = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SidebarDashboard;
+export default SidebarDashboard

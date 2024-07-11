@@ -1,13 +1,13 @@
-import React from "react";
+import React from "react"
 
 const footerLinks = [
   { text: "Privacy", href: "#" },
   { text: "Terms", href: "#" },
-  { text: "Sitemap", href: "#" },
-];
+  { text: "Sitemap", href: "#" }
+]
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear()
 
   return (
     <footer className="dashboard_footer pt30 pb10">
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
