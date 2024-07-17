@@ -16,31 +16,31 @@ const MainMenu = () => {
   const [activeLink, setActiveLink] = useState("");
 
   useEffect(() => {
-    homeItems.forEach((elm) => {
+    homeItems.forEach((elm:any) => {
       if (elm.href.split("/")[1] == pathname.split("/")[1]) {
         setTopMenu("home");
       }
     });
-    blogItems.forEach((elm) => {
+    blogItems.forEach((elm:any) => {
       if (elm.href.split("/")[1] == pathname.split("/")[1]) {
         setTopMenu("blog");
       }
     });
-    pageItems.forEach((elm) => {
+    pageItems.forEach((elm:any) => {
       if (elm.href.split("/")[1] == pathname.split("/")[1]) {
         setTopMenu("pages");
       }
     });
-    propertyItems.forEach((item) =>
-      item.subMenuItems.forEach((elm) => {
+    propertyItems.forEach((item:any) =>
+      item.subMenuItems.forEach((elm:any) => {
         if (elm.href.split("/")[1] == pathname.split("/")[1]) {
           setTopMenu("property");
           setSubmenu(item.label);
         }
       })
     );
-    listingItems.forEach((item) =>
-      item.submenu.forEach((elm) => {
+    listingItems.forEach((item:any) =>
+      item.submenu.forEach((elm:any) => {
         if (elm.href.split("/")[1] == pathname.split("/")[1]) {
           setTopMenu("listing");
           setSubmenu(item.title);
@@ -49,7 +49,7 @@ const MainMenu = () => {
     );
   }, [pathname]);
 
-  const handleActive = (link) => {
+  const handleActive = (link:any) => {
     if (link.split("/")[1] == pathname.split("/")[1]) {
       return "menuActive";
     }
@@ -59,36 +59,36 @@ const MainMenu = () => {
       <li className="visible_list dropitem">
         <a className="list-item" href="#">
           <span className={topMenu == "home" ? "title menuActive" : "title"}>
-            Home
+            지도
           </span>
-          <span className="arrow"></span>
+          {/* <span className="arrow"></span> */} 
         </a>
         {/* Level Two*/}
-        <ul className="sub-menu">
-          {homeItems.map((item, index) => (
+        {/* <ul className="sub-menu">
+          {homeItems.map((item:any, index:any) => (
             <li key={index}>
               <Link className={`${handleActive(item.href)}`} href={item.href}>
                 {item.label}
               </Link>
             </li>
           ))}
-        </ul>
+        </ul>  드롭다운*/}
       </li>
       {/* End homeItems */}
 
       <li className="megamenu_style dropitem">
         <a className="list-item" href="#">
           <span className={topMenu == "listing" ? "title menuActive" : "title"}>
-            Listing
+            게시판
           </span>
           <span className="arrow"></span>
         </a>
         <ul className="row dropdown-megamenu sub-menu">
-          {listingItems.map((item, index) => (
+          {listingItems.map((item:any, index:any) => (
             <li className="col mega_menu_list" key={index}>
               <h4 className="title">{item.title}</h4>
               <ul className="sub-menu">
-                {item.submenu.map((submenuItem, subIndex) => (
+                {item.submenu.map((submenuItem:any, subIndex:any) => (
                   <li key={subIndex}>
                     <Link
                       className={`${handleActive(submenuItem.href)}`}
@@ -110,12 +110,12 @@ const MainMenu = () => {
           <span
             className={topMenu == "property" ? "title menuActive" : "title"}
           >
-            Property
+            중개사
           </span>
           <span className="arrow"></span>
         </a>
         <ul className="sub-menu">
-          {propertyItems.map((item, index) => (
+          {propertyItems.map((item:any, index:any) => (
             <li key={index} className="dropitem">
               <a href="#">
                 <span
@@ -128,7 +128,7 @@ const MainMenu = () => {
                 <span className="arrow"></span>
               </a>
               <ul className="sub-menu">
-                {item.subMenuItems.map((subMenuItem, subIndex) => (
+                {item.subMenuItems.map((subMenuItem:any, subIndex:any) => (
                   <li key={subIndex}>
                     <Link
                       className={`${handleActive(subMenuItem.href)}`}
@@ -148,12 +148,12 @@ const MainMenu = () => {
       <li className="visible_list dropitem">
         <a className="list-item" href="#">
           <span className={topMenu == "blog" ? "title menuActive" : "title"}>
-            Blog
+            문의
           </span>
           <span className="arrow"></span>
         </a>
         <ul className="sub-menu">
-          {blogItems.map((item, index) => (
+          {blogItems.map((item:any, index:any) => (
             <li key={index}>
               <Link className={`${handleActive(item.href)}`} href={item.href}>
                 {item.label}
@@ -172,7 +172,7 @@ const MainMenu = () => {
           <span className="arrow"></span>
         </a>
         <ul className="sub-menu">
-          {pageItems.map((item, index) => (
+          {pageItems.map((item:any, index:any) => (
             <li key={index}>
               <Link className={`${handleActive(item.href)}`} href={item.href}>
                 {item.label}

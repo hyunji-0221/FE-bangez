@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/property/FormContact.js", "src/components/property/dashboard/dashboard-message/ChatBoxForm.tsx", "src/components/property/dashboard/dashboard-message/SearchBox.tsx", "src/components/property/dashboard/dashboard-message/UserChatBoxContent.tsx", "src/components/property/dashboard/dashboard-message/UserInboxList.tsx", "src/components/property/dashboard/Footer.js", "src/components/property/dashboard/SidebarDashboard.js", "src/components/property/dashboard/DboardMobileNavigation.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/property/FormContact.js", "src/components/property/dashboard/dashboard-message/ChatBoxForm.tsx", "src/components/property/dashboard/dashboard-message/SearchBox.tsx", "src/components/property/dashboard/dashboard-message/UserChatBoxContent.tsx", "src/components/property/dashboard/dashboard-message/UserInboxList.tsx", "src/components/property/dashboard/Footer.js", "src/components/property/dashboard/SidebarDashboard.js", "src/components/property/dashboard/DboardMobileNavigation.js", "src/components/common/MainMenu.js", "src/app/layout.js"],
   "exclude": ["node_modules"]
 }

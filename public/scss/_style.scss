@@ -3296,7 +3296,7 @@ li {
     background-image: url(../images/home/home-2.jpg);
     background-position: center center;
     background-repeat: no-repeat;
-    height: 650px;
+    height: 350px;
     max-width: 1600px;
     position: absolute;
     top: 200px;
@@ -3326,7 +3326,8 @@ li {
 }
 
 .home-banner-style2 {
-    background-color: #181a20;
+    // background-color: #181a20;
+    background-color: #464442;
     position: relative;
 }
 .home-banner-style2 .home-style2 {
@@ -3336,11 +3337,11 @@ li {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    height: 650px;
+    height: 450px;
 }
 @media (max-width: 991.98px) {
     .home-banner-style2 .home-style2 {
-        height: 500px;
+        height: 300px;
     }
 }
 @media (max-width: 767px) {
@@ -4464,6 +4465,16 @@ section {
 @media (max-width: 991.98px) {
     section {
         padding: 60px 0;
+    }
+}
+
+.mainSection {
+    padding: 0px 0;
+    position: relative;
+}
+@media (max-width: 991.98px) {
+    .mainSection {
+        padding: 0px 0;
     }
 }
 

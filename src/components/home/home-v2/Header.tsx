@@ -42,7 +42,7 @@ const Header = () => {
                       <Image
                         width={138}
                         height={44}
-                        src="/images/header-logo.svg"
+                        src="/images/bangezlogo.png"
                         alt="Header Logo"
                       />
                     </Link>
@@ -65,13 +65,13 @@ const Header = () => {
 
               <div className="col-auto">
                 <div className="d-flex align-items-center">
-                  <a
+                  {/* <a
                     className="login-info d-flex align-items-center me-3"
                     href="tel:+012305094502"
                   >
                     <i className="far fa-phone fz16 me-2"></i>{" "}
                     <span className="d-none d-xl-block">2 911 098 7654</span>
-                  </a>
+                  </a> */}
                   <a
                     href="#"
                     className="login-info d-flex align-items-center"
@@ -80,13 +80,13 @@ const Header = () => {
                     role="button"
                   >
                     <i className="far fa-user-circle fz16 me-2" />{" "}
-                    <span className="d-none d-xl-block">Login / Register</span>
+                    <span className="d-none d-xl-block">로그인 / 회원가입</span>
                   </a>
                   <Link
                     className="ud-btn add-property menu-btn bdrs60 mx-2 mx-xl-4"
                     href="/dashboard-add-property"
                   >
-                    Add Property
+                    매물 등록하기
                     <i className="fal fa-arrow-right-long" />
                   </Link>
                   <a
@@ -141,7 +141,7 @@ const Header = () => {
       {/* DesktopSidebarMenu */}
       <div
         className="offcanvas offcanvas-end"
-        tabIndex="-1"
+        tabIndex={-1}
         id="SidebarPanel"
         aria-labelledby="SidebarPanelLabel"
       >

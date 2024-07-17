@@ -20,6 +20,7 @@ export const metadata = {
   title: "Home v2 || Homez - Real Estate NextJS Template",
 };
 
+
 const Home_V2 = () => {
   return (
     <>
@@ -48,7 +49,7 @@ const Home_V2 = () => {
       {/* End Home Banner Style V2 */}
 
       {/* Explore Apartment */}
-      <section className="pb90 pb30-md">
+      <section className="pb90 pb30-md mainSection" >
         <div className="container">
           <div className="row justify-content-center" data-aos="fade">
             <div className="col-lg-12">
