@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import ModalVideo from "react-modal-video";
+// import ModalVideo from "react-modal-video";
+import ModalVideo from "react-modal-video"
 
 const VideoBox = () => {
   const [isOpen, setOpen] = useState(false);

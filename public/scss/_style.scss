@@ -102,7 +102,7 @@ a,
 }
 a:hover,
 .btn:hover {
-    color: #eb6753;
+    color: #E89D21;
 }
 a:active,
 a:focus,
@@ -264,13 +264,13 @@ li {
     transition: all 0.4s ease;
 }
 .app-widget .app-info:hover {
-    background-color: #eb6753;
+    background-color: #E89D21;
 }
 .app-widget .app-info.light-style {
     background-color: #181a20;
 }
 .app-widget .app-info.light-style:hover {
-    background-color: #eb6753;
+    background-color: #E89D21;
 }
 .app-widget .app-info.light-style:hover .app-text {
     color: #ffffff;
@@ -440,7 +440,7 @@ li {
     font-weight: 400;
 }
 .link-style1.at-home9 a:hover {
-    color: #eb6753;
+    color: #E89D21;
 }
 
 /* All styles about breadcumb */
@@ -1108,7 +1108,7 @@ li {
     top: -40px;
 }
 .listing-style1 .list-tag {
-    background-color: #eb6753;
+    background-color: #E89D21;
     border-radius: 6px;
     color: #ffffff;
     font-family: var(--title-font-family);
@@ -3293,7 +3293,7 @@ li {
 
 /*Home 2 Banner Content*/
 .home2-hero-banner {
-    background-image: url(../images/home/home-2.jpg);
+    background-image: url(../images/mainBanner.png);
     background-position: center center;
     background-repeat: no-repeat;
     height: 350px;
@@ -3301,6 +3301,7 @@ li {
     position: absolute;
     top: 200px;
     width: 100%;
+    filter: brightness(0.5); //메인페이지 배너 어둡게
 }
 @media (max-width: 991.98px) {
     .home2-hero-banner {
@@ -4478,6 +4479,16 @@ section {
     }
 }
 
+.sideBarBottom{
+    position: absolute;
+    bottom: 0;
+}
+@media (max-width: 991.98px) {
+    .sideBarBottom {
+        position: absolute;
+    }
+}
+
 .main-title,
 .main-title2 {
     position: relative;
@@ -4662,10 +4673,10 @@ section {
 
 .scrollToHome {
     background-color: transparent;
-    border: 1px solid #eb6753;
+    border: 1px solid #E89D21;
     border-radius: 50%;
     bottom: 45px;
-    color: #eb6753;
+    color: #E89D21;
     display: block;
     height: 50px;
     line-height: 50px;
@@ -4687,7 +4698,7 @@ section {
 }
 
 .scrollToHome:hover {
-    background-color: #eb6753;
+    background-color: #E89D21;
     color: #ffffff;
 }
 
@@ -5154,7 +5165,7 @@ section {
     transition: all 0.4s ease;
 }
 .iconbox-style4 .icon {
-    background-color: rgba(235, 103, 83, 0.07);
+    background-color: rgba(255, 220, 155, 0.25); 
     border-radius: 50%;
     color: var(--headings-color);
     display: block;
@@ -5172,7 +5183,7 @@ section {
     margin-bottom: 5px;
 }
 .iconbox-style4:hover {
-    background-color: #eb6753;
+    background-color: #E89D21 ;
 }
 .iconbox-style4:hover .title,
 .iconbox-style4:hover .text,
@@ -6696,8 +6707,8 @@ textarea:focus {
 }
 
 .btn-thm {
-    background-color: #eb6753;
-    border: 1px solid #eb6753;
+    background-color: #F5A623 ;
+    border: 1px solid #F5A623 ;
     color: #ffffff;
 }
 
@@ -6718,7 +6729,7 @@ textarea:focus {
 .btn-light-gray:before,
 .btn-transparent:before,
 .btn-transparent2:before {
-    background-color: #ee4c34;
+    background-color: #E89D21;
     content: "";
     height: 100%;
     left: -100%;
@@ -6775,24 +6786,24 @@ textarea:focus {
 }
 
 .btn-dark:hover {
-    background-color: #eb6753;
-    border: 1px solid #eb6753;
+    background-color: #E89D21;
+    border: 1px solid #E89D21;
 }
 
 .btn-thm2 {
     background-color: rgba(235, 103, 83, 0.1);
-    color: #eb6753;
+    color: #E89D21;
 }
 
 .btn-thm3 {
     background-color: #ffffff;
-    border: 1px solid #eb6753;
-    color: #eb6753;
+    border: 1px solid #E89D21;
+    color: #E89D21;
 }
 
 .btn-thm-border {
     background-color: #ffffff;
-    border: 1px solid #eb6753;
+    border: 1px solid #E89D21;
     color: var(--headings-color);
 }
 
@@ -6859,8 +6870,8 @@ textarea:focus {
     color: #ffffff;
 }
 .menu-btn:hover {
-    background-color: #eb6753;
-    border: 1px solid #eb6753;
+    background-color: #E89D21;
+    border: 1px solid #E89D21;
 }
 
 .signup-modal .btn-white i,
@@ -7385,8 +7396,8 @@ header.nav-homepage-style.sticky .btn-transparent2 {
     color: var(--headings-color);
 }
 header.nav-homepage-style.sticky .menu-btn:hover {
-    background-color: #eb6753;
-    border: 1px solid #eb6753;
+    background-color: #E89D21;
+    border: 1px solid #E89D21;
     color: #ffffff;
 }
 header.nav-homepage-style.at-home2,
@@ -7695,9 +7706,9 @@ li.mm-listitem:focus {
 .hiddenbar_navbar_menu .navbar-nav .nav-item .nav-link:hover,
 .hiddenbar_navbar_menu .navbar-nav .nav-item .nav-link:active,
 .hiddenbar_navbar_menu .navbar-nav .nav-item .nav-link:focus {
-    background-color: rgba(235, 103, 83, 0.07);
-    border-left: 2px solid #eb6753;
-    color: #eb6753;
+    background-color: rgba(255, 220, 155, 0.25);
+    border-left: 2px solid #E89D21;
+    color: #E89D21;
 }
 .hiddenbar_navbar_menu .navbar-nav .nav-item .nav-link i {
     line-height: 60px;
@@ -10084,7 +10095,7 @@ input:focus-visible {
 }
 
 .bgc-thm {
-    background-color: #eb6753;
+    background-color: #FFB137;
 }
 
 .bgc-thm2 {
@@ -10104,7 +10115,7 @@ input:focus-visible {
 }
 
 .bgc-thm-light {
-    background-color: rgba(235, 103, 83, 0.05);
+    background-color: rgba(255, 218, 154, 0.15);
 }
 
 .bgc-thm3-light {

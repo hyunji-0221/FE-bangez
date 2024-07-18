@@ -4,6 +4,7 @@ import {
   listingItems,
   propertyItems,
   pageItems,
+  boardItems,
 } from "@/data/navItems";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -57,14 +58,14 @@ const MainMenu = () => {
   return (
     <ul className="ace-responsive-menu">
       <li className="visible_list dropitem">
-        <a className="list-item" href="#">
-          <span className={topMenu == "home" ? "title menuActive" : "title"}>
-            지도
+        <a className="list-item" href="/map-v1">
+          <span className={topMenu == "home" ? "title" : "title"}>
+            부동산
           </span>
-          {/* <span className="arrow"></span> */} 
+          <span className="arrow"></span> 
         </a>
         {/* Level Two*/}
-        {/* <ul className="sub-menu">
+        <ul className="sub-menu">
           {homeItems.map((item:any, index:any) => (
             <li key={index}>
               <Link className={`${handleActive(item.href)}`} href={item.href}>
@@ -72,11 +73,30 @@ const MainMenu = () => {
               </Link>
             </li>
           ))}
-        </ul>  드롭다운*/}
+        </ul>
       </li>
       {/* End homeItems */}
 
-      <li className="megamenu_style dropitem">
+      <li className="visible_list dropitem">
+        <a className="list-item" href="/map-v1">
+          <span className={topMenu == "home" ? "title" : "title"}>
+            게시판
+          </span>
+          <span className="arrow"></span> 
+        </a>
+        {/* Level Two*/}
+        <ul className="sub-menu">
+          {boardItems.map((item:any, index:any) => (
+            <li key={index}>
+              <Link className={`${handleActive(item.href)}`} href={item.href}>
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </li>
+
+      {/* <li className="megamenu_style dropitem">
         <a className="list-item" href="#">
           <span className={topMenu == "listing" ? "title menuActive" : "title"}>
             게시판
@@ -86,7 +106,7 @@ const MainMenu = () => {
         <ul className="row dropdown-megamenu sub-menu">
           {listingItems.map((item:any, index:any) => (
             <li className="col mega_menu_list" key={index}>
-              <h4 className="title">{item.title}</h4>
+              <h6 className="title">{item.title}</h6>
               <ul className="sub-menu">
                 {item.submenu.map((submenuItem:any, subIndex:any) => (
                   <li key={subIndex}>
@@ -102,10 +122,10 @@ const MainMenu = () => {
             </li>
           ))}
         </ul>
-      </li>
+      </li> */}
       {/* End listings */}
 
-      <li className="visible_list dropitem">
+      {/* <li className="visible_list dropitem">
         <a className="list-item" href="#">
           <span
             className={topMenu == "property" ? "title menuActive" : "title"}
@@ -142,7 +162,7 @@ const MainMenu = () => {
             </li>
           ))}
         </ul>
-      </li>
+      </li> */}
       {/* End property Items */}
 
       <li className="visible_list dropitem">
@@ -164,7 +184,7 @@ const MainMenu = () => {
       </li>
       {/* End blog Items */}
 
-      <li className="visible_list dropitem">
+      {/* <li className="visible_list dropitem">
         <a className="list-item" href="#">
           <span className={topMenu == "pages" ? "title menuActive" : "title"}>
             Pages
@@ -180,7 +200,7 @@ const MainMenu = () => {
             </li>
           ))}
         </ul>
-      </li>
+      </li> */}
       {/* End pages Items */}
     </ul>
   );

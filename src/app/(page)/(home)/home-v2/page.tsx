@@ -38,7 +38,7 @@ const Home_V2 = () => {
           <div className="container maxw1600">
             <div className="home2-hero-banner bdrs12"></div>
             <div className="row">
-              <div className="col-xl-10 mx-auto">
+              <div className="col-xl-10 mx-auto mt85">
                 <Hero />
               </div>
             </div>
@@ -49,15 +49,13 @@ const Home_V2 = () => {
       {/* End Home Banner Style V2 */}
 
       {/* Explore Apartment */}
-      <section className="pb90 pb30-md mainSection" >
-        <div className="container">
-          <div className="row justify-content-center" data-aos="fade">
-            <div className="col-lg-12">
-              <ApartmentType />
-            </div>
-          </div>
+      <section className=" pb30-md mainSection">
+      <div className="container">
+        <div className="row justify-content-center" data-aos="fade">
+          <ApartmentType/>
         </div>
-      </section>
+      </div>
+    </section>
       {/* End Explore Apartment */}
 
       {/* Featured Listings */}
@@ -95,7 +93,7 @@ const Home_V2 = () => {
       {/* Explore Featured Listings */}
 
       {/* Property Cities */}
-      <section className="pt0 pb90 pb50-md">
+      {/* <section className="pt0 pb90 pb50-md">
         <div className="container">
           <div className="row  justify-content-between align-items-center">
             <div className="col-auto">
@@ -109,45 +107,45 @@ const Home_V2 = () => {
                   Aliquam lacinia diam quis lacus euismod
                 </p>
               </div>
-            </div>
+            </div> */}
             {/* End header */}
 
-            <div className="col-auto mb30">
+            {/* <div className="col-auto mb30">
               <div className="row align-items-center justify-content-center">
                 <div className="col-auto">
                   <button className="cities_prev__active swiper_button">
                     <i className="far fa-arrow-left-long" />
                   </button>
-                </div>
+                </div> */}
                 {/* End prev */}
 
-                <div className="col-auto">
+                {/* <div className="col-auto">
                   <div className="pagination swiper--pagination cities_pagination__active" />
-                </div>
+                </div> */}
                 {/* End pagination */}
 
-                <div className="col-auto">
+                {/* <div className="col-auto">
                   <button className="cities_next__active swiper_button">
                     <i className="far fa-arrow-right-long" />
                   </button>
-                </div>
+                </div> */}
                 {/* End Next */}
-              </div>
-            </div>
+              {/* </div> */}
+            {/* </div> */}
             {/* End .col for navigation and pagination */}
-          </div>
+          {/* </div> */}
           {/* End .row */}
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-lg-12" data-aos="fade-up" data-aos-delay="300">
               <div className="property-city-slider">
                 <ExploreCities />
               </div>
             </div>
-          </div>
+          </div> */}
           {/* End .row */}
-        </div>
-      </section>
+        {/* </div>
+      </section> */}
       {/* End property cities */}
 
       {/* Explore Apartment */}
@@ -178,15 +176,15 @@ const Home_V2 = () => {
       {/* End Explore Apartment */}
 
       {/* About Us */}
-      <section className="about-us">
+      {/* <section className="about-us">
         <div className="container">
           <About />
         </div>
-      </section>
+      </section> */}
       {/* End About Us */}
 
       {/* Our Testimonials */}
-      <section className="our-testimonial p-0">
+      {/* <section className="our-testimonial p-0">
         <div className="cta-banner2 bgc-f7 maxw1600 mx-auto pt110 pt60-md pb110 pb60-md bdrs12 position-relative">
           <div className="container">
             <div className="row">
@@ -216,7 +214,7 @@ const Home_V2 = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* End Our Testimonials */}
 
       {/* Exclusive Agents */}
