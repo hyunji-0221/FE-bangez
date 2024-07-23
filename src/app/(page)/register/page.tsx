@@ -31,13 +31,13 @@ const Register = () => {
                       width={138}
                       height={44}
                       className="mb25"
-                      src="/images/header-logo2.svg"
+                      src="/images/bangezlogo.png"
                       alt="logo"
                     />
                   </Link>
-                  <h2>Create account</h2>
+                  <h2>계정 생성</h2>
                   <p className="text">
-                    Sign in with this account across the following sites.
+                    계정을 만들고 더 많은 서비스를 이용하세요!
                   </p>
                 </div>
                 <SignUp />

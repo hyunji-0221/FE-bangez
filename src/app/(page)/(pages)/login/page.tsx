@@ -31,13 +31,13 @@ const Login = () => {
                       width={138}
                       height={44}
                       className="mb25"
-                      src="/images/header-logo2.svg"
+                      src="/images/bangezlogo.png"
                       alt="logo"
                     />
                   </Link>
-                  <h2>Sign in</h2>
+                  <h2>로그인</h2>
                   <p className="text">
-                    Sign in with this account across the following sites.
+                    로그인하고 더 많은 서비스를 이용하세요!
                   </p>
                 </div>
                 <SignIn />

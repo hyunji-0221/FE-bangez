@@ -1,112 +1,115 @@
+import { API } from "@/app/api/common/API";
 import { ChatMessageProps } from "@/module/chat/Chat";
+import { ChatModel, UserChatBoxContentModel } from "@/types/ChatData";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { EventSourcePolyfill} from "event-source-polyfill";
+
+const UserChatBoxContent = ({ UserChatBoxContentModels }: { UserChatBoxContentModels: UserChatBoxContentModel }) => {
+  const roomId = UserChatBoxContentModels.roomId
+  const userId = UserChatBoxContentModels.senderId
+  const receiverId = UserChatBoxContentModels.receiverId
+
+  const [prevMessages, setPrevMessages] = useState<ChatModel[]>([])
+
+  const messageEndRef = useRef<HTMLUListElement>(null);
+  const scrollToBottom = () => {
+    messageEndRef.current?.lastElementChild?.scrollIntoView({
+      behavior: 'smooth', block: 'nearest'
+    });
+  };
 
 
-const chatMessages: ChatMessageProps[] = [
-  {
-    className: "sent float-start",
-    imageUrl: "/images/inbox/ms4.png",
-    name: "Albert Flores",
-    time: "35 mins",
-    message: "How likely are you to recommend our company to your friends and family?",
-  },
-  {
-    className: "reply float-end",
-    imageUrl: "/images/inbox/ms5.png",
-    name: "You",
-    time: "35 mins",
-    message: "Hey there, we’re just writing to let you know that you’ve been subscribed to a repository on GitHub.",
-  },
-  {
-    className: "reply float-end",
-    imageUrl: "/images/inbox/ms3.png",
-    name: "You",
-    time: "35 mins",
-    message: "Are we meeting today?",
-  },
-  {
-    className: "reply float-end",
-    imageUrl: "/images/inbox/ms3.png",
-    name: "You",
-    time: "35 mins",
-    message: "The project finally complete! Let's go to!",
-  },
-  {
-    className: "sent float-start",
-    imageUrl: "/images/inbox/ms2.png",
-    name: "Albert Flores",
-    time: "35 mins",
-    message: "Let's go!",
-  },
-  {
-    className: "sent float-start",
-    imageUrl: "/images/inbox/ms2.png",
-    name: "Albert Flores",
-    time: "35 mins",
-    message: "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's",
-  },
-  {
-    className: "sent float-start",
-    imageUrl: "/images/inbox/ms2.png",
-    name: "Albert Flores",
-    time: "35 mins",
-    message: "Hello, John!",
-  },
-];
 
-const ChatMessage: React.FC<{ message: ChatMessageProps }> = ({ message }) => {
+  useEffect(() => {
+    console.log('roomId ', roomId)
+    setPrevMessages([])
+    if (roomId === '') return
+    // fetch(`${API.CHATSERVER}/chat/read/${roomId}/1`, {
+    //   method: 'GET'
+    // }).then(res => {
+    //   console.log('채팅 내용 : ', res)f
+    // }).catch(error => {
+    //   console.log('채팅 내용 에러 발생', error)
+    // })
+
+    // const eventSource = new EventSource(`${API.CHATSERVER}/chat/sse/${roomId}`);
+    const eventSource = new EventSourcePolyfill(`${API.CHATSERVER}/sse/${roomId}`, {
+      headers: {
+        'Authorization' : 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoeXVuamkxNDQzQGdtYWlsLmNvbSIsImlzcyI6ImJpdGNhbXAiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTcyMTY0MjYwMiwiZXhwIjoxNzIxNjQ1NjAyfQ.tPEHpK3DGLAaGxx_KfbhrIFYhUSZLIiSBB_bTb2sbiM'
+      }, withCredentials: true
+    });
+    eventSource.onopen = (event) => {
+      console.log('Connection opened:', event);
+    };
+    eventSource.onmessage = (event) => {
+      console.log('Message received:', event.data);
+      setPrevMessages(prevMessage => [...prevMessage, JSON.parse(event.data)]);
+    };
+    eventSource.addEventListener('error', (e: any) => {
+      console.log("An error occurred while attempting to connect.");
+      console.error("Error event details:", e);
+      console.error("EventSource readyState:", e.target.readyState);
+      console.error("EventSource URL:", e.target.url);
+      eventSource.close();
+    });
+    return () => {
+      eventSource.close();
+    }
+  }, [roomId])
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [prevMessages])
+
   return (
-    <li className={message.className}>
+    <ul ref={messageEndRef} className="chatting_content" >
+      {prevMessages.map((message, index) => (
+        <ChatMessage key={index} message={message} userId={userId} />
+      ))}
+    </ul>
+  );
+};
+
+const ChatMessage: React.FC<{ message: ChatModel, userId: string }> = ({ message, userId }) => {
+  return (
+    <li className={message.senderId === userId ? 'reply float-end' : 'sent float-start'}>
       <div
-        className={`d-flex align-items-center ${
-          message.className === "sent float-start" ? "mb15" : "justify-content-end mb15"
-        }`}
-      >
-        {message.className === "sent float-start" ? (
-          <Image
+        className={`d-flex align-items-center
+          ${message.senderId !== userId ? "mb15" : "justify-content-end mb15"}`}>
+
+        {message.senderId !== userId
+          && (<Image
             width={50}
             height={50}
             className="img-fluid rounded-circle align-self-start mr10"
-            src={message.imageUrl}
-            alt={`${message.name}'s profile`}
-          />
-        ) : null}
+            src="/images/default_user_img.svg"
+            alt={`${message.senderId}'s profile`}
+          />)}
+
         <div
-          className={`title fz14 ${
-            message.className === "reply float-end" ? "mr10" : "ml10"
-          }`}
-        >
-          {message.className === "reply float-end" ? (
-            <small>{message.time}</small>
-          ) : (
-            <>
-              {message.name} <small className="ml10">{message.time}</small>
-            </>
-          )}
+          className={`title fz14 ${message.senderId === userId ? "mr10" : "ml10"}`}>
+
+          {message.senderId === userId
+            ? (<small>{message.timeStamp}</small>)
+            : (<>
+              {/*{message.name}*/}
+              {message.senderId} <small className="ml10">{message.timeStamp}</small>
+            </>)}
         </div>
-        {message.className === "reply float-end" ? (
-          <Image
+
+        {/* {message.userId === "1"
+          && (<Image
             width={50}
             height={50}
             className="img-fluid rounded-circle align-self-end ml10"
             src={message.imageUrl}
             alt={`${message.name}'s profile`}
-          />
-        ) : null}
+          />) } */}
+
       </div>
       <p>{message.message}</p>
     </li>
-  );
-};
-
-const UserChatBoxContent: React.FC = () => {
-  return (
-    <>
-      {chatMessages.map((message, index) => (
-        <ChatMessage key={index} message={message} />
-      ))}
-    </>
   );
 };
 

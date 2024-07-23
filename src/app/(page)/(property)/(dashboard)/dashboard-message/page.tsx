@@ -5,12 +5,12 @@ import MobileMenu from "@/components/common/mobile-menu";
 import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
 import Footer from "@/components/property/dashboard/Footer";
 import SidebarDashboard from "@/components/property/dashboard/SidebarDashboard";
-import ChatBoxForm from "@/components/property/dashboard/dashboard-message/ChatBoxForm";
 import SearchBox from "@/components/property/dashboard/dashboard-message/SearchBox";
 import UserChatBoxContent from "@/components/property/dashboard/dashboard-message/UserChatBoxContent";
 import UserInboxList from "@/components/property/dashboard/dashboard-message/UserInboxList";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import ChatBoxForm from "@/components/property/dashboard/dashboard-message/ChatBoxForm";
+import { useState } from "react";
 
 // export const metadata = {
 //   title: "Dashboard Message || Homez - Real Estate NextJS Template",
@@ -18,17 +18,19 @@ import { useEffect, useState } from "react";
 
 const DashboardMessage = () => {
 
-  const roomId = useState('')
+  const userId = '1'
+  const [roomId, setRoomId] = useState('')
+  const [receiverId, setReceiverId] = useState('')
 
-  useEffect(() => {
-    
-    const eventsource = new EventSource(`${API.CHATSERVER}/sse/${roomId}`);
+  // useEffect(() => {
 
-    eventsource.onmessage = (event) => {
-      console.log(event.data);
-    };
+  //   const eventsource = new EventSource(`${API.CHATSERVER}/sse/${roomId}`);
 
-  }, [roomId]);
+  //   eventsource.onmessage = (event) => {
+  //     console.log(event.data);
+  //   };
+
+  // }, [roomId]);
 
   return (
     <>
@@ -68,15 +70,15 @@ const DashboardMessage = () => {
                 <div className="col-lg-6 col-xl-5 col-xxl-4">
                   <div className="message_container">
                     <div className="inbox_user_list">
-                      <div className="iu_heading pr35">
+                      {/* <div className="iu_heading pr35">
                         <div className="chat_user_search">
                           <SearchBox />
                         </div>
-                      </div>
+                      </div> */}
                       {/* End search box */}
 
                       <div className="chat-member-list pr20">
-                        <UserInboxList />
+                        <UserInboxList setRoomId={setRoomId} setReceiverId={setReceiverId} />
                       </div>
                     </div>
                   </div>
@@ -88,17 +90,17 @@ const DashboardMessage = () => {
                     <div className="user_heading px-0 mx30">
                       <div className="wrap">
                         <span className="contact-status online" />
-                        <Image
+                        {receiverId ? <Image
                           width={50}
                           height={50}
                           className="img-fluid mr10"
-                          src="/images/inbox/ms3.png"
+                          src="/images/default_user_img.svg"
                           alt="ms3.png"
-                        />
+                        /> : null}
                         <div className="meta d-sm-flex justify-content-sm-between align-items-center">
                           <div className="authors">
-                            <h6 className="name mb-0">Arlene McCoy</h6>
-                            <p className="preview">Active</p>
+                            <h6 className="name mb-0">{receiverId}</h6>
+                            {/* <p className="preview">Active</p> */}
                           </div>
                           <div>
                             <a
@@ -114,15 +116,15 @@ const DashboardMessage = () => {
                     {/* End .user_heading */}
 
                     <div className="inbox_chatting_box">
-                      <ul className="chatting_content">
-                        <UserChatBoxContent />
-                      </ul>
+
+                      <UserChatBoxContent UserChatBoxContentModels={{ roomId: `${roomId}`, senderId: `${userId}`, receiverId: "2" }} />
+
                     </div>
                     {/* End inbox-chatting */}
 
                     <div className="mi_text">
                       <div className="message_input">
-                        <ChatBoxForm />
+                        <ChatBoxForm ChatBoxFormModels={{ roomId: `${roomId}`, senderId: `${userId}`, receiverId: "2" }} />
                       </div>
                     </div>
                     {/* End button */}

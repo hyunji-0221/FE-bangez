@@ -1,7 +1,7 @@
 export const enum API{
-    TXSERVER = 'http://localhost:8081',
-    USERSERVER = 'http://localhost:8082/api',
-    LANDSERVER = 'http://localhost:8083/api',
-    ANALYSERVER = 'http://localhost:8084/api',
-    CHATSERVER = 'http://localhost:8085'
+    TXSERVER = 'http://localhost:8000/tx',
+    USERSERVER = 'http://localhost:8000/user',
+    LANDSERVER = 'http://localhost:8000/land',
+    ANALYSERVER = 'http://localhost:8000/analysis',
+    CHATSERVER = 'http://localhost:8000/chat'
 }
