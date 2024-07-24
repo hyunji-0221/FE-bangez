@@ -1,4 +1,4 @@
-import ListingMap1 from "@/components/listing/map-style/ListingMap1";
+import ListingMap1 from "@/components/listing/map-style/Map";
 import React from "react";
 
 const PropertyAddress = () => {
