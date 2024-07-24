@@ -11,8 +11,8 @@ export const homeItems = [
 ];
 
 export const boardItems = [
-  { href: "#", label: "방 구해요" },
-  { href: "#", label: "방 내놓아요" },
+  { href: "/buy-board", label: "방 구해요" },
+  { href: "/sell-board/apt", label: "방 내놓아요" },
   // { href: "#", label: "Home v4" },
   // { href: "#", label: "Home v5" },
   // { href: "#", label: "Home v6" },

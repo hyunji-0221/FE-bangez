@@ -1,11 +1,11 @@
 'use client'
 
 import React from "react";
-import PropertyType from "../../sidebar/PropertyType";
-import PriceRange from "../../sidebar/PriceRange";
-import Bedroom from "../../sidebar/Bedroom";
-import Bathroom from "../../sidebar/Bathroom";
-import ListingStatus from "../../sidebar/ListingStatus";
+import PropertyType from "../../sidebar-apt/PropertyType";
+import PriceRange from "../../sidebar-apt/PriceRangeRent";
+import Bedroom from "../../sidebar-apt/Bedroom";
+import Bathroom from "../../sidebar-apt/Bathroom";
+import ListingStatus from "../../sidebar-apt/ListingStatus";
 
 const TopFilterBar2 = ({filterFunctions}) => {
   return (

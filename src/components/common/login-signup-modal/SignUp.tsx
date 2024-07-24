@@ -1,37 +1,85 @@
+'use client'
+
+import { SignUpTypes } from "@/types/SignUpData";
+import { error } from "console";
 import Link from "next/link";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const SignUp = () => {
+
+  const {
+    register,
+    handleSubmit,
+    reset
+  } = useForm<SignUpTypes>();
+
+  const onSubmit: SubmitHandler<SignUpTypes> = async (data) => {
+    console.log('onSubmit 내용', data)
+    fetch('http://localhost:8000/users/add' , {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userName: data.userName,
+        password: data.password,
+        passwordConfirm : data.passwordConfirm,
+        name: data.name,
+        email: data.email
+      }),
+      credentials: 'include',
+    }).then(res => {
+      console.log('res',res)
+      console.log(res.json())
+    }).catch(error => {
+      console.log('error', error)
+    })
+    reset();
+  }
+
   return (
-    <form className="form-style1">
-      <div className="mb25">
-        <label className="form-label fw600 dark-color">이메일</label>
+    <form onSubmit={handleSubmit(onSubmit)} className="form-style1">
+      <div className="mb10">
+        <label className="form-label fw600 dark-color">ID</label>
         <input
-          type="email"
+          {...register("userName", { required: true })}
+          type="text"
           className="form-control"
-          placeholder="이메일"
+          placeholder="아이디"
           required
         />
       </div>
-      {/* End Email */}
+      {/* End userName */}
 
-      <div className="mb20">
+      <div className="mb10">
         <label className="form-label fw600 dark-color">비밀번호</label>
         <input
-          type="text"
+          {...register("password", { required: true})}
+          type="password"
           className="form-control"
           placeholder="비밀번호"
-          required
         />
       </div>
       {/* End Password */}
 
-      <div className="mb25">
+      <div className="mb10">
         <label className="form-label fw600 dark-color">비밀번호 확인</label>
         <input
-          type="email"
+          {...register("passwordConfirm", {required: true})}
+          type="password"
           className="form-control"
           placeholder="비밀번호 확인"
-          required
+        />
+      </div>
+      {/* End PassCheck */}
+
+      <div className="mb20">
+        <label className="form-label fw600 dark-color">이메일</label>
+        <input
+          {...register("email", {required: true})}
+          type="email"
+          className="form-control"
+          placeholder="이메일"
         />
       </div>
       {/* End PassCheck */}

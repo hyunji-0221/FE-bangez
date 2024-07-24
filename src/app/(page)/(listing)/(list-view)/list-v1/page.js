@@ -49,7 +49,7 @@ const ListV1 = () => {
 
       {/* Property Filtering */}
       <PropertyFilteringList/>
-     
+    
       {/* Property Filtering */}
 
       {/* Start Our Footer */}

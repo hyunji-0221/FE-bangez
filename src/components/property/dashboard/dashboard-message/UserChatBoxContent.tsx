@@ -36,7 +36,7 @@ const UserChatBoxContent = ({ UserChatBoxContentModels }: { UserChatBoxContentMo
     // const eventSource = new EventSource(`${API.CHATSERVER}/chat/sse/${roomId}`);
     const eventSource = new EventSourcePolyfill(`${API.CHATSERVER}/sse/${roomId}`, {
       headers: {
-        'Authorization' : 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoeXVuamkxNDQzQGdtYWlsLmNvbSIsImlzcyI6ImJpdGNhbXAiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTcyMTY0MjYwMiwiZXhwIjoxNzIxNjQ1NjAyfQ.tPEHpK3DGLAaGxx_KfbhrIFYhUSZLIiSBB_bTb2sbiM'
+        'Authorization' : 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlzcyI6ImJpdGNhbXAiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTcyMTcyNjU0MCwiZXhwIjoxNzIxNzI5NTQwfQ.vTq2ITDbBv5eAHJZhyXqwLYa5Xd17kFzhvC6BVmurmo'
       }, withCredentials: true
     });
     eventSource.onopen = (event) => {
