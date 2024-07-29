@@ -3,14 +3,9 @@ import Select from "react-select";
 
 const Location = ({filterFunctions}) => {
   const locationOptions = [
-    { value: "All Cities", label: "All Cities" },
-    { value: "California", label: "California" },
-    { value: "Los Angeles", label: "Los Angeles" },
-    { value: "New Jersey", label: "New Jersey" },
-    { value: "New York", label: "New York" },
-    { value: "San Diego", label: "San Diego" },
-    { value: "San Francisco", label: "San Francisco" },
-    { value: "Texas", label: "Texas" },
+    { value: "전국", label: "전국" },
+    { value: "강남구", label: "강남구" },
+    { value: "서초구", label: "서초구" },
   ];
 
   const customStyles = {
@@ -36,7 +31,7 @@ const Location = ({filterFunctions}) => {
       options={locationOptions}
       value={{value:filterFunctions.location,label:filterFunctions.location}}
       
-     
+      
       
       
       

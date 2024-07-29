@@ -58,7 +58,7 @@ const MainMenu = () => {
   return (
     <ul className="ace-responsive-menu">
       <li className="visible_list dropitem">
-        <a className="list-item" href="/map-v1">
+        <a className="list-item" href="/map-v4">
           <span className={topMenu == "home" ? "title" : "title"}>
             부동산
           </span>

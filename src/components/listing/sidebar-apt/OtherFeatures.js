@@ -4,21 +4,15 @@ import React from "react";
 
 const OtherFeatures = ({filterFunctions}) => {
   const featuresLeftColumn = [
-    { label: "Attic" },
-    { label: "Basketball court", defaultChecked: true },
-    { label: "Air Conditioning", defaultChecked: true },
-    { label: "Lawn", defaultChecked: true },
-    { label: "TV Cable" },
-    { label: "Dryer" },
+    { label: "베란다" , defaultChecked: true},
+    { label: "세탁기"  },
+    { label: "건조기" },
   ];
 
   const featuresRightColumn = [
-    { label: "Outdoor Shower" },
-    { label: "Washer" },
-    { label: "Lake view" },
-    { label: "Wine cellar" },
-    { label: "Front yard" },
-    { label: "Refrigerator" },
+    { label: "주차장",},
+    { label: "냉장고" },
+    { label: "에어컨" },
   ];
 
 
@@ -31,7 +25,7 @@ const OtherFeatures = ({filterFunctions}) => {
             <label className="custom_checkbox" key={index}>
               {feature.label}
               <input checked={filterFunctions?.categories.includes(feature.label)}
-             type="checkbox" onChange={()=>filterFunctions?.handlecategories(feature.label)}  />
+            type="checkbox" onChange={()=>filterFunctions?.handlecategories(feature.label)}  />
               <span className="checkmark" />
             </label>
           ))}

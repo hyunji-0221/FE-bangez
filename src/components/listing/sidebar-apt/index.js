@@ -4,7 +4,9 @@ import React from "react";
 import SearchBox from "./SearchBox";
 import ListingStatus from "./ListingStatus";
 import PropertyType from "./PropertyType";
-import PriceSlider from "./PriceRange";
+import PriceSlider from "./PriceRangeRent";
+import PriceSlider2 from "./PriceRangeMonth";
+import PriceSlider3 from "./PriceRangeTrade";
 import Bedroom from "./Bedroom";
 import Bathroom from "./Bathroom";
 import Location from "./Location";
@@ -16,21 +18,22 @@ const ListingSidebar = ({filterFunctions}) => {
   return (
     <div className="list-sidebar-style1">
       <div className="widget-wrapper">
-        <h6 className="list-title">Find your home</h6>
+        <h6 className="list-title">검색</h6>
         <SearchBox filterFunctions={filterFunctions} />
       </div>
       {/* End .widget-wrapper */}
 
-      <div className="widget-wrapper">
-        <h6 className="list-title">Listing Status</h6>
+      {/* <div className="widget-wrapper">
+        <h6 className="list-title">거래 유형</h6> 
         <div className="radio-element">
           <ListingStatus filterFunctions={filterFunctions} />
         </div>
-      </div>
+      </div> */}
       {/* End .widget-wrapper */}
+      {/* 체크박스 아니라 중복 체크가 불가능 하니까 삭제 할거임 */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Property Type</h6>
+        <h6 className="list-title">거래 유형</h6>
         <div className="checkbox-style1">
           <PropertyType filterFunctions={filterFunctions} />
         </div>
@@ -39,16 +42,32 @@ const ListingSidebar = ({filterFunctions}) => {
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Price Range</h6>
+        <h6 className="list-title">보증금(전세금)</h6>
         {/* Range Slider Desktop Version */}
         <div className="range-slider-style1">
           <PriceSlider filterFunctions={filterFunctions} />
         </div>
       </div>
+
+      <div className="widget-wrapper">
+        <h6 className="list-title">월세</h6>
+        {/* Range Slider Desktop Version */}
+        <div className="range-slider-style1">
+          <PriceSlider2 filterFunctions={filterFunctions} />
+        </div>
+      </div>
+
+      <div className="widget-wrapper">
+        <h6 className="list-title">매매</h6>
+        {/* Range Slider Desktop Version */}
+        <div className="range-slider-style1">
+          <PriceSlider3 filterFunctions={filterFunctions} />
+        </div>
+      </div>
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Bedrooms</h6>
+        <h6 className="list-title">침실</h6>
         <div className="d-flex">
           <Bedroom filterFunctions={filterFunctions} />
         </div>
@@ -56,7 +75,7 @@ const ListingSidebar = ({filterFunctions}) => {
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Bathrooms</h6>
+        <h6 className="list-title">화장실</h6>
         <div className="d-flex">
           <Bathroom filterFunctions={filterFunctions}  />
         </div>
@@ -64,7 +83,7 @@ const ListingSidebar = ({filterFunctions}) => {
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper advance-feature-modal">
-        <h6 className="list-title">Location</h6>
+        <h6 className="list-title">지역</h6>
         <div className="form-style2 input-group">
           <Location filterFunctions={filterFunctions} />
         </div>
@@ -72,13 +91,13 @@ const ListingSidebar = ({filterFunctions}) => {
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Square Feet</h6>
+        <h6 className="list-title">면적</h6>
         <SquareFeet filterFunctions={filterFunctions}/>
       </div>
       {/* End .widget-wrapper */}
 
       <div className="widget-wrapper">
-        <h6 className="list-title">Year Built</h6>
+        <h6 className="list-title">준공년도</h6>
         <YearBuilt filterFunctions={filterFunctions}/>
       </div>
       {/* End .widget-wrapper */}
@@ -96,7 +115,7 @@ const ListingSidebar = ({filterFunctions}) => {
                   aria-expanded="true"
                   aria-controls="collapseOne"
                 >
-                  <span className="flaticon-settings" /> Other Features
+                  <span className="flaticon-settings" /> 추가 조건
                 </button>
               </h2>
               <div
@@ -119,7 +138,7 @@ const ListingSidebar = ({filterFunctions}) => {
         <div className="btn-area d-grid align-items-center">
           <button className="ud-btn btn-thm">
             <span className="flaticon-search align-text-top pr10" />
-            Search
+            검색
           </button>
         </div>
       </div>
@@ -128,11 +147,11 @@ const ListingSidebar = ({filterFunctions}) => {
       <div className="reset-area d-flex align-items-center justify-content-between">
         <div onClick={()=>filterFunctions.resetFilter()} className="reset-button cursor" href="#">
           <span className="flaticon-turn-back" />
-          <u>Reset all filters</u>
+          <u>필터 초기화</u>
         </div>
         <a className="reset-button" href="#">
           <span className="flaticon-favourite" />
-          <u>Save Search</u>
+          <u>검색 조건 저장</u>
         </a>
       </div>
     </div>

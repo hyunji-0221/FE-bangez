@@ -18,7 +18,7 @@ const Bedroom = ({filterFunctions}) => {
         <div className="selection" key={option.id}>
           <input
             id={option.id}
-           
+          
             type="radio"
             onChange={(e)=>filterFunctions?.handlebedrooms(option.value)}
             checked={filterFunctions?.bedrooms == option.value}

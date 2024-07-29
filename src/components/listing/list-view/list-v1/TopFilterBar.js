@@ -13,11 +13,13 @@ const TopFilterBar = ({
       <div className="col-sm-6">
         <div className="text-center text-sm-start">
           <p className="pagination_page_count mb-0">
-            Showing {pageContentTrac[0]}–
-            {pageContentTrac[2] < pageContentTrac[1]
+          {pageContentTrac[2]}개 중{" "}
+          {pageContentTrac[1]}개{" "}
+            {/* {pageContentTrac[2] < pageContentTrac[1]
               ? pageContentTrac[2]
-              : pageContentTrac[1]}{" "}
-            of {pageContentTrac[2]} results
+              : pageContentTrac[1]}{" "}개 */}
+            표시중 
+                
           </p>
         </div>
       </div>
@@ -26,7 +28,7 @@ const TopFilterBar = ({
       <div className="col-sm-6">
         <div className="page_control_shorting d-flex align-items-center justify-content-center justify-content-sm-end">
           <div className="pcs_dropdown pr10 d-flex align-items-center">
-            <span style={{ minWidth: "60px" }}>Sort by</span>
+            <span style={{ minWidth: "70px" }}>정렬 기준</span>
             <select
               className="form-select"
               onChange={(e) =>
@@ -34,11 +36,11 @@ const TopFilterBar = ({
                 setCurrentSortingOption(e.target.value)
               }
             >
-              <option>Newest</option>
-              <option>Best Seller</option>
-              <option>Best Match</option>
-              <option>Price Low</option>
-              <option>Price High</option>
+              <option>최신등록순</option>
+              <option>인기순</option>
+              <option>추천순</option>
+              <option>낮은가격순</option>
+              <option>높은가격순</option>
             </select>
           </div>
           <div
@@ -47,7 +49,7 @@ const TopFilterBar = ({
             } `}
             onClick={() => setColstyle(true)}
           >
-            Grid
+            격자
           </div>
           <div
             className={`pl15 d-none d-md-block  cursor ${
@@ -55,7 +57,7 @@ const TopFilterBar = ({
             }`}
             onClick={() => setColstyle(false)}
           >
-            List
+            목록
           </div>
         </div>
       </div>

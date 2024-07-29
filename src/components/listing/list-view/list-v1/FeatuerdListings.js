@@ -31,13 +31,13 @@ const FeaturedListings = ({ data, colstyle }) => {
                 {!listing.forRent && (
                   <div className="list-tag fz12">
                     <span className="flaticon-electricity me-2" />
-                    FEATURED
+                    추천
                   </div>
                 )}
               </div>
 
               <div className="list-price">
-                {listing.price} / <span>mo</span>
+                {listing.price} / <span>월</span>
               </div>
             </div>
             <div className="list-content">
@@ -47,13 +47,13 @@ const FeaturedListings = ({ data, colstyle }) => {
               <p className="list-text">{listing.location}</p>
               <div className="list-meta d-flex align-items-center">
                 <a href="#">
-                  <span className="flaticon-bed" /> {listing.bed} bed
+                  <span className="flaticon-bed" /> {listing.bed} 방
                 </a>
                 <a href="#">
-                  <span className="flaticon-shower" /> {listing.bath} bath
+                  <span className="flaticon-shower" /> {listing.bath} 욕실
                 </a>
                 <a href="#">
-                  <span className="flaticon-expand" /> {listing.sqft} sqft
+                  <span className="flaticon-expand" /> {listing.sqft} 평
                 </a>
               </div>
               <p className="list-text2">

@@ -2,11 +2,12 @@
 
 import { Property } from '@/module/property/Property';
 import axios from 'axios';
+import { API } from '../API';
 
 const fetchProperties = async (): Promise<Property[]> => {
   try {
-    const API_OFFICETELS = `${process.env.NEXT_PUBLIC_API_LANDSERVER}/officetels`;
-    const API_APARTMENTS = `${process.env.NEXT_PUBLIC_API_LANDSERVER}/apartments`;
+    const API_OFFICETELS = `${API.LANDSERVER}/officetels`;
+    const API_APARTMENTS = `${API.LANDSERVER}/apartments`;
 
     const [officetelsResponse, apartmentsResponse] = await Promise.all([
       axios.get(API_OFFICETELS),

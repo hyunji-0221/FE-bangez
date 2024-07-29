@@ -3,10 +3,12 @@
 import { API } from "@/app/api/common/API";
 import { LoginTypes } from "@/types/LoginData";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const SignIn = () => {
+  const router = useRouter();
 
   const googleClinetId = process.env.GOOGLE_CLIENT_ID;
 
@@ -36,6 +38,7 @@ const SignIn = () => {
     }).then(res => {
       console.log('res', res)
       console.log(res.json())
+      router.push("/");
     }).catch(error => {
       console.log('error', error)
     })

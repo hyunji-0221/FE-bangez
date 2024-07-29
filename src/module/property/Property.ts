@@ -49,3 +49,29 @@ export interface Property {
     forRent: boolean;
     image?: string;
   }
+export interface exampleProperty {
+    id: '1',
+    atclNo: 123456,
+    atclNm: 'Beautiful Apartment',
+    rletTpNm: 'Apartment',
+    tradTpNm: 'Sale',
+    flrInfo: '5th Floor',
+    prc: 500000,
+    rentPrc: 2000,
+    hanPrc: '5000',
+    spc1: 85,
+    spc2: 90,
+    direction: 'South',
+    atclCfmYmd: '2023-07-01',
+    lat: '40.712776',
+    lng: '-74.005974',
+    atclFetrDesc: 'Spacious, modern, and in a great location',
+    tagList: ['Modern', 'Spacious', 'Convenient'],
+    bildNm: 'Skyline Apartments',
+    town: 'Downtown',
+    roadAddress: '123 Main St',
+    address: '123 Main St, New York, NY 10001',
+    forRent: false,
+    image: 'https://example.com/image.jpg',
+  };
+  

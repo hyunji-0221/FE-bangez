@@ -32,7 +32,7 @@ const ListV1 = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="breadcumb-style1">
-                                <h2 className="title">방 내놓아요</h2>
+                                <h2 className="title">오피스텔 내놓아요</h2>
                                 <div className="breadcumb-list">
                                     <div className="widget-wrapper mb20">
                                         <div className="btn-area d-grid align-items-center">

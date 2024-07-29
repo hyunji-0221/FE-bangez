@@ -1,5 +1,5 @@
 export const homeItems = [
-  { href: "#", label: "매물 보기" },
+  { href: "/map-v4", label: "지도 보기" },
   { href: "#", label: "부동산 정보" },
   // { href: "#", label: "Home v4" },
   // { href: "#", label: "Home v5" },
