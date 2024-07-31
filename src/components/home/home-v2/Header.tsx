@@ -8,11 +8,13 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 import Cookies from 'js-cookie';
+import {jwtDecode} from 'jwt-decode';
 
 const Header = () => {
 
   const [userId, setUserId] = useState(false);
   const [accessToken, setAccessToken] = useState<string|undefined>();
+  
 
   const [navbar, setNavbar] = useState(false);
 
@@ -91,7 +93,7 @@ const Header = () => {
                     매물 등록하기
                     <i className="fal fa-arrow-right-long" />
                   </Link>
-                  {!userId ?
+                  {!accessToken ?
                     <a
                       href="/login"
                       className="login-info d-flex align-items-center"

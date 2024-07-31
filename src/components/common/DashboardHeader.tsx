@@ -6,6 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
+import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined';
+import { API } from "@/app/api/common/API";
 
 const DashboardHeader = () => {
   const pathname = usePathname();
@@ -70,6 +73,35 @@ const DashboardHeader = () => {
     },
   ];
 
+  const userId = "2";
+  const [notification, setNotification] = useState(0);
+
+  useEffect(() => {
+    // const eventSource = new EventSource(`${API.CHATSERVER}/chat/notifications/${userId}`);
+
+    // eventSource.onopen = (event) => {
+    //   console.log('Connection opened:', event);
+    // };
+
+    // eventSource.addEventListener('notification', (event: any) => {
+    //   console.log('Notification event:', event.data);
+    //   setNotification(prev => prev + 1);
+    // });
+
+    // eventSource.addEventListener('error', (e: any) => {
+    //   console.log("An error occurred while attempting to connect.");
+    //   console.error("Error event details:", e);
+    //   console.error("EventSource readyState:", e.target.readyState);
+    //   console.error("EventSource URL:", e.target.url);
+    //   eventSource.close();
+    // });
+
+    // return () => {
+    //   eventSource.close(); // Clean up on unmount
+    // };
+
+  }, []);
+
   return (
     <>
       <header className="header-nav nav-homepage-style light-header position-fixed menu-home4 main-menu">
@@ -127,7 +159,12 @@ const DashboardHeader = () => {
 
                     <li className="d-none d-sm-block">
                       <a className="text-center mr20 notif" href="#">
-                        <span className="flaticon-bell" />
+                        {/* <span className="flaticon-bell" /> */}
+                        {
+                          !notification ?
+                            <MessageOutlinedIcon sx={{ stroke: "#ffffff", strokeWidth: 1 }} /> :
+                            <MarkUnreadChatAltOutlinedIcon sx={{ stroke: "#ffffff", strokeWidth: 1 }} />
+                        }
                       </a>
                     </li>
                     {/* End notification icon */}
@@ -147,18 +184,16 @@ const DashboardHeader = () => {
                             {menuItems.map((section, sectionIndex) => (
                               <div key={sectionIndex}>
                                 <p
-                                  className={`fz15 fw400 ff-heading ${
-                                    sectionIndex === 0 ? "mb20" : "mt30"
-                                  }`}
+                                  className={`fz15 fw400 ff-heading ${sectionIndex === 0 ? "mb20" : "mt30"
+                                    }`}
                                 >
                                   {section.title}
                                 </p>
                                 {section.items.map((item, itemIndex) => (
                                   <Link
                                     key={itemIndex}
-                                    className={`dropdown-item ${
-                                      pathname == item.href ? "-is-active" : ""
-                                    } `}
+                                    className={`dropdown-item ${pathname == item.href ? "-is-active" : ""
+                                      } `}
                                     href={item.href}
                                   >
                                     <i className={`${item.icon} mr10`} />

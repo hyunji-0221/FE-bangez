@@ -91,7 +91,7 @@ const UserInboxList: React.FC<{
       method: 'GET',
       headers: {
         // 'Content-Type': 'application/json',
-        'Authorization': 'Bearer '+'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlzcyI6ImJpdGNhbXAiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTcyMTcyOTc4OCwiZXhwIjoxNzIxNzMyNzg4fQ.TtzoJwWS8ccVNI-uMIUqHONz0WBlD3eZ5Zl3k0r9LDM'
+        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlzcyI6ImJpdGNhbXAiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTcyMTcyOTc4OCwiZXhwIjoxNzIxNzMyNzg4fQ.TtzoJwWS8ccVNI-uMIUqHONz0WBlD3eZ5Zl3k0r9LDM'
       },
     }).then(res => res.json())
       .then(data => {
@@ -107,7 +107,9 @@ const UserInboxList: React.FC<{
       {/* {users.map((user, index) => (
         <UserItem key={index} user={user} setRoomId={setRoomId} setReceiverId={setReceiverId} />
       ))} */}
-      {
+      {rooms.length === 0
+        ? <h4 className="my-chat_roomEmpty">채팅방이 없습니다.</h4>
+        :
         rooms.map((room, index) => (
           <UserItem key={index} room={{
             id: room.id,
@@ -116,8 +118,8 @@ const UserInboxList: React.FC<{
             receiverId: room.receiverId,
             createDate: room.createDate
           }} setRoomId={setRoomId} setReceiverId={setReceiverId} />
-        ))
-      }
+        ))}
+        
     </>
   );
 };
