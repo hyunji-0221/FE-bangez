@@ -3,7 +3,7 @@ import { ChatMessageProps } from "@/module/chat/Chat";
 import { ChatModel, UserChatBoxContentModel } from "@/types/ChatData";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { EventSourcePolyfill} from "event-source-polyfill";
+import { EventSourcePolyfill } from "event-source-polyfill";
 
 const UserChatBoxContent = ({ UserChatBoxContentModels }: { UserChatBoxContentModels: UserChatBoxContentModel }) => {
   const roomId = UserChatBoxContentModels.roomId
@@ -25,18 +25,18 @@ const UserChatBoxContent = ({ UserChatBoxContentModels }: { UserChatBoxContentMo
     console.log('roomId ', roomId)
     setPrevMessages([])
     if (roomId === '') return
-    // fetch(`${API.CHATSERVER}/chat/read/${roomId}/1`, {
-    //   method: 'GET'
-    // }).then(res => {
-    //   console.log('채팅 내용 : ', res)f
-    // }).catch(error => {
-    //   console.log('채팅 내용 에러 발생', error)
-    // })
+    fetch(`${API.CHATSERVER}/read/${roomId}/1`, {
+      method: 'GET'
+    }).then(res => {
+      console.log('채팅 내용 : ', res)
+    }).catch(error => {
+      console.log('채팅 내용 에러 발생', error)
+    })
 
-    // const eventSource = new EventSource(`${API.CHATSERVER}/chat/sse/${roomId}`);
+    // const eventSource = new EventSource(`${API.CHATSERVER}/sse/${roomId}`);
     const eventSource = new EventSourcePolyfill(`${API.CHATSERVER}/sse/${roomId}`, {
       headers: {
-        'Authorization' : 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlzcyI6ImJpdGNhbXAiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTcyMTcyNjU0MCwiZXhwIjoxNzIxNzI5NTQwfQ.vTq2ITDbBv5eAHJZhyXqwLYa5Xd17kFzhvC6BVmurmo'
+        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlzcyI6ImJpdGNhbXAiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTcyMTcyNjU0MCwiZXhwIjoxNzIxNzI5NTQwfQ.vTq2ITDbBv5eAHJZhyXqwLYa5Xd17kFzhvC6BVmurmo'
       }, withCredentials: true
     });
     eventSource.onopen = (event) => {
@@ -89,9 +89,11 @@ const ChatMessage: React.FC<{ message: ChatModel, userId: string }> = ({ message
 
         <div
           className={`title fz14 ${message.senderId === userId ? "mr10" : "ml10"}`}>
-
+          {/* <div className="text-black text-[14px]">{message.timeStamp?.toString().slice(0, 10)}</div> */}
           {message.senderId === userId
-            ? (<small>{message.timeStamp}</small>)
+            ? (
+              <small>{new Date(message.timeStamp)?.toLocaleTimeString('ko-KR', { hour12: true }).slice(0, 8)}</small>
+            )
             : (<>
               {/*{message.name}*/}
               {message.senderId} <small className="ml10">{message.timeStamp}</small>

@@ -3,6 +3,7 @@
 import { SignUpTypes } from "@/types/SignUpData";
 import { error } from "console";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const SignUp = () => {
@@ -12,6 +13,8 @@ const SignUp = () => {
     handleSubmit,
     reset
   } = useForm<SignUpTypes>();
+
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<SignUpTypes> = async (data) => {
     console.log('onSubmit 내용', data)
@@ -31,6 +34,7 @@ const SignUp = () => {
     }).then(res => {
       console.log('res',res)
       console.log(res.json())
+      router.push("/login");
     }).catch(error => {
       console.log('error', error)
     })

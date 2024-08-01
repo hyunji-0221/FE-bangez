@@ -11,6 +11,7 @@ import UserInboxList from "@/components/property/dashboard/dashboard-message/Use
 import Image from "next/image";
 import ChatBoxForm from "@/components/property/dashboard/dashboard-message/ChatBoxForm";
 import { useState } from "react";
+import Header from "@/components/home/home-v2/Header";
 
 // export const metadata = {
 //   title: "Dashboard Message || Homez - Real Estate NextJS Template",
@@ -21,16 +22,6 @@ const DashboardMessage = () => {
   const userId = '1'
   const [roomId, setRoomId] = useState('')
   const [receiverId, setReceiverId] = useState('')
-
-  // useEffect(() => {
-
-  //   const eventsource = new EventSource(`${API.CHATSERVER}/sse/${roomId}`);
-
-  //   eventsource.onmessage = (event) => {
-  //     console.log(event.data);
-  //   };
-
-  // }, [roomId]);
 
   return (
     <>

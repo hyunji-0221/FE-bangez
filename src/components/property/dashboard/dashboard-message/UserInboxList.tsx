@@ -2,42 +2,9 @@ import { API } from "@/app/api/common/API";
 import { ChatRoomModel } from "@/types/ChatData";
 import Image from "next/image";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { set } from "react-hook-form";
 
-// interface ChatUsersProps {
-//   roomId: string,
-//   receiverId: string,
-//   name: string;
-//   position: string;
-//   imageUrl: string;
-//   notificationStatus?: string;
-// }
-
-// const users: ChatUsersProps[] = [
-//   {
-//     roomId: '668e475eb73f2a1eaa46ad00',
-//     receiverId: '2',
-//     name: "Darlene Robertson",
-//     position: "Head of Development",
-//     imageUrl: "/images/inbox/ms1.png",
-//     notificationStatus: "online",
-//   },
-//   {
-//     roomId: '668e475eb73f2a1eaa46ad00',
-//     receiverId: '2',
-//     name: "Jane Cooper",
-//     position: "Head of Development",
-//     imageUrl: "/images/inbox/ms2.png",
-//     notificationStatus: "none",
-//   },
-//   {
-//     roomId: '668e475eb73f2a1eaa46ad00',
-//     receiverId: '2',
-//     name: "Arlene McCoy",
-//     position: "Head of Development",
-//     imageUrl: "/images/inbox/ms3.png",
-//     notificationStatus: "away",
-//   },
-// ];
+import Cookies from "js-cookie";
 
 const UserItem: React.FC<{
   room: ChatRoomModel
@@ -82,16 +49,21 @@ const UserInboxList: React.FC<{
   setRoomId: Dispatch<SetStateAction<string>>
   , setReceiverId: Dispatch<SetStateAction<string>>
 }> = ({ setRoomId, setReceiverId }) => {
+  
   const userId = '1';
+  const [accessToken, setAccessToken] = useState<string|undefined>('');
 
   const [rooms, setRooms] = useState<ChatRoomModel[]>([]);
 
   useEffect(() => {
+    const accessToken = Cookies.get('accessToken');
+    console.log('accessTokenㅗ', accessToken);
+    setAccessToken(accessToken);
     fetch(`${API.CHATSERVER}/get-room-list/${userId}`, {
       method: 'GET',
-      headers: {
+      headers:  {
         // 'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlzcyI6ImJpdGNhbXAiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTcyMTcyOTc4OCwiZXhwIjoxNzIxNzMyNzg4fQ.TtzoJwWS8ccVNI-uMIUqHONz0WBlD3eZ5Zl3k0r9LDM'
+        'Authorization': `Bearer ${accessToken}`,
       },
     }).then(res => res.json())
       .then(data => {

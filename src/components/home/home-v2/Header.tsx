@@ -8,13 +8,12 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 import Cookies from 'js-cookie';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 const Header = () => {
 
   const [userId, setUserId] = useState(false);
-  const [accessToken, setAccessToken] = useState<string|undefined>();
-  
+  const [accessToken, setAccessToken] = useState<string>();
 
   const [navbar, setNavbar] = useState(false);
 
@@ -27,10 +26,14 @@ const Header = () => {
   };
 
   useEffect(() => {
-
     const accessToken = Cookies.get('accessToken')
     console.log('token', JSON.stringify(accessToken))
     setAccessToken(accessToken)
+    if (accessToken !== undefined) {
+      const decodeToken = jwtDecode(accessToken as string)
+      console.log('decodeToken ', decodeToken)
+    }
+
 
     window.addEventListener("scroll", changeBackground);
     return () => {
@@ -40,7 +43,6 @@ const Header = () => {
 
   return (
     <>
-    {accessToken && <div>accessToken 있음.</div>} {/*accessToken이 있으면 왁! 출력*/}
       <header
         className={`header-nav nav-homepage-style at-home2  main-menu ${navbar ? "sticky slideInDown animated" : ""
           }`}

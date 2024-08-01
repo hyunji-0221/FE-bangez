@@ -38,7 +38,7 @@ const SignIn = () => {
     }).then(res => {
       console.log('res', res)
       console.log(res.json())
-      router.push("/");
+      // router.push("/");
     }).catch(error => {
       console.log('error', error)
     })

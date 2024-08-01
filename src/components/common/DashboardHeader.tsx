@@ -10,6 +10,10 @@ import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined';
 import { API } from "@/app/api/common/API";
 
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
+import { useDispatch } from "react-redux";
+
 const DashboardHeader = () => {
   const pathname = usePathname();
 
@@ -73,32 +77,44 @@ const DashboardHeader = () => {
     },
   ];
 
-  const userId = "2";
+  const [userId, setUserId] = useState('');
+  const [accessToken, setAccessToken] = useState<string>()
   const [notification, setNotification] = useState(0);
 
+  const dispatch = useDispatch();
+  const getUserId:
+
   useEffect(() => {
-    // const eventSource = new EventSource(`${API.CHATSERVER}/chat/notifications/${userId}`);
+    const accessToken = Cookies.get('accessToken')
+    console.log('token', JSON.stringify(accessToken))
 
-    // eventSource.onopen = (event) => {
-    //   console.log('Connection opened:', event);
-    // };
+    setAccessToken(accessToken)
+    if (accessToken !== undefined) {
+      const decodeToken = jwtDecode(accessToken as string)
+      console.log('decodeToken ', decodeToken)
+    }
+    const eventSource = new EventSource(`${API.CHATSERVER}/notifications/${userId}`);
 
-    // eventSource.addEventListener('notification', (event: any) => {
-    //   console.log('Notification event:', event.data);
-    //   setNotification(prev => prev + 1);
-    // });
+    eventSource.onopen = (event) => {
+      console.log('Connection opened:', event);
+    };
 
-    // eventSource.addEventListener('error', (e: any) => {
-    //   console.log("An error occurred while attempting to connect.");
-    //   console.error("Error event details:", e);
-    //   console.error("EventSource readyState:", e.target.readyState);
-    //   console.error("EventSource URL:", e.target.url);
-    //   eventSource.close();
-    // });
+    eventSource.addEventListener('notification', (event: any) => {
+      console.log('Notification event:', event.data);
+      setNotification(prev => prev + 1);
+    });
 
-    // return () => {
-    //   eventSource.close(); // Clean up on unmount
-    // };
+    eventSource.addEventListener('error', (e: any) => {
+      console.log("An error occurred while attempting to connect.");
+      console.error("Error event details:", e);
+      console.error("EventSource readyState:", e.target.readyState);
+      console.error("EventSource URL:", e.target.url);
+      eventSource.close();
+    });
+
+    return () => {
+      eventSource.close(); // Clean up on unmount
+    };
 
   }, []);
 
@@ -162,7 +178,8 @@ const DashboardHeader = () => {
                         {/* <span className="flaticon-bell" /> */}
                         {
                           !notification ?
-                            <MessageOutlinedIcon sx={{ stroke: "#ffffff", strokeWidth: 1 }} /> :
+                            <MessageOutlinedIcon sx={{ stroke: "#ffffff", strokeWidth: 1 }} />
+                            :
                             <MarkUnreadChatAltOutlinedIcon sx={{ stroke: "#ffffff", strokeWidth: 1 }} />
                         }
                       </a>
