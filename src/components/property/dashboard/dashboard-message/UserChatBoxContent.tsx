@@ -1,9 +1,13 @@
 import { API } from "@/app/api/common/API";
 import { ChatMessageProps } from "@/module/chat/Chat";
-import { ChatModel, UserChatBoxContentModel } from "@/types/ChatData";
+import { CustomJwtPayload, ChatModel, UserChatBoxContentModel } from "@/types/ChatData";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { EventSourcePolyfill } from "event-source-polyfill";
+import { getAuthHeader } from "@/module/login/Header";
+
+import Cookies from 'js-cookie';
+import { jwtDecode } from "jwt-decode";
 
 const UserChatBoxContent = ({ UserChatBoxContentModels }: { UserChatBoxContentModels: UserChatBoxContentModel }) => {
   const roomId = UserChatBoxContentModels.roomId
@@ -20,12 +24,11 @@ const UserChatBoxContent = ({ UserChatBoxContentModels }: { UserChatBoxContentMo
   };
 
 
-
   useEffect(() => {
-    console.log('roomId ', roomId)
+    console.log('roomId', roomId)
     setPrevMessages([])
     if (roomId === '') return
-    fetch(`${API.CHATSERVER}/read/${roomId}/1`, {
+    fetch(`${API.CHATSERVER}/read/${roomId}/${userId}`, {
       method: 'GET'
     }).then(res => {
       console.log('채팅 내용 : ', res)
@@ -33,11 +36,9 @@ const UserChatBoxContent = ({ UserChatBoxContentModels }: { UserChatBoxContentMo
       console.log('채팅 내용 에러 발생', error)
     })
 
-    // const eventSource = new EventSource(`${API.CHATSERVER}/sse/${roomId}`);
     const eventSource = new EventSourcePolyfill(`${API.CHATSERVER}/sse/${roomId}`, {
-      headers: {
-        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlzcyI6ImJpdGNhbXAiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTcyMTcyNjU0MCwiZXhwIjoxNzIxNzI5NTQwfQ.vTq2ITDbBv5eAHJZhyXqwLYa5Xd17kFzhvC6BVmurmo'
-      }, withCredentials: true
+      headers: getAuthHeader(), 
+      withCredentials: true
     });
     eventSource.onopen = (event) => {
       console.log('Connection opened:', event);
@@ -96,7 +97,7 @@ const ChatMessage: React.FC<{ message: ChatModel, userId: string }> = ({ message
             )
             : (<>
               {/*{message.name}*/}
-              {message.senderId} <small className="ml10">{message.timeStamp}</small>
+              {message.senderId} <small className="ml10">{new Date(message.timeStamp)?.toLocaleTimeString('ko-KR', { hour12: true }).slice(0, 8)}</small>
             </>)}
         </div>
 

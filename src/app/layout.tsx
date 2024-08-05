@@ -7,6 +7,7 @@ import "../../public/scss/main.scss";
 import "rc-slider/assets/index.css";
 import { DM_Sans, Poppins } from "next/font/google";
 import { useEffect } from "react";
+import { useUserStore } from "@/stores/useUserStore";
 
 if (typeof window !== "undefined") {
   import("bootstrap");
@@ -26,12 +27,18 @@ const poppins = Poppins({
   variable: "--title-font-family",
 });
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+
+  const fetchUser = useUserStore((state) => state.fetchUser);
+
   useEffect(() => {
     Aos.init({
       duration: 1200,
       once: true,
     });
+
+    fetchUser();
+    
   }, []);
 
   return (

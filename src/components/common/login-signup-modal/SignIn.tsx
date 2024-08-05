@@ -7,6 +7,10 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import Cookies from 'js-cookie';
+import { CustomJwtPayload } from "@/types/ChatData";
+import { jwtDecode } from "jwt-decode";
+
 const SignIn = () => {
   const router = useRouter();
 
@@ -35,13 +39,21 @@ const SignIn = () => {
         password: data.password,
       }),
       credentials: 'include',
-    }).then(res => {
-      console.log('res', res)
-      console.log(res.json())
-      // router.push("/");
-    }).catch(error => {
-      console.log('error', error)
-    })
+    }).then(res => res.json()) // 응답을 JSON으로 파싱
+      .then(data => {
+        console.log('response data', data);
+        const accessToken = Cookies.get("accessToken");
+        console.log('Access Token:', accessToken);
+        if (accessToken) {
+          const decodedToken: CustomJwtPayload = jwtDecode(accessToken);
+          const id = decodedToken.id;
+          console.log('Decoded Token:', decodedToken);
+        }
+        router.push('/');
+      })
+      .catch(error => {
+        console.log('error', error)
+      });
     reset();
   }
 

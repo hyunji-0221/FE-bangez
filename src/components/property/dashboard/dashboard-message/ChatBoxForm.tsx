@@ -15,32 +15,40 @@ const ChatBoxForm = ({ ChatBoxFormModels }: { ChatBoxFormModels: UserChatBoxCont
     register,
     handleSubmit,
     reset
-  } = useForm<ChatBoxTypes>();
+  } = useForm<ChatBoxTypes>({
+    defaultValues: {
+      roomId: roomId,
+      senderId: userId,
+      receiverId: receiverId
+    }
+  });
 
   const onSubmit: SubmitHandler<ChatBoxTypes> = async (data) => {
-    console.log('chatbox 들어옴', data.message)
+    console.log('message 들어옴', data.message)
+    console.log('roomId 들어옴', roomId)
+    console.log('senderId 들어옴', userId)
+    console.log('receiverId 들어옴', receiverId)
     await fetch(`${API.CHATSERVER}/save`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        chatRoomId: data.roomId,
-        senderId: data.senderId,
-        receiverId: data.receiverId,
+        chatRoomId:roomId,
+        senderId: userId,
+        receiverId: receiverId,
         message: data.message
       })
     }).catch(error => {
       console.log('채팅 전송 에러', error)
     })
-    reset();
+    reset({
+      message:''
+    });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="d-flex align-items-center ">
-      <input {...register("roomId", { required: true })} value={roomId}></input>
-      <input {...register("senderId", { required: true })} type="hidden" value={userId}></input>
-      <input {...register("receiverId", { required: true })} type="hidden" value={receiverId}></input>
       <input
         {...register("message", { required: true })}
         className="form-control"

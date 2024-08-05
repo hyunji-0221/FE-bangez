@@ -1,10 +1,11 @@
 import { API } from "@/app/api/common/API";
-import { ChatRoomModel } from "@/types/ChatData";
+import { CustomJwtPayload, ChatRoomModel, UserId } from "@/types/ChatData";
 import Image from "next/image";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { set } from "react-hook-form";
 
 import Cookies from "js-cookie";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 
 const UserItem: React.FC<{
   room: ChatRoomModel
@@ -49,30 +50,36 @@ const UserInboxList: React.FC<{
   setRoomId: Dispatch<SetStateAction<string>>
   , setReceiverId: Dispatch<SetStateAction<string>>
 }> = ({ setRoomId, setReceiverId }) => {
-  
-  const userId = '1';
-  const [accessToken, setAccessToken] = useState<string|undefined>('');
+
+  const [userId, setUserId] = useState<string|undefined>();
 
   const [rooms, setRooms] = useState<ChatRoomModel[]>([]);
 
   useEffect(() => {
-    const accessToken = Cookies.get('accessToken');
-    console.log('accessTokenㅗ', accessToken);
-    setAccessToken(accessToken);
-    fetch(`${API.CHATSERVER}/get-room-list/${userId}`, {
-      method: 'GET',
-      headers:  {
-        // 'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`,
-      },
-    }).then(res => res.json())
-      .then(data => {
-        console.log('채팅방 리스트', data)
-        setRooms(data);
-      }).catch(error => {
-        console.log('채팅방 리스트 에러', error)
-      })
-  }, []);
+    const access = Cookies.get('accessToken');
+    if (access) {
+      const decodedToken: CustomJwtPayload = jwtDecode(access as string); // 토큰 디코딩 함수
+      const id = decodedToken.id;
+      
+      setUserId(id)
+
+      if (userId) {
+        fetch(`${API.CHATSERVER}/get-room-list/${userId}`, {
+          method: 'GET',
+          headers: {
+            // 'Content-Type': 'application/json',
+            'Authorization': `Bearer ${access}`,
+          },
+        }).then(res => res.json())
+          .then(data => {
+            console.log('채팅방 리스트', data)
+            setRooms(data);
+          }).catch(error => {
+            console.log('채팅방 리스트 에러', error)
+          })
+      }
+    }
+  }, [userId]);
 
   return (
     <>
@@ -91,7 +98,7 @@ const UserInboxList: React.FC<{
             createDate: room.createDate
           }} setRoomId={setRoomId} setReceiverId={setReceiverId} />
         ))}
-        
+
     </>
   );
 };

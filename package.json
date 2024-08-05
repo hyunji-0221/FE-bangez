@@ -16,7 +16,6 @@
     "@mui/material": "^5.16.5",
     "@popperjs/core": "^2.11.8",
     "@react-google-maps/api": "^2.19.2",
-    "@reduxjs/toolkit": "2.2.2",
     "@types/aos": "^3.0.7",
     "@types/bootstrap": "^5.2.10",
     "@types/event-source-polyfill": "^1.0.5",
@@ -49,7 +48,8 @@
     "react-tooltip": "^5.21.1",
     "recharts": "2.2.0",
     "sass": "^1.63.4",
-    "swiper": "^8.4.7"
+    "swiper": "^8.4.7",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@types/node": "^20",

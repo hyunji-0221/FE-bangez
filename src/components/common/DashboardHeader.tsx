@@ -12,9 +12,13 @@ import { API } from "@/app/api/common/API";
 
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
-import { useDispatch } from "react-redux";
+import { EventSourcePolyfill } from "event-source-polyfill";
+import { CustomJwtPayload } from "@/types/ChatData";
+import { set } from "react-hook-form";
 
-const DashboardHeader = () => {
+const DashboardHeader = (
+  // { SenderUserId }: { SenderUserId: UserChatUserId }
+) => {
   const pathname = usePathname();
 
   const menuItems = [
@@ -56,7 +60,11 @@ const DashboardHeader = () => {
           text: "Saved Search",
           href: "/dashboard-saved-search",
         },
-        { icon: "flaticon-review", text: "Reviews", href: "/dashboard-review" },
+        {
+          icon: "flaticon-review",
+          text: "Reviews",
+          href: "/dashboard-review"
+        },
       ],
     },
     {
@@ -77,24 +85,26 @@ const DashboardHeader = () => {
     },
   ];
 
-  const [userId, setUserId] = useState('');
-  const [accessToken, setAccessToken] = useState<string>()
+  // const [accessToken, setAccessToken] = useState<string>()
   const [notification, setNotification] = useState(0);
-
-  const dispatch = useDispatch();
-  const getUserId:
-
-  useEffect(() => {
+  const [userId, setUserId] = useState('')
+  
+  useEffect(() => { //새로고침을 해야만 notification이 작동함
+    setNotification(0)
     const accessToken = Cookies.get('accessToken')
-    console.log('token', JSON.stringify(accessToken))
 
-    setAccessToken(accessToken)
     if (accessToken !== undefined) {
-      const decodeToken = jwtDecode(accessToken as string)
-      console.log('decodeToken ', decodeToken)
+      const decodeToken: CustomJwtPayload = jwtDecode(accessToken as string)
+      setUserId(decodeToken.id)
     }
-    const eventSource = new EventSource(`${API.CHATSERVER}/notifications/${userId}`);
-
+    // const eventSource = new EventSource(`${API.CHATSERVER}/notifications/${userId}`);
+    if (userId === '') return;
+    const eventSource = new EventSourcePolyfill(`${API.CHATSERVER}/notifications/${userId}`, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      },
+      withCredentials: true
+    });
     eventSource.onopen = (event) => {
       console.log('Connection opened:', event);
     };
@@ -103,6 +113,11 @@ const DashboardHeader = () => {
       console.log('Notification event:', event.data);
       setNotification(prev => prev + 1);
     });
+
+    // eventSource.addEventListener('messageRead', (event:any) => {
+    //   console.log('Message read event:', event.data);
+    //   setNotification(prev => prev + 1);
+    // });
 
     eventSource.addEventListener('error', (e: any) => {
       console.log("An error occurred while attempting to connect.");
@@ -116,7 +131,8 @@ const DashboardHeader = () => {
       eventSource.close(); // Clean up on unmount
     };
 
-  }, []);
+
+  }, [userId]);
 
   return (
     <>

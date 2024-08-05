@@ -18,7 +18,7 @@ const SidebarDashboard = () => {
         {
           href: "/dashboard-message",
           icon: "flaticon-chat-1",
-          text: "Message"
+          text: "1:1 문의 채팅"
         }
       ]
     },
@@ -45,10 +45,15 @@ const SidebarDashboard = () => {
           icon: "flaticon-search-2",
           text: "Saved Search"
         },
+        // {
+        //   href: "/dashboard-reviews",
+        //   icon: "flaticon-review",
+        //   text: "Reviews"
+        // },
         {
-          href: "/dashboard-reviews",
-          icon: "flaticon-review",
-          text: "Reviews"
+          href: "/dashboard-chargePoint",
+          icon: "flaticon-secure-payment",
+          text: "포인트 충전"
         }
       ]
     },

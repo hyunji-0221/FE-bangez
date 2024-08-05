@@ -10,8 +10,11 @@ import UserChatBoxContent from "@/components/property/dashboard/dashboard-messag
 import UserInboxList from "@/components/property/dashboard/dashboard-message/UserInboxList";
 import Image from "next/image";
 import ChatBoxForm from "@/components/property/dashboard/dashboard-message/ChatBoxForm";
-import { useState } from "react";
-import Header from "@/components/home/home-v2/Header";
+import { useEffect, useState } from "react";
+
+import Cookies from 'js-cookie';
+import {jwtDecode} from "jwt-decode";
+import { CustomJwtPayload } from "@/types/ChatData";
 
 // export const metadata = {
 //   title: "Dashboard Message || Homez - Real Estate NextJS Template",
@@ -19,9 +22,20 @@ import Header from "@/components/home/home-v2/Header";
 
 const DashboardMessage = () => {
 
-  const userId = '1'
   const [roomId, setRoomId] = useState('')
   const [receiverId, setReceiverId] = useState('')
+  const [userId , setUserId] = useState('')
+
+
+  useEffect(() => {
+    const access = Cookies.get('accessToken')
+    if(access){
+      const decodedToken:CustomJwtPayload = jwtDecode(access as string); // 토큰 디코딩 함수
+      const id = decodedToken.id;
+      setUserId(id)
+    }
+  },[])
+  
 
   return (
     <>
@@ -94,12 +108,12 @@ const DashboardMessage = () => {
                             {/* <p className="preview">Active</p> */}
                           </div>
                           <div>
-                            <a
+                            {/* <a
                               className="text-decoration-underline fz14 fw600 dark-color ff-heading"
                               href="#"
                             >
                               Delete Conversation
-                            </a>
+                            </a> */}
                           </div>
                         </div>
                       </div>
@@ -107,9 +121,7 @@ const DashboardMessage = () => {
                     {/* End .user_heading */}
 
                     <div className="inbox_chatting_box">
-
                       <UserChatBoxContent UserChatBoxContentModels={{ roomId: `${roomId}`, senderId: `${userId}`, receiverId: "2" }} />
-
                     </div>
                     {/* End inbox-chatting */}
 

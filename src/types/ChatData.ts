@@ -1,3 +1,5 @@
+import { JwtPayload } from "jwt-decode"
+
 export type ChatBoxTypes = {
     roomId: string,
     senderId: string,
@@ -5,9 +7,12 @@ export type ChatBoxTypes = {
     message: string
 }
 
-export interface UserChatBoxContentModel {
-    roomId: string,
+export interface UserChatUserId{
     senderId: string,
+}
+
+export interface UserChatBoxContentModel extends UserChatUserId {
+    roomId: string,
     receiverId: string
 }
 
@@ -23,4 +28,18 @@ export interface ChatRoomModel {
     senderId:string,
     receiverId:string,
     createDate:Date
+}
+
+export interface CustomJwtPayload extends JwtPayload {
+    id : string
+}
+
+export interface UserId {
+    userId: string
+}
+
+export interface UserInboxProps {
+    setRoomId: React.Dispatch<React.SetStateAction<string>>,
+    setReceiverId: React.Dispatch<React.SetStateAction<string>>,
+    UserId: {userId: string}
 }

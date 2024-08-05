@@ -534,3 +534,25 @@ header.nav-homepage-style.light-header .ace-responsive-menu a {
     justify-content: center;
     height: 95%;
 }
+
+.my-pay_btn {
+    color: #000000;
+    background-color: #fff;
+    border-color: #e89d21;
+    border-radius: 8px;
+}
+.my-form-control {
+    border-radius: 8px;
+    border: 1px solid #e89d21;
+    box-shadow: none;
+    font-size: 14px;
+    font-family: var(--title-font-family);
+    height: 55px;
+    outline: none;
+    padding-left: 15px;
+}
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

@@ -1,10 +1,11 @@
+import { useUserStore } from "@/stores/useUserStore";
 import ContactInfo from "./ContactInfo";
 import MenuItems from "./MenuItems";
 import SocialLinks from "./SocialLinks";
 
 const SidebarPanel = () => {
 
-  const name = "현지";
+  const user = useUserStore((state)=>state.user);
 
   return (
     <div className="rightside-hidden-bar">
@@ -16,7 +17,7 @@ const SidebarPanel = () => {
         >
           <span className="far fa-times"></span>
         </div>
-        <h4 className="title">안녕하세요, {name}님!</h4>
+        <h4 className="title">안녕하세요, {user?.name}님!</h4>
       </div>
       {/* End header */}
 

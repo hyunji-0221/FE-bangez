@@ -1,7 +1,7 @@
 "use client";
 import Select from "react-select";
 
-const Price = ({filterFunctions}) => {
+const Location = ({filterFunctions}:any) => {
   const locationOptions = [
     { value: "All Cities", label: "All Cities" },
     { value: "California", label: "California" },
@@ -14,7 +14,7 @@ const Price = ({filterFunctions}) => {
   ];
 
   const customStyles = {
-    option: (styles, { isFocused, isSelected, isHovered }) => {
+    option: (styles:any, { isFocused, isSelected, isHovered }:any) => {
       return {
         ...styles,
         backgroundColor: isSelected
@@ -38,9 +38,9 @@ const Price = ({filterFunctions}) => {
       classNamePrefix="select"
       required
       value={{value:filterFunctions.location,label:filterFunctions.location}}
-      onChange={(e)=>filterFunctions?.handlelocation(e.value)}
+      onChange={(e:any)=>filterFunctions?.handlelocation(e.value)}
     />
   );
 };
 
-export default Price;
+export default Location;
