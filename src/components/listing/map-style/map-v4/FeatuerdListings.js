@@ -1,10 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import img01 from '../../../../../public/Images/listings/apartment.jpeg'
+import img01 from '../../../../../public/Images/listings/apartment.jpeg';
 
 const FeaturedListings = ({ data, colstyle }) => {
-  
-
   return (
     <>
       {data.map((listing) => (
@@ -45,7 +43,7 @@ const FeaturedListings = ({ data, colstyle }) => {
             <div className="list-content">
               <div className="list-price mb-2">{listing.prc}</div>
               <h6 className="list-title">
-                <Link href={`/single-v5/${listing.id}`}>{listing.atclNm}</Link>
+                <Link href={`/single-v5/${listing.id}?rletTpNm=${listing.rletTpNm}`}>{listing.atclNm}</Link>
               </h6>
               <p className="list-text">{listing.town}</p>
             </div>

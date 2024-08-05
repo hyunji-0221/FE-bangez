@@ -17,7 +17,7 @@ const TopFilterBar2 = ({filterFunctions}) => {
           className="form-control search-field"
            onChange={(e)=>filterFunctions && filterFunctions.setSearchQuery(e.target.value)}
         
-          placeholder="Enter an address, neighborhood, city, or ZIP code"
+          placeholder="지역, 지하철, 동 또는 단지명을 입력하세요"
         />
       </li>
       <li className="list-inline-item position-relative">
@@ -27,19 +27,21 @@ const TopFilterBar2 = ({filterFunctions}) => {
           data-bs-toggle="dropdown"
           data-bs-auto-close="outside"
         >
-          For Sale <i className="fa fa-angle-down ms-2" />
+          거래 유형 <i className="fa fa-angle-down ms-2" />
         </button>
         <div className="dropdown-menu">
           <div className="widget-wrapper bdrb1 pb25 mb0 pl20">
-            <h6 className="list-title">Listing Status</h6>
+            <h6 className="list-title">거래 유형</h6>
             <div className="radio-element">
               <ListingStatus  filterFunctions={filterFunctions}  />
             </div>
           </div>
-          <div className="text-end mt10 pr10">
-            <button type="button" className="done-btn ud-btn btn-thm drop_btn">
-              Done
-            </button>
+          <div className="text-end mt10 pr10" >
+            {/* <button type="button" 
+            className="done-btn ud-btn btn-thm drop_btn" 
+            data-bs-auto-close="true">
+              완료
+            </button> */}
           </div>
         </div>
       </li>
@@ -52,22 +54,17 @@ const TopFilterBar2 = ({filterFunctions}) => {
           data-bs-toggle="dropdown"
           data-bs-auto-close="outside"
         >
-          Property Type <i className="fa fa-angle-down ms-2" />
+          매물 유형 <i className="fa fa-angle-down ms-2" />
         </button>
         <div className="dropdown-menu">
           <div className="widget-wrapper bdrb1 pb25 mb0 pl20">
-            <h6 className="list-title">Property Type</h6>
+            <h6 className="list-title">매물 유형</h6>
             <div className="checkbox-style1">
               <PropertyType  filterFunctions={filterFunctions}  />
             </div>
           </div>
           <div className="text-end mt10 pr10">
-            <button
-              type="button"
-              className="done-btn ud-btn btn-thm dropdown-toggle"
-            >
-              Done
-            </button>
+            
           </div>
         </div>
       </li>
@@ -80,26 +77,26 @@ const TopFilterBar2 = ({filterFunctions}) => {
           data-bs-toggle="dropdown"
           data-bs-auto-close="outside"
         >
-          Price <i className="fa fa-angle-down ms-2" />
+          가격 <i className="fa fa-angle-down ms-2" />
         </button>
 
         <div className="dropdown-menu dd3">
           <div className="widget-wrapper bdrb1 pb25 mb0 pl20 pr20">
-            <h6 className="list-title">Price Range</h6>
+            <h6 className="list-title">가격 범위</h6>
             {/* Range Slider Desktop Version */}
             <div className="range-slider-style1">
               <PriceRange  filterFunctions={filterFunctions}  />
             </div>
           </div>
           <div className="text-end mt10 pr10">
-            <button type="button" className="done-btn ud-btn btn-thm drop_btn3">
+            {/* <button type="button" className="done-btn ud-btn btn-thm drop_btn3">
               Done
-            </button>
+            </button> */}
           </div>
         </div>
       </li>
       {/* End li Price */}
-
+{/* 
       <li className="list-inline-item position-relative">
         <button
           type="button"
@@ -129,7 +126,7 @@ const TopFilterBar2 = ({filterFunctions}) => {
             </button>
           </div>
         </div>
-      </li>
+      </li> */}
       {/* End bed and bathroom check */}
 
       <li className="list-inline-item">
@@ -140,7 +137,7 @@ const TopFilterBar2 = ({filterFunctions}) => {
           data-bs-toggle="modal"
           data-bs-target="#advanceSeachModal"
         >
-          <i className="flaticon-settings me-2" /> More Filter
+          <i className="flaticon-settings me-2" /> 추가 필터
         </button>
       </li>
     </>

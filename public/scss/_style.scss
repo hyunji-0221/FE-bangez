@@ -10544,3 +10544,36 @@ input:focus-visible {
     }
 }
 
+
+//준호님 map 관련 css 
+.btn-secondary {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    color: white;
+    background-color: #3554d1;
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    background-color: #eb6753;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    color: white;
+    background-color: #f1416c;
+}

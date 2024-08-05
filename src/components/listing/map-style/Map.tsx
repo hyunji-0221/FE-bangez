@@ -79,6 +79,8 @@ const Map: React.FC<MapProps> = ({ properties }) => {
       const map = mapInstance.current;
       const clusterer = clustererInstance.current;
 
+      
+
       const markers = properties.map((property) => {
         const markerPosition = new window.kakao.maps.LatLng(parseFloat(property.lat), parseFloat(property.lng));
         const marker = new window.kakao.maps.Marker({
@@ -101,3 +103,4 @@ const Map: React.FC<MapProps> = ({ properties }) => {
 };
 
 export default Map;
+

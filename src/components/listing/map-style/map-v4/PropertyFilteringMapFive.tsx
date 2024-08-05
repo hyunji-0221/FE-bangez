@@ -11,6 +11,7 @@ import Map from '../Map';
 import { Property } from '@/module/property/Property';
 import { API } from '@/app/api/common/API';
 
+
 const fetchProperties = async (): Promise<Property[]> => {
   try {
     const API_OFFICETELS = `${API.LANDSERVER}/officetels`;
@@ -110,15 +111,38 @@ const PropertyFilteringMapFive: React.FC = () => {
     const refItems = properties.filter((elm) => {
       if (listingStatus === 'All') {
         return true;
-      } else if (listingStatus === 'Buy') {
-        return !elm.forRent;
-      } else if (listingStatus === 'Rent') {
-        return elm.forRent;
+      } else if (listingStatus === '매매') {
+        return elm.tradTpNm === '매매';
+      } else if (listingStatus === '전세') {
+        return elm.tradTpNm === '전세';
+      } else if (listingStatus === '월세') {
+        return elm.tradTpNm === '월세';
       }
       return false;
     });
 
+
+
     let filteredArrays: Property[][] = [];
+
+    if (priceRange.length > 0) {
+      const filtered = refItems.filter(
+        (elm) =>
+          Number(elm.prc) >= priceRange[0] &&
+          Number(elm.prc) <= priceRange[1],
+      );
+      filteredArrays.push(filtered);}
+
+      if (squirefeet.length > 0 && squirefeet[1]) {
+        const filtered = refItems.filter(
+          (elm) =>
+            (elm.spc1 * 0.3025) >= squirefeet[0] &&
+            (elm.spc1 * 0.3025) <= squirefeet[1],
+        );
+        filteredArrays.push(filtered);
+      }
+      
+
     if (propertyTypes.length > 0) {
       filteredArrays.push(refItems.filter((elm) => propertyTypes.includes(elm.rletTpNm)));
     }
@@ -145,15 +169,18 @@ const PropertyFilteringMapFive: React.FC = () => {
   ]);
 
   useEffect(() => {
-    setPageNumber(1);
     if (currentSortingOption === 'Newest') {
-      setSortedFilteredData([...filteredData].sort((a, b) => parseInt(b.atclCfmYmd.substring(0, 4)) - parseInt(a.atclCfmYmd.substring(0, 4))));
+      setSortedFilteredData(
+        [...filteredData].sort((a, b) => {
+          const dateA = a.atclCfmYmd ? parseInt(a.atclCfmYmd.substring(0, 4)) : 0;
+          const dateB = b.atclCfmYmd ? parseInt(b.atclCfmYmd.substring(0, 4)) : 0;
+          return dateB - dateA;
+        })
+      );
     } else if (currentSortingOption === 'Price Low') {
       setSortedFilteredData([...filteredData].sort((a, b) => a.prc - b.prc));
     } else if (currentSortingOption === 'Price High') {
       setSortedFilteredData([...filteredData].sort((a, b) => b.prc - a.prc));
-    } else {
-      setSortedFilteredData(filteredData);
     }
   }, [filteredData, currentSortingOption]);
 
