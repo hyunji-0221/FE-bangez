@@ -149,6 +149,9 @@ padding-right: 90px !important;
 padding-right: 95px !important;
 }.pr100 {
 padding-right: 100px !important;
+}.pr150 {
+background-color: #f7f7f7;
+padding-right: 150px !important;
 }
 /*Padding Bottom*/
 .pb0 {

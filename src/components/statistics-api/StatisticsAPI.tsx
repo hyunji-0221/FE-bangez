@@ -102,7 +102,8 @@ export async function getSchool() {
 
 
 export async function getPark() {
-    const url = `http://localhost:8000/analysis/api/city_park/statistics`
+    const url = `http://localhost:8000/analysis/api/city-park/statistics`
+    console.log('url', url)
     try {
         const response = await fetch(url, {
             method: "GET",

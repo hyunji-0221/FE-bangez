@@ -145,7 +145,7 @@ const Pricing = ({ filterFunctions }: any) => {
               <div className="pricing_packages">
                 <div className="heading mb60">
                   <h1 className="text2">
-                    포인트 잔액 : {point}
+                    잔액 : {point} 포인트 
                   </h1>
                   <Image
                     width={70}
