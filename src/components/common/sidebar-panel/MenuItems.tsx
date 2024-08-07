@@ -33,7 +33,7 @@ const MenuItems = () => {
       if (response.ok) {
         Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
-        router.refresh; 
+        console.log('Logout successful');
       } else {
         console.error('Failed to logout');
       }

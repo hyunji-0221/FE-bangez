@@ -7,7 +7,7 @@ export function AccessCountSave() {
     useEffect(() => {
         const recordPageVisit = async () => {
             try {
-                await fetch('http://localhost:8084/api/today/access-record', { method: 'POST' });
+                await fetch('http://localhost:8000/analysis/api/today/access-record', { method: 'POST' });
             } catch (error) {
                 console.error('Error recording page visit:', error);
             }

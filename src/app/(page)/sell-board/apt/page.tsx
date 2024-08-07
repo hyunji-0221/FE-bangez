@@ -1,20 +1,17 @@
-'use client'
-
 import DefaultHeader from "@/components/common/DefaultHeader";
+
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
-import { useRouter } from "next/navigation";
-import PropertyAptFilteringList from "@/components/listing/list-view/list-v1/PropertyAptFilteringList";
+
+import ProperteyFiltering from "@/components/listing/grid-view/sell-board/ProperteyFiltering";
 
 import React from "react";
 
-const ListV1 = () => {
-    const router = useRouter();
+export const metadata = {
+    title: "Gird Full 3 Column || Homez - Real Estate NextJS Template",
+};
 
-
-    const navigateTo = (path: string) => {
-        router.push(path);
-    };
+const GridFull3Col = () => {
     return (
         <>
             {/* Main Header Nav */}
@@ -31,33 +28,9 @@ const ListV1 = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="breadcumb-style1">
-                                <h2 className="title">아파트 내놓아요</h2>
+                                <h2 className="title">방 내놓아요</h2>
                                 <div className="breadcumb-list">
-                                    <div className="widget-wrapper mb20">
-                                        <div className="btn-area d-grid align-items-center">
-                                            <button
-                                                className="ud-btn btn-thm custom-button"
-                                                onClick={() => navigateTo("/sell-board/apt")}
-                                            >
-                                                <span className="flaticon-search align-text-top pr10" />
-                                                아파트
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="breadcumb-list">
-                                    <div className="widget-wrapper mb20">
-                                        <div className="btn-area d-grid align-items-center">
-                                            <button
-                                                className="ud-btn btn-thm custom-button"
-                                                onClick={() => navigateTo("/sell-board/office")}
-                                            >
-                                                <span className="flaticon-search align-text-top pr10" />
-                                                오피스텔
-                                            </button>
-                                        </div>
-                                    </div>
+                                    <p className="text">간편하게 방 내놓기</p>
                                 </div>
                                 <a
                                     className="filter-btn-left mobile-filter-btn d-block d-lg-none"
@@ -76,8 +49,7 @@ const ListV1 = () => {
             {/* End Breadcumb Sections */}
 
             {/* Property Filtering */}
-            <PropertyAptFilteringList />
-
+            <ProperteyFiltering />
             {/* Property Filtering */}
 
             {/* Start Our Footer */}
@@ -89,4 +61,4 @@ const ListV1 = () => {
     );
 };
 
-export default ListV1;
+export default GridFull3Col;

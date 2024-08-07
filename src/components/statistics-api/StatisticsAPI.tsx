@@ -1,5 +1,5 @@
 export async function avgCost(tradeType:string) {
-    const url = `http://localhost:8084/api/${tradeType}/statistics?select=1`
+    const url = `http://localhost:8000/analysis/api/${tradeType}/statistics?select=1`
     try {
         const response = await fetch(url, {
             method: "GET",
@@ -17,7 +17,7 @@ export async function avgCost(tradeType:string) {
 
 
 export async function tradeCountRaiseTop5ForMonth() {
-    const url = `http://localhost:8084/api/apt_trade/statistics?select=7`
+    const url = `http://localhost:8000/analysis/api/apt_trade/statistics?select=7`
     try {
         const response = await fetch(url, {
             method: "GET",
@@ -33,7 +33,7 @@ export async function tradeCountRaiseTop5ForMonth() {
 }
 
 export async function SalesCountByRegionForMonth(date:string, propertyType:string, region:string) {
-    const url = `http://localhost:8084/api/${propertyType}/statistics?select=3&date=${date}&region=${region}`
+    const url = `http://localhost:8000/analysis/api/${propertyType}/statistics?select=3&date=${date}&region=${region}`
     try {
         const response = await fetch(url, {
             method: "GET",
@@ -49,7 +49,7 @@ export async function SalesCountByRegionForMonth(date:string, propertyType:strin
 }
 
 export async function GetBarChart() {
-    const url = `http://localhost:8084/api/apt_trade/boxplot`
+    const url = `http://localhost:8000/analysis/api/apt_trade/boxplot`
     try {
         const response = await fetch(url, {
             method: "GET",
@@ -65,7 +65,7 @@ export async function GetBarChart() {
 }
 
 export async function getUserCount() {
-    const url = `http://localhost:8084/api/today/access-count`
+    const url = `http://localhost:8000/analysis/api/today/access-count`
     try {
         const response = await fetch(url, {
             method: "GET",
@@ -84,7 +84,7 @@ export async function getUserCount() {
 
 
 export async function getSchool() {
-    const url = `http://localhost:8084/api/school/statistics`
+    const url = `http://localhost:8000/analysis/api/school/statistics`
     try {
         const response = await fetch(url, {
             method: "GET",
@@ -102,7 +102,7 @@ export async function getSchool() {
 
 
 export async function getPark() {
-    const url = `http://localhost:8084/api/city_park/statistics`
+    const url = `http://localhost:8000/analysis/api/city_park/statistics`
     try {
         const response = await fetch(url, {
             method: "GET",

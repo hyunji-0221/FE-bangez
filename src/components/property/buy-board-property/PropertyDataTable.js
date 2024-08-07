@@ -1,64 +1,35 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import { API } from "@/app/api/common/API";
 
-const propertyData = [
-  {
-    id: 1,
-    title: "Equestrian Family Home",
-    imageSrc: "/images/listings/list-1.jpg",
-    location: "California City, CA, USA",
-    price: "$14,000/mo",
-    datePublished: "December 31, 2022",
-    status: "Pending",
-  },
-  {
-    id: 2,
-    title: "Luxury villa in Rego Park",
-    imageSrc: "/images/listings/list-2.jpg",
-    location: "California City, CA, USA",
-    price: "$14,000/mo",
-    datePublished: "December 31, 2022",
-    status: "Published",
-  },
-  {
-    id: 3,
-    title: "Villa on Hollywood Boulevard",
-    imageSrc: "/images/listings/list-3.jpg",
-    location: "California City, CA, USA",
-    price: "$14,000/mo",
-    datePublished: "December 31, 2022",
-    status: "Processing",
-  },
-  {
-    id: 4,
-    title: "Equestrian Family Home",
-    imageSrc: "/images/listings/list-4.jpg",
-    location: "California City, CA, USA",
-    price: "$14,000/mo",
-    datePublished: "December 31, 2022",
-    status: "Pending",
-  },
-  {
-    id: 5,
-    title: "Luxury villa in Rego Park",
-    imageSrc: "/images/listings/list-5.jpg",
-    location: "California City, CA, USA",
-    price: "$14,000/mo",
-    datePublished: "December 31, 2022",
-    status: "Published",
-  },
-];
+// API 호출을 통해 데이터를 가져오는 함수
+const fetchPropertyData = async () => {
+  try {
+    const response = await fetch(`${API.USERSERVER}/buy-article/list`);
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Fetched data:", data);  // 응답 데이터 콘솔 출력
+      return data;
+    } else {
+      console.error('Failed to fetch property data');
+      return [];
+    }
+  } catch (error) {
+    console.error('Error fetching property data:', error);
+    return [];
+  }
+};
 
 const getStatusStyle = (status) => {
   switch (status) {
-    case "Pending":
+    case "거래 예약":
       return "pending-style style1";
-    case "Published":
+    case "구하는 중":
       return "pending-style style2";
-    case "Processing":
+    case "거래 완료":
       return "pending-style style3";
     default:
       return "";
@@ -66,14 +37,27 @@ const getStatusStyle = (status) => {
 };
 
 const PropertyDataTable = () => {
+  const [propertyData, setPropertyData] = useState([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await fetchPropertyData();
+      setPropertyData(data);
+    };
+
+    loadData();
+  }, []);
+
   return (
     <table className="table-style3 table at-savesearch">
       <thead className="t-head">
         <tr>
           <th scope="col">제목</th>
+          <th scope="col">거래 유형</th>
           <th scope="col">상태</th>
-          <th scope="col">등록일</th>
           <th scope="col">조회수</th>
+          <th scope="col">등록일</th>
+
           {/* <th scope="col">Action</th> */}
         </tr>
       </thead>
@@ -82,34 +66,38 @@ const PropertyDataTable = () => {
           <tr key={property.id}>
             <th scope="row">
               <div className="listing-style1 dashboard-style d-xxl-flex align-items-center mb-0">
-                <div className="list-thumb">
-                  {/* <Image
+                {/* <div className="list-thumb">
+                  <Image
                     width={110}
                     height={94}
                     className="w-100"
                     src={property.imageSrc}
                     alt="property"
-                  /> */}
-                </div>
-                <div className="list-content py-0 p-0 mt-2 mt-xxl-0 ps-xxl-4">
-                  <div className="h6 list-title">
-                    <Link href={`/single-v1/${property.id}`}>{property.title}</Link>
+                  />
+                </div> */}
+                <div className="list-content py-0 p-0 mt-2 mt-xxl-0 ps-xxl-0">
+                  <div className="h6 list-postTitle">
+                    <Link href={`/single-v1/${property.id}`}>{property.postTitle}</Link>
                   </div>
                   <p className="list-text mb-0">{property.location}</p>
-                  <div className="list-price">
-                    <a href="#">{property.price}</a>
+                  <div className="list-buildType">
+                    <b>{property.buildType}</b>
                   </div>
                 </div>
               </div>
             </th>
+            <td className="vam" style={{ fontWeight: 'bold' }}>
+              {property.tradeType}
+            </td>  {/* 거래 유형 */}
             <td className="vam">
               <span className={getStatusStyle(property.status)}>
-                {property.status}
+                {property.status} 
               </span>
             </td>
-            <td className="vam">{property.datePublished}</td>  {/* 등록일 */}
-            
-            <td className="vam">{property.datePublished}</td>  {/* 조회수(예정) */}
+            <td className="vam">{property.boardHits}</td>  {/* 조회수 */}
+            <td className="vam">{property.postDate}</td>  {/* 등록일 */}
+            {/* <td className="vam">{property.datePublished}</td>  //등록일 
+            <td className="vam">{property.datePublished}</td>  //조회수 */}
             {/* <td className="vam">
               <div className="d-flex">
                 <button

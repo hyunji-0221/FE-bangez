@@ -59,8 +59,8 @@ const updateLocation = (data: { lat: string; lng: string; roadAddress: string; a
 
     const apiUrl =
     propertyData.rletTpNm === "오피스텔"
-      ? "http://localhost:8083/api/officetels"
-      : "http://localhost:8083/api/apartments";
+      ? "http://localhost:8000/land/api/officetels"
+      : "http://localhost:8000/land/api/apartments";
     try {
       const response = await axios.post(apiUrl, propertyData);
       if (response.status === 200) {

@@ -1,11 +1,9 @@
-'use client';
+'use client'
 
 import React from "react";
-import MultiSelectField from "./MultiSelectField";
-import StructureType from "./StructureType";
 import Select from "react-select";
 
-const DetailsFiled = () => {
+const DetailsFiled = ({ data, onChange, onSubmit }) => {
   const NumberOfApt = [
     { value: "전체", label: "전체" },
     { value: "100세대 미만", label: "100세대 미만" },
@@ -69,7 +67,7 @@ const DetailsFiled = () => {
   };
 
   return (
-    <form className="form-style1">
+    <div className="form-style1">
       <div className="row">
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
@@ -80,10 +78,11 @@ const DetailsFiled = () => {
               type="text"
               className="form-control"
               placeholder="숫자만 입력"
+              value={data.size}
+              onChange={(e) => onChange({ size: e.target.value })}
             />
           </div>
         </div>
-        {/* End .col-4 */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
@@ -92,10 +91,11 @@ const DetailsFiled = () => {
               type="text"
               className="form-control"
               placeholder="숫자만 입력"
+              value={data.roomCount}
+              onChange={(e) => onChange({ roomCount: e.target.value })}
             />
           </div>
         </div>
-        {/* End .col-4 */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
@@ -106,86 +106,77 @@ const DetailsFiled = () => {
               type="text"
               className="form-control"
               placeholder="숫자만 입력"
+              value={data.toiletCount}
+              onChange={(e) => onChange({ toiletCount: e.target.value })}
             />
           </div>
         </div>
-        {/* End .col-4 */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
             <label className="heading-color ff-heading fw600 mb10">
               세대수
             </label>
-            <div className="location-area">
-              <Select
-                defaultValue={[NumberOfApt[0]]}
-                name="colors"
-                options={NumberOfApt}
-                styles={customStyles}
-                className="select-custom pl-0"
-                classNamePrefix="select"
-                required
-              />
-            </div>
+            <Select
+              defaultValue={NumberOfApt.find(option => option.value === data.numberOfApt)}
+              onChange={(selected) => onChange({ numberOfApt: selected.value })}
+              options={NumberOfApt}
+              styles={customStyles}
+              className="select-custom pl-0"
+              classNamePrefix="select"
+              required
+            />
           </div>
         </div>
-        {/* End .col-4 */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
             <label className="heading-color ff-heading fw600 mb10">
               사용승인일
             </label>
-            <div className="location-area">
-              <Select
-                defaultValue={[AcceptForUse[0]]}
-                name="colors"
-                options={AcceptForUse}
-                styles={customStyles}
-                className="select-custom pl-0"
-                classNamePrefix="select"
-                required
-              />
-            </div>
+            <Select
+              defaultValue={AcceptForUse.find(option => option.value === data.acceptForUse)}
+              onChange={(selected) => onChange({ acceptForUse: selected.value })}
+              options={AcceptForUse}
+              styles={customStyles}
+              className="select-custom pl-0"
+              classNamePrefix="select"
+              required
+            />
           </div>
         </div>
-        {/* End .col-4 */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
             <label className="heading-color ff-heading fw600 mb10">
               주차대수
             </label>
-            <div className="location-area">
-              <Select
-                defaultValue={[Parking[0]]}
-                name="colors"
-                options={Parking}
-                styles={customStyles}
-                className="select-custom pl-0"
-                classNamePrefix="select"
-                required
-              />
-            </div>
+            <Select
+              defaultValue={Parking.find(option => option.value === data.parking)}
+              onChange={(selected) => onChange({ parking: selected.value })}
+              options={Parking}
+              styles={customStyles}
+              className="select-custom pl-0"
+              classNamePrefix="select"
+              required
+            />
           </div>
         </div>
-        {/* End .col-4 */}
 
         <div className="col-sm-6 col-xl-4">
           <div className="mb30">
             <label className="heading-color ff-heading fw600 mb10">
               편의 시설
             </label>
-            <div className="location-area">
-              <Select
-                name="colors"
-                options={Convenient}
-                styles={customStyles}
-                className="select-custom pl-0"
-                classNamePrefix="select"
-                isMulti
-              />
-            </div>
+            <Select
+              defaultValue={data.convenient}
+              onChange={(selected) => onChange({ convenient: selected.map(option => option.value) })}
+              options={Convenient}
+              styles={customStyles}
+              className="select-custom pl-0"
+              classNamePrefix="select"
+              isMulti
+            />
           </div>
         </div>
 
@@ -194,17 +185,15 @@ const DetailsFiled = () => {
             <label className="heading-color ff-heading fw600 mb10">
               층수
             </label>
-            <div className="location-area">
-              <Select
-                defaultValue={[Floor[0]]}
-                name="colors"
-                options={Floor}
-                styles={customStyles}
-                className="select-custom pl-0"
-                classNamePrefix="select"
-                required
-              />
-            </div>
+            <Select
+              defaultValue={Floor.find(option => option.value === data.floor)}
+              onChange={(selected) => onChange({ floor: selected.value })}
+              options={Floor}
+              styles={customStyles}
+              className="select-custom pl-0"
+              classNamePrefix="select"
+              required
+            />
           </div>
         </div>
 
@@ -213,21 +202,18 @@ const DetailsFiled = () => {
             <label className="heading-color ff-heading fw600 mb10">
               입주 희망일
             </label>
-            <div className="location-area">
-              <Select
-                defaultValue={[HopeMove[0]]}
-                name="colors"
-                options={HopeMove}
-                styles={customStyles}
-                className="select-custom pl-0"
-                classNamePrefix="select"
-                required
-              />
-            </div>
+            <Select
+              defaultValue={HopeMove.find(option => option.value === data.hopeMove)}
+              onChange={(selected) => onChange({ hopeMove: selected.value })}
+              options={HopeMove}
+              styles={customStyles}
+              className="select-custom pl-0"
+              classNamePrefix="select"
+              required
+            />
           </div>
         </div>
       </div>
-      {/* End .row */}
 
       <div className="row">
         <div className="col-sm-12">
@@ -239,19 +225,20 @@ const DetailsFiled = () => {
               cols={30}
               rows={5}
               placeholder=" "
-              defaultValue={""}
+              value={data.moreContent}
+              onChange={(e) => onChange({ moreContent: e.target.value })}
             />
           </div>
         </div>
-        {/* End .col-12 */}
       </div>
+
       <div className="d-md-flex align-items-center justify-content-xxl-end">
-      <a href="#" className="ud-btn btn-thm">
-        작성 완료
-        <i className="fal fa-arrow-right-long"/>
-      </a>
+        <button type="button" className="ud-btn btn-thm" onClick={onSubmit}>
+          작성 완료
+          <i className="fal fa-arrow-right-long"/>
+        </button>
       </div>
-    </form>
+    </div>
   );
 };
 

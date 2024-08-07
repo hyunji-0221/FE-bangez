@@ -1,11 +1,95 @@
-import React from "react";
+'use client'
+
+import React, { useState } from "react";
 import PropertyDescription from "./property-description";
-import UploadMedia from "./upload-media";
-import LocationField from "./LocationField";
 import DetailsFiled from "./details-field";
-import Amenities from "./Amenities";
+import { useRouter } from 'next/navigation';
+import { API } from "@/app/api/common/API";
+
 
 const AddPropertyTabContent = () => {
+  const [propertyData, setPropertyData] = useState({
+    postTitle: '',
+    postContent: '',
+    buildType: '아파트',
+    tradeType: '매매',
+    location: '전체',
+    rentPrice: '',
+    monthPrice: '',
+    tradePrice: '',
+  });
+
+  const [detailsData, setDetailsData] = useState({
+    size: '',
+    roomCount: '',
+    toiletCount: '',
+    numberOfApt: '전체',
+    acceptForUse: '전체',
+    parking: '상관없음',
+    convenient: [],
+    floor: '상관없음',
+    hopeMove: '즉시 입주',
+    moreContent: '',
+  });
+
+  // PropertyDescription 컴포넌트에서 호출되는 함수
+  const handlePropertyChange = (updates) => {
+    setPropertyData(prevData => ({ ...prevData, ...updates }));
+  };
+
+  // DetailsFiled 컴포넌트에서 호출되는 함수
+  const handleDetailsChange = (updates) => {
+    setDetailsData(prevData => ({ ...prevData, ...updates }));
+  };
+
+  const router = useRouter(); //페이지 이동 라우터
+
+  // 버튼 클릭 시 호출되는 함수
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // 폼 제출 기본 동작 방지
+
+    try {
+      console.log("보내는 데이터",propertyData.postTitle)
+
+      const response = await fetch(`${API.USERSERVER}/buy-article/save`, { // 백엔드 API 엔드포인트에 맞게 수정
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          postTitle: propertyData.postTitle,
+          postContent: propertyData.postContent,
+          buildType: propertyData.buildType,
+          tradeType: propertyData.tradeType,
+          location: propertyData.location,
+          rentPrice: propertyData.rentPrice,
+          monthPrice: propertyData.monthPrice,
+          tradePrice: propertyData.tradePrice,
+          size: detailsData.size,
+          roomCount: detailsData.roomCount,
+          toiletCount: detailsData.toiletCount,
+          numberOfApt: detailsData.numberOfApt,
+          acceptForUse: detailsData.acceptForUse,
+          parking: detailsData.parking,
+          convenient: detailsData.convenient,
+          floor: detailsData.floor,
+          hopeMove: detailsData.hopeMove,
+          moreContent: detailsData.moreContent
+        }),
+      });
+
+      if (response.ok) {
+        alert('작성 완료');
+        router.push('/buy-board');  // 작성 완료 시 '/success' 페이지로 이동
+      } else {
+        alert('작성 실패 내용을 확인해주세요.');
+      }
+    } catch (error) {
+      console.error('제출 중 오류 발생:', error);
+      alert('제출 중 오류 발생.');
+    }
+  };
+
   return (
     <>
       <nav>
@@ -22,30 +106,6 @@ const AddPropertyTabContent = () => {
           >
             1. 내용
           </button>
-          {/* <button
-            className="nav-link fw600"
-            id="nav-item2-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#nav-item2"
-            type="button"
-            role="tab"
-            aria-controls="nav-item2"
-            aria-selected="false"
-          >
-            2. Media
-          </button> */}
-          {/* <button
-            className="nav-link fw600"
-            id="nav-item3-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#nav-item3"
-            type="button"
-            role="tab"
-            aria-controls="nav-item3"
-            aria-selected="false"
-          >
-            2. 지역
-          </button> */}
           <button
             className="nav-link fw600"
             id="nav-item4-tab"
@@ -58,87 +118,34 @@ const AddPropertyTabContent = () => {
           >
             2. 세부 사항
           </button>
-          {/* <button
-            className="nav-link fw600"
-            id="nav-item5-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#nav-item5"
-            type="button"
-            role="tab"
-            aria-controls="nav-item5"
-            aria-selected="false"
-          >
-            3. 편의 시설
-          </button> */}
         </div>
       </nav>
-      {/* End nav tabs */}
-
-      <div className="tab-content" id="nav-tabContent">
-        <div
-          className="tab-pane fade show active"
-          id="nav-item1"
-          role="tabpanel"
-          aria-labelledby="nav-item1-tab"
-        >
-          <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">내용 작성</h4>
-            <PropertyDescription />
+      <form onSubmit={handleSubmit}> {/* 폼 제출 시 handleSubmit 호출 */}
+        <div className="tab-content" id="nav-tabContent">
+          <div
+            className="tab-pane fade show active"
+            id="nav-item1"
+            role="tabpanel"
+            aria-labelledby="nav-item1-tab"
+          >
+            <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
+              <h4 className="title fz17 mb30">내용 작성</h4>
+              <PropertyDescription data={propertyData} onChange={handlePropertyChange} />
+            </div>
           </div>
-        </div>
-        {/* End tab for Property Description */}
-
-        <div
-          className="tab-pane fade"
-          id="nav-item2"
-          role="tabpanel"
-          aria-labelledby="nav-item2-tab"
-        >
-          <UploadMedia />
-        </div>
-        {/* End tab for Upload photos of your property */}
-
-        <div
-          className="tab-pane fade"
-          id="nav-item3"
-          role="tabpanel"
-          aria-labelledby="nav-item3-tab"
-        >
-          <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">원하는 지역 설정</h4>
-            <LocationField />
-          </div>
-        </div>
-        {/* End tab for Listing Location */}
-
-        <div
-          className="tab-pane fade"
-          id="nav-item4"
-          role="tabpanel"
-          aria-labelledby="nav-item4-tab"
-        >
-          <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">세부 사항 작성</h4>
-            <DetailsFiled />
-          </div>
-        </div>
-        {/* End tab for Listing Details */}
-
-        <div
-          className="tab-pane fade"
-          id="nav-item5"
-          role="tabpanel"
-          aria-labelledby="nav-item5-tab"
-        >
-          <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
-            <h4 className="title fz17 mb30">편의 시설 선택</h4>
-            <div className="row">
-              <Amenities />
+          <div
+            className="tab-pane fade"
+            id="nav-item4"
+            role="tabpanel"
+            aria-labelledby="nav-item4-tab"
+          >
+            <div className="ps-widget bgc-white bdrs12 p30 overflow-hidden position-relative">
+              <h4 className="title fz17 mb30">세부 사항 작성</h4>
+              <DetailsFiled data={detailsData} onChange={handleDetailsChange} onSubmit={handleSubmit} />
             </div>
           </div>
         </div>
-        {/* End tab for Select Amenities */}
-      </div>
+      </form>
     </>
   );
 };
