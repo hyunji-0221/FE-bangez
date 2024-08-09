@@ -55,6 +55,7 @@ export function BoxChart() {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 display: false,
@@ -84,8 +85,9 @@ export function BoxChart() {
     };
 
     return (
-        <div style={{ width: '100%', height: '270px'}}>
-            <Chart type='boxplot' data={chartData} options={options} />
-        </div>
+<div className='contentInner' style={{ height: '400px !important', width: '100%' }}>
+    <Chart type='boxplot' data={chartData} options={options} />
+</div>
+
     );
 }

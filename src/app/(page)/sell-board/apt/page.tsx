@@ -1,14 +1,11 @@
 import DefaultHeader from "@/components/common/DefaultHeader";
-
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
-
 import ProperteyFiltering from "@/components/listing/grid-view/sell-board/ProperteyFiltering";
-
 import React from "react";
 
 export const metadata = {
-    title: "Gird Full 3 Column || Homez - Real Estate NextJS Template",
+    title: "Grid Full 3 Column || Homez - Real Estate NextJS Template",
 };
 
 const GridFull3Col = () => {
@@ -18,32 +15,23 @@ const GridFull3Col = () => {
             <DefaultHeader />
             {/* End Main Header Nav */}
 
-            {/* Mobile Nav  */}
+            {/* Mobile Nav */}
             <MobileMenu />
-            {/* End Mobile Nav  */}
+            {/* End Mobile Nav */}
 
             {/* Breadcumb Sections */}
             <section className="breadcumb-section bgc-f7">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="breadcumb-style1">
-                                <h2 className="title">방 내놓아요</h2>
-                                <div className="breadcumb-list">
-                                    <p className="text">간편하게 방 내놓기</p>
-                                </div>
-                                <a
-                                    className="filter-btn-left mobile-filter-btn d-block d-lg-none"
-                                    data-bs-toggle="offcanvas"
-                                    href="#listingSidebarFilter"
-                                    role="button"
-                                    aria-controls="listingSidebarFilter"
-                                >
-                                    <span className="flaticon-settings" /> Filter
-                                </a>
-                            </div>
+                <div className="container d-flex justify-content-between align-items-center">
+                    <div className="breadcumb-style1">
+                        <h2 className="title">방 내놓아요</h2>
+                        <div className="breadcumb-list">
+                            <p className="text">간편하게 방 내놓기</p>
                         </div>
                     </div>
+                    <a href="/sell-board-add" className="ud-btn btn-thm">
+                        글 작성하기
+                        <i className="fal fa-pencil-alt" />
+                    </a>
                 </div>
             </section>
             {/* End Breadcumb Sections */}

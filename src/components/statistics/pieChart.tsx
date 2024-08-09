@@ -109,7 +109,7 @@ export function PieChart() {
   role='tablist'
   style={{ padding: 0, margin: 0 }} // 여백 및 패딩 제거
 >
-  <li className='nav-item' style={{ flex: '1 1 150px', margin: '5px' }}>
+  <li className='nav-item' style={{ flex: '1 1 200px', margin: '5px' }}>
     <select
       id="regionSelect"
       className="form-select"
@@ -125,7 +125,7 @@ export function PieChart() {
       <option value="west"> 서부 </option>
     </select>
   </li>
-  <li className='nav-item' style={{ flex: '1 1 150px', margin: '5px' }}>
+  <li className='nav-item' style={{ flex: '1 1 200px', margin: '5px' }}>
     <select
       id="yearSelect"
       className="form-select"
@@ -141,7 +141,7 @@ export function PieChart() {
       <option value="off_rent"> 오피스텔 전세 </option>
     </select>
   </li>
-  <li className='nav-item' style={{ flex: '1 1 150px', margin: '5px' }}>
+  <li className='nav-item' style={{ flex: '1 1 200px', margin: '5px' }}>
     <select
       id="yearSelect"
       className="form-select"
@@ -158,7 +158,7 @@ export function PieChart() {
       <option value={year - 4}> {year - 4}년 </option>
     </select>
   </li>
-  <li className='nav-item' style={{ flex: '1 1 150px', margin: '5px' }}>
+  <li className='nav-item' style={{ flex: '1 1 200px', margin: '5px' }}>
     <select
       id="monthSelect"
       className="form-select"

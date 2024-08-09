@@ -107,7 +107,7 @@ const SingleV5: React.FC = () => {
                 <div className="row">
                   <div className="col-md-12">
                     <div className="accordion-style1 style2">
-                      <FloorPlans />
+                    <FloorPlans imageUrl={property.imageUrl} />
                     </div>
                   </div>
                 </div>

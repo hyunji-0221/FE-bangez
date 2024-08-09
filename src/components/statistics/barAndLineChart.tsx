@@ -1,9 +1,7 @@
 'use client'
-
 import { avgCost } from "@/components/statistics-api/StatisticsAPI";
 import { useEffect, useState } from "react";
 import { CHART_COLORS, transparentize } from '@/utilis/chartjsUtils';
-
 import {
   registerables,
   Chart,
@@ -11,49 +9,35 @@ import {
 import { Bar, Line } from 'react-chartjs-2';
 import { LoadingMessage } from "./chartdetail";
 import EventEmitter from "events";
-
 Chart.register(...registerables);
-
 let aptTrade: number[];
 let aptAxis: number[];
-
 const eventEmitter = new EventEmitter();
-
-
 export function BarChart() {
   const tradeType = ["apt_trade", "apt_rent", "off_trade", "off_rent"]
-
   const [tradeLabels, setTradeLabels] = useState(["아파트 매매", "아파트 전세"])
-
   const [aptTradeData, setAptTradeData] = useState<number[]>([])
   const [offTradeData, setOffTradeData] = useState<number[]>([])
   const [aptRentData, setAptRentData] = useState<number[]>([])
   const [offRentData, setOffRentData] = useState<number[]>([])
-
   const [aptAxisName, setAptAxisName] = useState<number[]>([])
   const [offAxisName, setOffAxisName] = useState<number[]>([2024, 2023])
-
   const [selectDataTrade, setSelectDataTrade] = useState([1, 2])
   const [selectDataRent, setSelectDataRent] = useState([1, 2])
   const [selectAxis, setSelectAxis] = useState([2024, 2023])
-
   const [loading, setLoading] = useState(true);
-
   const handleApt = (e: any) => {
     setSelectDataTrade(aptTradeData)
     setSelectDataRent(aptRentData)
     setSelectAxis(aptAxisName)
     setTradeLabels(["아파트 매매", "아파트 전세"])
   }
-
   const handleOfficetel = (e: any) => {
     setSelectDataTrade(offTradeData)
     setSelectDataRent(offRentData)
     setSelectAxis(offAxisName)
     setTradeLabels(["오피스텔 매매", "오피스텔 전세"])
-
   }
-
   const data = {
     labels: selectAxis,
     datasets: [
@@ -77,7 +61,6 @@ export function BarChart() {
       },
     ],
   };
-
   const options = {
     responsive: true,
     plugins: {
@@ -104,9 +87,7 @@ export function BarChart() {
       }
   }
     // maintainAspectRatio: false,
-
   };
-
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -114,40 +95,27 @@ export function BarChart() {
       const aptRentResult = await avgCost(tradeType[1]);
       const offTradeResult = await avgCost(tradeType[2]);
       const offRentResult = await avgCost(tradeType[3]);
-
       aptAxis = (Object.keys(aptTradeResult).map(i => parseInt(i)));
       setOffAxisName(Object.keys(offTradeResult).map(i => parseInt(i)));
       setAptAxisName(Object.keys(aptTradeResult).map(i => parseInt(i)))
-
       aptTrade = (Object.values(aptTradeResult));
       setAptTradeData(Object.values(aptTradeResult))
       setOffTradeData(Object.values(offTradeResult));
       setAptRentData(Object.values(aptRentResult));
       setOffRentData(Object.values(offRentResult));
-
       setSelectDataTrade(Object.values(aptTradeResult));
       setSelectDataRent(Object.values(aptRentResult));
-      
       setSelectAxis(Object.keys(aptTradeResult).map(i => parseInt(i)));
-
     } catch (error) {
       console.error("statistics-board의 useEffect 실패 :", error)
     } finally {
-
       setLoading(false);
       eventEmitter.emit('lineChart')
     }
   };
-
-
   useEffect(() => {
-
     fetchData();
   }, []);
-
-
-
-
   return (
     <div className='contentWrap'>
       <div className='contentInner'>
@@ -194,12 +162,9 @@ export function BarChart() {
     </div>
   );
 }
-
 export function LineChart() {
-
   const [costIndex, setCostIndex] = useState<number[]>([]);
   const [axis, setAxis] = useState<number[]>([])
-
   const data = {
     labels: axis,
     datasets: [
@@ -209,7 +174,6 @@ export function LineChart() {
         borderColor: function(context: { chart: any; }) {
           const chart = context.chart;
           const {ctx, chartArea} = chart;
-  
           if (!chartArea) {
             return;
           }
@@ -218,7 +182,6 @@ export function LineChart() {
       },
     ]
   };
-
   const options = {
     responsive: true,
     plugins: {
@@ -246,9 +209,7 @@ export function LineChart() {
       }
   }
   };
-
   eventEmitter.on('lineChart', () =>{
-    
         if (aptTrade.length > 0 && aptAxis.length > 0) {
           const newCostIndex = [0];
           for (let i = 1; i < aptTrade.length-1; i++) {
@@ -258,23 +219,19 @@ export function LineChart() {
           setAxis(aptAxis.slice(0, aptTrade.length-1));
         }}
   )
-
   return (
     <div className='contentWrap'>
-      <div className='contentInner' style={{ width: '100%', height: '270px'}}>
+      <div className='contentInner' style={{ height: '100%', width: '100%' }}>
           <Line options={options} data={data} />
               </div>
     </div>
   );
 }
-
 let width: number, height: number, gradient: { addColorStop: (arg0: number, arg1: any) => void; };
-
 function getGradient(ctx: { createLinearGradient: (arg0: number, arg1: any, arg2: number, arg3: any) => { addColorStop: (arg0: number, arg1: any) => void; }; }, chartArea: { right: number; left: number; bottom: number; top: number; }) {
   const chartWidth = chartArea.right - chartArea.left;
   const chartHeight = chartArea.bottom - chartArea.top;
   if (!gradient || width !== chartWidth || height !== chartHeight) {
-
     width = chartWidth;
     height = chartHeight;
     gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
@@ -282,6 +239,5 @@ function getGradient(ctx: { createLinearGradient: (arg0: number, arg1: any, arg2
     gradient.addColorStop(0.5, CHART_COLORS.yellow);
     gradient.addColorStop(1, CHART_COLORS.red);
   }
-
   return gradient;
 }

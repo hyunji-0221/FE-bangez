@@ -9,7 +9,7 @@ import ListingsFavourites from "@/components/property/dashboard/dashboard-my-fav
 import Pricing from "@/components/pages/pricing/Pricing";
 
 export const metadata = {
-  title: "Dashboard My Favourites || Homez - Real Estate NextJS Template",
+  title: "BangEZ",
 };
 
 const DashboardChargePoint = () => {
@@ -61,6 +61,33 @@ const DashboardChargePoint = () => {
                 </div>
               </div>
               {/* End .row */}
+              {/* 추가된 섹션: 좌우 이미지 */}
+              <div className="row justify-content-center align-items-center pb40">
+                <div className="col-md-5 text-center">
+                  <img
+                    src="/images/ncp/NCP.jpg"
+                    alt="Left Image"
+                    style={{
+                      maxWidth: '100%',
+                      height: '300px',
+                      maxHeight: '300px', // 원하는 최대 높이
+                      objectFit: 'cover'
+                    }}
+                  />
+                </div>
+                <div className="col-md-5 text-center">
+                  <img
+                    src="/images/ncp/bit.jpg"
+                    alt="Right Image"
+                    style={{
+                      maxWidth: '100%',
+                      height: '300px',
+                      maxHeight: '300px', // 원하는 최대 높이
+                      objectFit: 'cover'
+                    }}
+                  />
+                </div>
+              </div>
             </div>
             {/* End .dashboard__content */}
 

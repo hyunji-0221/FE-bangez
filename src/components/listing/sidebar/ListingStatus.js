@@ -5,8 +5,9 @@ import React from "react";
 const ListingStatus = ({filterFunctions}) => {
   const options = [
     { id: "flexRadioDefault3", label: "All" , defaultChecked: true },
-    { id: "flexRadioDefault1", label: "Buy" },
-    { id: "flexRadioDefault2", label: "Rent", },
+    { id: "flexRadioDefault1", label: "매매" },
+    { id: "flexRadioDefault2", label: "전세", },
+    { id: "flexRadioDefault2", label: "월세", },
 
   ];
 
@@ -39,3 +40,4 @@ const ListingStatus = ({filterFunctions}) => {
 };
 
 export default ListingStatus;
+

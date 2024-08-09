@@ -6,18 +6,18 @@ const PropertyType = ({filterFunctions}) => {
 
   const options = [
 
-    { label: "Houses" },
+    // { label: "Houses" },
 
-    { label: "Apartments", defaultChecked: true },
-    { label: "Office" },
-    { label: "Villa" },
+    { label: "아파트", defaultChecked: true },
+    { label: "오피스텔" },
+    // { label: "Villa" },
    
   ];
 
   return (
     <>
     <label className="custom_checkbox"  >
-          All
+          전체
           <input type="checkbox"
           checked={!filterFunctions?.propertyTypes.length}
           onChange={(e=>{filterFunctions?.setPropertyTypes([])})}

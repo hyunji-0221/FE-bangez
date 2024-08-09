@@ -49,15 +49,15 @@ const FeaturedListings = () => {
                     alt="listings"
                   />
                   <div className="sale-sticker-wrap">
-                    {/* {!listing.forRent && (
+                    {!listing.forRent && (
                       <div className="list-tag fz12">
                         <span className="flaticon-electricity me-2" />
                         FEATURED
                       </div>
-                    )} */}
+                    )}
                   </div>
                   <div className="list-price">
-                    {listing.price} 
+                    {listing.price} / <span>mo</span>
                   </div>
                 </div>
                 <div className="list-content">
@@ -69,18 +69,18 @@ const FeaturedListings = () => {
                   <p className="list-text">{listing.location}</p>
                   <div className="list-meta d-flex align-items-center">
                     <a href="#">
-                      <span className="flaticon-bed" /> 방 {listing.bed} 개
+                      <span className="flaticon-bed" /> {listing.bed} bed
                     </a>
                     <a href="#">
-                      <span className="flaticon-shower" /> 화장실 {listing.bath} 개
+                      <span className="flaticon-shower" /> {listing.bath} bath
                     </a>
-                    {/* <a href="#">
+                    <a href="#">
                       <span className="flaticon-expand" /> {listing.sqft} sqft
-                    </a> */}
+                    </a>
                   </div>
                   <hr className="mt-2 mb-2" />
                   <div className="list-meta2 d-flex justify-content-between align-items-center">
-                    <span className="for-what">아파트 / 전세</span>
+                    <span className="for-what">For Rent</span>
                     <div className="icons d-flex align-items-center">
                       <a href="#">
                         <span className="flaticon-fullscreen" />

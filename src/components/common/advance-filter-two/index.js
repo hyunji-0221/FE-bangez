@@ -1,4 +1,5 @@
 "use client";
+import React, { useState } from "react";
 import Select from "react-select";
 import PriceRange from "./PriceRange";
 import Bedroom from "./Bedroom";
@@ -7,21 +8,43 @@ import Amenities from "./Amenities";
 
 const AdvanceFilterModal = ({ filterFunctions }) => {
   const catOptions = [
-    { value: "Houses", label: "Houses" },
-    { value: "Office", label: "Office" },
-    { value: "Apartments", label: "Apartments" },
-    { value: "Villa", label: "Villa" },
+    { value: "오피스텔", label: "오피스텔" },
+    { value: "아파트", label: "아파트" },
+  ];
+  const tradTpNmOptions = [
+    { value: "매매", label: "매매" },
+    { value: "전세", label: "전세" },
+    { value: "월세", label: "월세" },
   ];
 
   const locationOptions = [
-    { value: "All Cities", label: "All Cities" },
-    { value: "California", label: "California" },
-    { value: "Los Angeles", label: "Los Angeles" },
-    { value: "New Jersey", label: "New Jersey" },
-    { value: "New York", label: "New York" },
-    { value: "San Diego", label: "San Diego" },
-    { value: "San Francisco", label: "San Francisco" },
-    { value: "Texas", label: "Texas" },
+    { value: "전체", label: "전체" },
+    { value: "강남구", label: "강남구" },
+    { value: "강동구", label: "강동구" },
+    { value: "강북구", label: "강북구" },
+    { value: "강서구", label: "강서구" },
+    { value: "관악구", label: "관악구" },
+    { value: "광진구", label: "광진구" },
+    { value: "구로구", label: "구로구" },
+    { value: "금천구", label: "금천구" },
+    { value: "노원구", label: "노원구" },
+    { value: "도봉구", label: "도봉구" },
+    { value: "동대문구", label: "동대문구" },
+    { value: "동작구", label: "동작구" },
+    { value: "마포구", label: "마포구" },
+    { value: "서대문구", label: "서대문구" },
+    { value: "서초구", label: "서초구" },
+    { value: "성동구", label: "성동구" },
+    { value: "성북구", label: "성북구" },
+    { value: "송파구", label: "송파구" },
+    { value: "양천구", label: "양천구" },
+    { value: "영등포구", label: "영등포구" },
+    { value: "용산구", label: "용산구" },
+    { value: "은평구", label: "은평구" },
+    { value: "종로구", label: "종로구" },
+    { value: "중구", label: "중구" },
+    { value: "중랑구", label: "중랑구" },
+    
   ];
 
   const customStyles = {
@@ -39,12 +62,28 @@ const AdvanceFilterModal = ({ filterFunctions }) => {
     },
   };
 
+  // 평 수 상태 관리
+  const [minSquareFeet, setMinSquareFeet] = useState(0);
+  const [maxSquareFeet, setMaxSquareFeet] = useState(0);
+
+  const handleMinSquareFeetChange = (e) => {
+    const value = Number(e.target.value);
+    setMinSquareFeet(value);
+    filterFunctions?.handlesquirefeet([value, maxSquareFeet]);
+  };
+
+  const handleMaxSquareFeetChange = (e) => {
+    const value = Number(e.target.value);
+    setMaxSquareFeet(value);
+    filterFunctions?.handlesquirefeet([minSquareFeet, value]);
+  };
+
   return (
     <div className="modal-dialog modal-dialog-centered modal-lg">
       <div className="modal-content">
         <div className="modal-header pl30 pr30">
           <h5 className="modal-title" id="exampleModalLabel">
-            More Filter
+            추가 필터
           </h5>
           <button
             type="button"
@@ -59,7 +98,7 @@ const AdvanceFilterModal = ({ filterFunctions }) => {
           <div className="row">
             <div className="col-lg-12">
               <div className="widget-wrapper">
-                <h6 className="list-title mb20">Price Range</h6>
+                <h6 className="list-title mb20">가격 범위  (만 원)</h6>
                 <div className="range-slider-style modal-version">
                   <PriceRange filterFunctions={filterFunctions} />
                 </div>
@@ -71,7 +110,28 @@ const AdvanceFilterModal = ({ filterFunctions }) => {
           <div className="row">
             <div className="col-sm-6">
               <div className="widget-wrapper">
-                <h6 className="list-title">Type</h6>
+                <h6 className="list-title">매물 유형</h6>
+                <div className="form-style2 input-group">
+                  <Select
+                    defaultValue={[tradTpNmOptions[1]]}
+                    name="colors"
+                    options={tradTpNmOptions}
+                    styles={customStyles}
+                    onChange={(e) =>
+                      filterFunctions?.setPropertyTypes([e.value])
+                    }
+                    className="select-custom"
+                    classNamePrefix="select"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            {/* End .col-6 */}
+
+            <div className="col-sm-6">
+              <div className="widget-wrapper">
+                <h6 className="list-title">거래 유형</h6>
                 <div className="form-style2 input-group">
                   <Select
                     defaultValue={[catOptions[1]]}
@@ -89,50 +149,12 @@ const AdvanceFilterModal = ({ filterFunctions }) => {
               </div>
             </div>
             {/* End .col-6 */}
-
-            <div className="col-sm-6">
-              <div className="widget-wrapper">
-                <h6 className="list-title">Property ID</h6>
-                <div className="form-style2">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="RT04949213"
-                  />
-                </div>
-              </div>
-            </div>
-            {/* End .col-6 */}
           </div>
           {/* End .row */}
-
           <div className="row">
             <div className="col-sm-6">
               <div className="widget-wrapper">
-                <h6 className="list-title">Bedrooms</h6>
-                <div className="d-flex">
-                  <Bedroom filterFunctions={filterFunctions} />
-                </div>
-              </div>
-            </div>
-            {/* End .col-md-6 */}
-
-            <div className="col-sm-6">
-              <div className="widget-wrapper">
-                <h6 className="list-title">Bathrooms</h6>
-                <div className="d-flex">
-                  <Bathroom filterFunctions={filterFunctions} />
-                </div>
-              </div>
-            </div>
-            {/* End .col-md-6 */}
-          </div>
-          {/* End .row */}
-
-          <div className="row">
-            <div className="col-sm-6">
-              <div className="widget-wrapper">
-                <h6 className="list-title">Location</h6>
+                <h6 className="list-title">지역</h6>
                 <div className="form-style2 input-group">
                   <Select
                     defaultValue={[locationOptions[0]]}
@@ -155,37 +177,29 @@ const AdvanceFilterModal = ({ filterFunctions }) => {
 
             <div className="col-sm-6">
               <div className="widget-wrapper">
-                <h6 className="list-title">Square Feet</h6>
+                <h6 className="list-title">평 수 (계약면적)</h6>
                 <div className="space-area">
                   <div className="d-flex align-items-center justify-content-between">
                     <div className="form-style1">
                       <input
                         type="number"
                         className="form-control filterInput"
-                        onChange={(e) =>
-                          filterFunctions?.handlesquirefeet([
-                            e.target.value,
-                            document.getElementById("maxFeet3").value / 1,
-                          ])
-                        }
-                        placeholder="Min."
+                        onChange={handleMinSquareFeetChange}
+                        placeholder="최소"
                         id="minFeet3"
                       />
+                      <span>{minSquareFeet > 0 ? `${(minSquareFeet * 3.3058).toFixed(2)}㎡` : ""}</span>
                     </div>
                     <span className="dark-color">-</span>
                     <div className="form-style1">
                       <input
                         type="number"
                         className="form-control filterInput"
-                        placeholder="Max"
+                        placeholder="최대"
                         id="maxFeet3"
-                        onChange={(e) =>
-                          filterFunctions?.handlesquirefeet([
-                            document.getElementById("minFeet3").value / 1,
-                            e.target.value,
-                          ])
-                        }
+                        onChange={handleMaxSquareFeetChange}
                       />
+                      <span>{maxSquareFeet > 0 ? `${(maxSquareFeet * 3.3058).toFixed(2)}㎡` : ""}</span>
                     </div>
                   </div>
                 </div>
@@ -198,7 +212,7 @@ const AdvanceFilterModal = ({ filterFunctions }) => {
           <div className="row">
             <div className="col-lg-12">
               <div className="widget-wrapper mb0">
-                <h6 className="list-title mb10">Amenities</h6>
+                <h6 className="list-title mb10">시설 정보</h6>
               </div>
             </div>
             <Amenities filterFunctions={filterFunctions} />

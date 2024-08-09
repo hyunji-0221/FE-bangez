@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import img01 from '../../../../../public/Images/listings/apartment.jpeg';
+import img01 from '../../../../../public/Images/listings/apartment.jpeg'; //여기 이미지하드
 
 const FeaturedListings = ({ data, colstyle }) => {
   return (
@@ -14,8 +14,8 @@ const FeaturedListings = ({ data, colstyle }) => {
                 height={334}
                 className="w-100 cover"
                 style={{ height: '334px' }}
-                src={img01} // 임시 이미지 경로 사용
-                // src={listing.image}
+                src={img01}
+        
                 alt="listings"
               />
               <div className="sale-sticker-wrap">

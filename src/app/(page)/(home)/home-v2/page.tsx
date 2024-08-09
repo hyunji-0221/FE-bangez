@@ -38,7 +38,7 @@ const Home_V2 = () => {
           <div className="container maxw1600">
             <div className="home2-hero-banner bdrs12"></div>
             <div className="row">
-              <div className="col-xl-10 mx-auto mt85">
+              <div className="col-xl-10 mx-auto hero_mt300">
                 <Hero />
               </div>
             </div>
@@ -64,16 +64,16 @@ const Home_V2 = () => {
           <div className="row align-items-center" data-aos="fade-up">
             <div className="col-lg-9">
               <div className="main-title2">
-                <h2 className="title">Discover Our Featured Listings</h2>
-                <p className="paragraph">
+                <h2 className="title">BangEZ의 매물을 확인해보세요</h2>
+                {/* <p className="paragraph">
                   Aliquam lacinia diam quis lacus euismod
-                </p>
+                </p> */}
               </div>
             </div>
             <div className="col-lg-3">
               <div className="text-start text-lg-end mb-3">
-                <Link className="ud-btn2" href="/grid-full-3-col">
-                  See All Properties
+                <Link className="ud-btn2" href="/map-v4">
+                  모든 매물 보러가기
                   <i className="fal fa-arrow-right-long" />
                 </Link>
               </div>
@@ -158,9 +158,9 @@ const Home_V2 = () => {
                 data-wow-delay="300ms"
               >
                 <div className="main-title text-center">
-                  <h2 className="title">See How Realton Can Help</h2>
+                  <h2 className="title">방 구해요 게시판에서 매물 찾아보기</h2>
                   <p className="paragraph">
-                    Aliquam lacinia diam quis lacus euismod
+                    방 구해요 게시판에서 원하는 조건을 작성하고 매물을 구해보세요! 
                   </p>
                 </div>
               </div>
@@ -227,9 +227,9 @@ const Home_V2 = () => {
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                <h2 className="title">Our Exclusive Agetns</h2>
+                <h2 className="title">궁금한 매물은 바로 채팅 요청하기</h2>
                 <p className="paragraph">
-                  Aliquam lacinia diam quis lacus euismod
+                  방 구해요 & 매물 상세보기에서 집주인 또는 중개사에게 바로 채팅 요청하세요!
                 </p>
               </div>
             </div>
@@ -237,23 +237,23 @@ const Home_V2 = () => {
 
             <div className="col-auto mb30">
               <div className="row align-items-center justify-content-center">
-                <div className="col-auto">
+                {/* <div className="col-auto">
                   <button className="agent_prev__active swiper_button">
                     <i className="far fa-arrow-left-long" />
                   </button>
-                </div>
+                </div> */}
                 {/* End prev */}
 
-                <div className="col-auto">
+                {/* <div className="col-auto">
                   <div className="pagination swiper--pagination agent_pagination__active" />
-                </div>
+                </div> */}
                 {/* End pagination */}
 
-                <div className="col-auto">
+                {/* <div className="col-auto">
                   <button className="agent_next__active swiper_button">
                     <i className="far fa-arrow-right-long" />
                   </button>
-                </div>
+                </div> */}
                 {/* End Next */}
               </div>
             </div>
@@ -273,7 +273,7 @@ const Home_V2 = () => {
       {/* Exclusive Agents */}
 
       {/* Our Partners */}
-      <section className="our-partners pt0">
+      {/* <section className="our-partners pt0">
         <div className="container">
           <div className="row">
             <div className="col-lg-12 wow fadeInUp" data-wow-delay="100">
@@ -281,7 +281,6 @@ const Home_V2 = () => {
                 <h6>Trusted by the world’s best</h6>
               </div>
             </div>
-            {/* End .col-12 */}
 
             <div
               className="col-lg-12 text-center"
@@ -290,11 +289,9 @@ const Home_V2 = () => {
             >
               <Partner />
             </div>
-            {/* End .col-12 */}
           </div>
-          {/* End .row */}
         </div>
-      </section>
+      </section> */}
       {/* End Our Partners */}
 
       {/* Our CTA */}

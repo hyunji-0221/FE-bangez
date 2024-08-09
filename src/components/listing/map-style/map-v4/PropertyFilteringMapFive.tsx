@@ -11,7 +11,6 @@ import Map from '../Map';
 import { Property } from '@/module/property/Property';
 import { API } from '@/app/api/common/API';
 
-
 const fetchProperties = async (): Promise<Property[]> => {
   try {
     const API_OFFICETELS = `${API.LANDSERVER}/officetels`;
@@ -50,6 +49,9 @@ const PropertyFilteringMapFive: React.FC = () => {
   const [yearBuild, setyearBuild] = useState<number[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Set the number of items per page
+  const pageCapacity = 8;
 
   const resetFilter = () => {
     setListingStatus('All');
@@ -121,8 +123,6 @@ const PropertyFilteringMapFive: React.FC = () => {
       return false;
     });
 
-
-
     let filteredArrays: Property[][] = [];
 
     if (priceRange.length > 0) {
@@ -141,7 +141,6 @@ const PropertyFilteringMapFive: React.FC = () => {
         );
         filteredArrays.push(filtered);
       }
-      
 
     if (propertyTypes.length > 0) {
       filteredArrays.push(refItems.filter((elm) => propertyTypes.includes(elm.rletTpNm)));
@@ -185,9 +184,9 @@ const PropertyFilteringMapFive: React.FC = () => {
   }, [filteredData, currentSortingOption]);
 
   useEffect(() => {
-    setPageItems(sortedFilteredData.slice((pageNumber - 1) * 4, pageNumber * 4));
-    setPageContentTrac([((pageNumber - 1) * 4) + 1, pageNumber * 4, sortedFilteredData.length]);
-  }, [pageNumber, sortedFilteredData]);
+    setPageItems(sortedFilteredData.slice((pageNumber - 1) * pageCapacity, pageNumber * pageCapacity));
+    setPageContentTrac([((pageNumber - 1) * pageCapacity) + 1, pageNumber * pageCapacity, sortedFilteredData.length]);
+  }, [pageNumber, sortedFilteredData, pageCapacity]);
 
   return (
     <>
@@ -230,7 +229,7 @@ const PropertyFilteringMapFive: React.FC = () => {
                   <FeaturedListings colstyle={colstyle} data={pageItems} />
                 </div>
                 <div className="row text-center">
-                  <PaginationTwo pageCapacity={4} data={sortedFilteredData} pageNumber={pageNumber} setPageNumber={setPageNumber} />
+                  <PaginationTwo pageCapacity={pageCapacity} data={sortedFilteredData} pageNumber={pageNumber} setPageNumber={setPageNumber} />
                 </div>
               </div>
             </div>
