@@ -6,9 +6,13 @@ import LoginSignupModal from "@/components/common/login-signup-modal";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useUserStore } from "@/stores/useUserStore";
+
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 const DefaultHeader = () => {
-
+  const user = useUserStore((state) => state.user);
 
   const [navbar, setNavbar] = useState(false);
 
@@ -20,7 +24,17 @@ const DefaultHeader = () => {
     }
   };
 
+  const [accessToken, setAccessToken] = useState<string | undefined>()
+
   useEffect(() => {
+    const accessToken = Cookies.get('accessToken')
+    console.log('token', JSON.stringify(accessToken))
+    setAccessToken(accessToken)
+    if (accessToken !== undefined) {
+      const decodeToken = jwtDecode(accessToken as string)
+      console.log('decodeToken ', decodeToken)
+    }
+
     window.addEventListener("scroll", changeBackground);
     return () => {
       window.removeEventListener("scroll", changeBackground);
@@ -66,45 +80,34 @@ const DefaultHeader = () => {
 
               <div className="col-auto">
                 <div className="d-flex align-items-center">
-                  <a
-                    href="#"
-                    className="login-info d-flex align-items-cente"
-                    data-bs-toggle="modal"
-                    data-bs-target="#loginSignupModal"
-                    role="button"
-                  >
-                    <i className="far fa-user-circle fz16 me-2" />{" "}
-                    <span className="d-none d-xl-block">로그인 / 회원가입</span>
-                  </a>
-                  <Link
-                    className="ud-btn btn-white add-property bdrs60 mx-2 mx-xl-4"
-                    href="/dashboard-add-property"
-                  >
-                    매물 등록하기
-                    <i className="fal fa-arrow-right-long" />
-                  </Link>
-                  <a
-                    className="sidemenu-btn filter-btn-right"
-                    href="#"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#SidebarPanel"
-                    aria-controls="SidebarPanelLabel"
-                  >
-                    <Image
-                      width={25}
-                      height={9}
-                      className="img-1"
-                      src="/images/dark-nav-icon.svg"
-                      alt="humberger menu"
-                    />
-                    <Image
-                      width={25}
-                      height={9}
-                      className="img-2"
-                      src="/images/dark-nav-icon.svg"
-                      alt="humberger menu"
-                    />
-                  </a>
+                  {!accessToken ?
+                    <div className="login-info d-flex align-items-cente">
+                      <i className="far fa-user-circle fz16 me-2" />{" "}
+                      <a href="/login" className="d-none d-xl-block">로그인</a>
+                    </div>
+                    :
+                    <a
+                      className="sidemenu-btn filter-btn-right"
+                      href="#"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#SidebarPanel"
+                      aria-controls="SidebarPanelLabel"
+                    >
+                      <Image
+                        width={25}
+                        height={9}
+                        className="img-1"
+                        src="/images/dark-nav-icon.svg"
+                        alt="humberger menu"
+                      />
+                      <Image
+                        width={25}
+                        height={9}
+                        className="img-2"
+                        src="/images/dark-nav-icon.svg"
+                        alt="humberger menu"
+                      />
+                    </a>}
                 </div>
               </div>
               {/* End .col-auto */}

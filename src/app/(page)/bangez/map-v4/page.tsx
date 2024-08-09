@@ -15,6 +15,7 @@ import PropertyFilteringMapFive from "@/components/listing/map-style/map-v4/Prop
 
 import React from "react";
 import Header from "@/components/home/home-v2/Header";
+import LoginRegiHeader from "@/components/login_register/LoginRegiHeader";
 
 export const metadata = {
   title: "Map V4 || Homez - Real Estate NextJS Template",

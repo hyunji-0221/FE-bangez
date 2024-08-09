@@ -1,20 +1,18 @@
 import MobileMenu from "@/components/common/mobile-menu";
-import Partner from "@/components/common/Partner";
 import Agents from "@/components/home/home-v2/Agents";
 import ApartmentType from "@/components/home/home-v2/ApartmentType";
 import Explore from "@/components/home/home-v2/Explore";
-import ExploreCities from "@/components/home/home-v2/ExploreCities";
 import FeaturedListings from "@/components/home/home-v2/FeatuerdListings";
 import Header from "@/components/home/home-v2/Header";
-import Testimonial from "@/components/home/home-v2/Testimonial";
-import About from "@/components/home/home-v2/about";
 import Hero from "@/components/home/home-v2/hero";
 import React from "react";
-import Footer from "@/components/common/default-footer";
-import Cta from "@/components/home/home-v2/Cta";
+import Footer from "@/components/home/home-v4/footer";
+// import Footer from "@/components/common/default-footer";
 
 
 import Link from "next/link";
+import CallToActions from "@/components/home/home-v4/CallToActions";
+import Cta from "@/components/home/home-v2/Cta";
 
 export const metadata = {
   title: "Home v2 || Homez - Real Estate NextJS Template",
@@ -218,7 +216,7 @@ const Home_V2 = () => {
       {/* End Our Testimonials */}
 
       {/* Exclusive Agents */}
-      <section className="pb90">
+      <section className="pb200">
         <div className="container">
           <div className="row  justify-content-between align-items-center">
             <div className="col-auto">
@@ -295,11 +293,12 @@ const Home_V2 = () => {
       {/* End Our Partners */}
 
       {/* Our CTA */}
-      <Cta />
+      {/* <Cta /> */}
+      <CallToActions />
       {/* End Our CTA */}
 
       {/* Start Our Footer */}
-      <section className="footer-style1 at-home2 pb-0">
+      <section className="footer-style1 at-home4 pt60 pb-0">
         <Footer />
       </section>
       {/* End Our Footer */}

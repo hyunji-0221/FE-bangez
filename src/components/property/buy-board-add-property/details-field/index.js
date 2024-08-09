@@ -169,6 +169,7 @@ const DetailsFiled = ({ data, onChange, onSubmit }) => {
               편의 시설
             </label>
             <Select
+              placeholder="선택"
               defaultValue={data.convenient}
               onChange={(selected) => onChange({ convenient: selected.map(option => option.value) })}
               options={Convenient}

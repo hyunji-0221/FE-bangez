@@ -18,27 +18,27 @@ const Footer = () => {
                   width={138}
                   height={44}
                   className="mb40"
-                  src="/images/header-logo2.svg"
+                  src="/images/bangezlogo.png"
                   alt=""
                 />
               </Link>
 
-              <ContactMeta />
+              {/* <ContactMeta /> */}
             </div>
           </div>
 
           <MenuWidget />
 
-          <div className="col-sm-6 col-lg-3">
+          {/* <div className="col-sm-6 col-lg-3">
             <div className="footer-widget mb-4 mb-lg-5">
               <div className="mailchimp-widget mb30">
-                <h6 className="title mb30">Keep Yourself Up to Date</h6>
-                <Subscribe />
-              </div>
+                <h6 className="title mb30">Keep Yourself Up to Date</h6> */}
+                {/* <Subscribe /> */}
+              {/* </div> */}
 
-              <AppWidget />
-            </div>
-          </div>
+              {/* <AppWidget /> */}
+            {/* </div>
+          </div> */}
           {/* End .col */}
         </div>
         {/* End .row */}

@@ -17,7 +17,7 @@ const SignIn = () => {
   const googleClinetId = process.env.GOOGLE_CLIENT_ID;
 
   const handleGoogleLogin = () => {
-    const googleAuthUrl = `http://localhost:8000/oauth2/authorization/google`;
+    const googleAuthUrl = `${API.GATE}/oauth2/authorization/google`;
     window.location.href = googleAuthUrl;
   };
 
@@ -29,7 +29,7 @@ const SignIn = () => {
 
   const onSubmit: SubmitHandler<LoginTypes> = async (data) => {
     console.log('onSubmit', data)
-    fetch('http://localhost:8000/auth/login/local', {
+    fetch(`${API.GATE}/auth/login/local`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 'use client'
 
+import { API } from "@/app/api/common/API";
 import { SignUpTypes } from "@/types/SignUpData";
 import { error } from "console";
 import Link from "next/link";
@@ -18,7 +19,7 @@ const SignUp = () => {
 
   const onSubmit: SubmitHandler<SignUpTypes> = async (data) => {
     console.log('onSubmit 내용', data)
-    fetch('http://localhost:8000/users/add' , {
+    fetch(`${API.USERSERVER}/add` , {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

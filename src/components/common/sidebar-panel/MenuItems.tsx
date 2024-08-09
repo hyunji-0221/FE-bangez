@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import Cookies from 'js-cookie';
+import { API } from '@/app/api/common/API';
 
 const MenuItems = () => {
   const router = useRouter();
@@ -18,10 +19,9 @@ const MenuItems = () => {
   const handleLogout = async (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
 
-    //로그아웃 요청, 현재 프론트의 쿠키는 삭제 되지만 서버에서 토큰 오류로 인해 레디스 refresh토큰이 삭제되지 않음
     try {
       const refresh = Cookies.get('refreshToken');
-      const response = await fetch('http://localhost:8000/auth/logout', {
+      const response = await fetch(`${API.GATE}/auth/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

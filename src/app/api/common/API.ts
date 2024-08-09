@@ -3,5 +3,6 @@ export const enum API{
     USERSERVER = 'http://localhost:8000/users',
     LANDSERVER = 'http://localhost:8000/land/api',
     ANALYSERVER = 'http://localhost:8000/analysis',
-    CHATSERVER = 'http://localhost:8000/chat'
+    CHATSERVER = 'http://localhost:8000/chat',
+    GATE = 'http://localhost:8000'
 }

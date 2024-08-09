@@ -11,6 +11,7 @@ import axios from "axios";
 import DeductionPointFetch from "@/components/pages/pricing/DedectionPoint";
 import { useUserStore } from "@/stores/useUserStore";
 import { useRouter } from "next/navigation";
+import { API } from "@/app/api/common/API";
 
 const AddPropertyForm: React.FC = () => {
   // 상태 변수 선언
@@ -65,8 +66,8 @@ const AddPropertyForm: React.FC = () => {
 
     const apiUrl =
       propertyData.rletTpNm === "오피스텔"
-        ? "http://localhost:8000/land/api/officetels"
-        : "http://localhost:8000/land/api/apartments";
+        ? `${API.LANDSERVER}/officetels`
+        : `${API.LANDSERVER}/apartments`;
     try {
       const response = await axios.post(apiUrl, propertyData);
       if (response.status === 200) {

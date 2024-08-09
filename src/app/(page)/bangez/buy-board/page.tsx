@@ -1,7 +1,8 @@
 import DashboardHeader from "@/components/common/DashboardHeader";
 import MobileMenu from "@/components/common/mobile-menu";
 import Pagination from "@/components/property/Pagination";
-import Footer from "@/components/property/dashboard/Footer";
+// import Footer from "@/components/property/dashboard/Footer";
+import Footer from "@/components/home/home-v4/footer";
 import SidebarDashboard from "@/components/property/dashboard/SidebarDashboard";
 import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
 import DefaultHeader from "@/components/common/DefaultHeader";
@@ -65,12 +66,15 @@ const DashboardMyProperties = () => {
             </div>
             {/* End .dashboard__content */}
 
-            <Footer />
+            
           </div>
           {/* End .dashboard__main */}
         </div>
       </div>
       {/* dashboard_content_wrapper */}
+      <section className="footer-style1 at-home4 pt60 pb-0">
+        <Footer />
+      </section>
     </>
   );
 };

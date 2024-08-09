@@ -28,7 +28,7 @@ const Footer = () => {
 
         <div className="col-sm-6">
           <div className="text-center text-lg-end">
-            <Social />
+            {/* <Social /> */}
           </div>
         </div>
         {/* End .col-sm-6 */}

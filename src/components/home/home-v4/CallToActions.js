@@ -4,6 +4,7 @@ import Link from "next/link";
 const CallToActions = () => {
   return (
     <div
+  
       className="cta-banner bgc-thm-light mx-auto maxw1600 pt90 pt60-md pb90 pb60-md bdrs12 position-relative mx20-lg px20-md"
       data-aos="fade"
       data-aos-delay="300"
@@ -21,13 +22,14 @@ const CallToActions = () => {
         <div className="row">
           <div className="col-lg-7 col-xl-6">
             <div className="cta-style3">
-              <h2 className="cta-title">Get Your Dream House</h2>
+              <h2 className="cta-title">지금 바로 방이지와 함께 <br />
+              부동산 거래를 시작해 보세요!</h2>
               <p className="cta-text mb25">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do{" "}
-                <br className="d-none d-md-block" /> eiusmod tempor incididunt.
+                {" "}
+                <br className="d-none d-md-block" /> 로그인 & 회원가입을 통해 방이지의 다양한 서비스를 이용해보세요.
               </p>
-              <Link href="/register" className="ud-btn btn-dark">
-                Register Now <i className="fal fa-arrow-right-long" />
+              <Link href="/login" className="ud-btn btn-dark">
+                방이지 시작하기 <i className="fal fa-arrow-right-long" />
               </Link>
             </div>
           </div>
@@ -37,7 +39,7 @@ const CallToActions = () => {
                 width={441}
                 height={511}
                 className="w-100 h-100 cover"
-                src="/images/about/cta-building-1.png"
+                src="/images/about/cta-building.png"
                 alt="shape"
               />
             </div>
