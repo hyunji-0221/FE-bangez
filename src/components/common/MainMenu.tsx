@@ -60,12 +60,12 @@ const MainMenu = () => {
       <li className="visible_list dropitem">
         <a className="list-item" href="/map-v4">
           <span className={topMenu == "home" ? "title" : "title"}>
-            부동산
+            지도
           </span>
-          <span className="arrow"></span> 
+          {/* <span className="arrow"></span>  */}
         </a>
         {/* Level Two*/}
-        <ul className="sub-menu">
+        {/* <ul className="sub-menu">
           {homeItems.map((item:any, index:any) => (
             <li key={index}>
               <Link className={`${handleActive(item.href)}`} href={item.href}>
@@ -73,7 +73,7 @@ const MainMenu = () => {
               </Link>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </li>
       {/* End homeItems */}
 
@@ -168,7 +168,7 @@ const MainMenu = () => {
       <li className="visible_list dropitem">
         <a className="list-item" href="#">
           <span className={topMenu == "blog" ? "title menuActive" : "title"}>
-            문의
+            입지정보
           </span>
           <span className="arrow"></span>
         </a>

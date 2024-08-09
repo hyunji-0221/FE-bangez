@@ -45,13 +45,13 @@ const Cta = () => {
             >
               <div className="cta-style2">
                 <h2 className="cta-title">
-                  Start Listing or Buying a Property With Realton
+                  지금 바로 방이지와 함께 <br/>부동산 거래를 시작해보세요!
                 </h2>
                 <p className="cta-text">
-                  Talk to our experts or Browse through more properties.
+                  로그인 & 회원가입을 통해 방이지의 다양한 서비스를 이용해보세요.
                 </p>
-                <Link href="/contact" className="ud-btn btn-dark mt10">
-                  Learn More
+                <Link href="/login" className="ud-btn btn-dark mt10">
+                  방이지 시작하기
                   <i className="fal fa-arrow-right-long" />
                 </Link>
               </div>

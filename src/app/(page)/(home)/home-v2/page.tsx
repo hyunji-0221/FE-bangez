@@ -25,7 +25,7 @@ const Home_V2 = () => {
   return (
     <>
       {/* Main Header Nav */}
-  
+      <Header />
       {/* End Main Header Nav */}
 
       {/* Mobile Nav  */}
@@ -50,12 +50,12 @@ const Home_V2 = () => {
 
       {/* Explore Apartment */}
       <section className=" pb30-md mainSection">
-      <div className="container">
-        <div className="row justify-content-center" data-aos="fade">
-          <ApartmentType/>
+        <div className="container">
+          <div className="row justify-content-center" data-aos="fade">
+            <ApartmentType />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
       {/* End Explore Apartment */}
 
       {/* Featured Listings */}
@@ -108,43 +108,43 @@ const Home_V2 = () => {
                 </p>
               </div>
             </div> */}
-            {/* End header */}
+      {/* End header */}
 
-            {/* <div className="col-auto mb30">
+      {/* <div className="col-auto mb30">
               <div className="row align-items-center justify-content-center">
                 <div className="col-auto">
                   <button className="cities_prev__active swiper_button">
                     <i className="far fa-arrow-left-long" />
                   </button>
                 </div> */}
-                {/* End prev */}
+      {/* End prev */}
 
-                {/* <div className="col-auto">
+      {/* <div className="col-auto">
                   <div className="pagination swiper--pagination cities_pagination__active" />
                 </div> */}
-                {/* End pagination */}
+      {/* End pagination */}
 
-                {/* <div className="col-auto">
+      {/* <div className="col-auto">
                   <button className="cities_next__active swiper_button">
                     <i className="far fa-arrow-right-long" />
                   </button>
                 </div> */}
-                {/* End Next */}
-              {/* </div> */}
-            {/* </div> */}
-            {/* End .col for navigation and pagination */}
-          {/* </div> */}
-          {/* End .row */}
+      {/* End Next */}
+      {/* </div> */}
+      {/* </div> */}
+      {/* End .col for navigation and pagination */}
+      {/* </div> */}
+      {/* End .row */}
 
-          {/* <div className="row">
+      {/* <div className="row">
             <div className="col-lg-12" data-aos="fade-up" data-aos-delay="300">
               <div className="property-city-slider">
                 <ExploreCities />
               </div>
             </div>
           </div> */}
-          {/* End .row */}
-        {/* </div>
+      {/* End .row */}
+      {/* </div>
       </section> */}
       {/* End property cities */}
 

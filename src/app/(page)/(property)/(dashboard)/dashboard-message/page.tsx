@@ -49,22 +49,22 @@ const DashboardMessage = () => {
 
       {/* dashboard_content_wrapper */}
       <div className="dashboard_content_wrapper">
-        <div className="dashboard dashboard_wrapper pr30 pr0-xl">
-          <SidebarDashboard />
+        <div className="dashboard dashboard_wrapper pr150 pr0-xl">
+          {/* <SidebarDashboard /> */}
           {/* End .dashboard__sidebar */}
 
           <div className="dashboard__main pl0-md">
             <div className="dashboard__content bgc-f7">
               <div className="row pb40">
                 <div className="col-lg-12">
-                  <DboardMobileNavigation />
+                  {/* <DboardMobileNavigation /> */}
                 </div>
                 {/* End .col-12 */}
 
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
-                    <h2>Messages</h2>
-                    <p className="text">We are glad to see you again!</p>
+                    <h2>채팅</h2>
+                    <p className="text">매물에 대해서 자세히 이야기 해보세요!</p>
                   </div>
                 </div>
                 {/* col-lg-12 */}

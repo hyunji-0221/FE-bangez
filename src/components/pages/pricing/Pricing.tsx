@@ -21,7 +21,7 @@ const Pricing = ({ filterFunctions }: any) => {
   const pricingPackages = [
     {
       price: "충전하기",
-      priceIcon: "images/icon/payment_icon.svg",
+      // priceIcon: "images/icon/payment_icon.svg",
       features: [
         "1000원 10포인트",
       ],
@@ -56,24 +56,24 @@ const Pricing = ({ filterFunctions }: any) => {
     if (token) {
       setAccessToken(token);
       console.log("포인트 페이지 token", token);
-      const decodedToken: JwtPayload = jwtDecode(token as string);
+      const decodedToken:CustomJwtPayload = jwtDecode(token as string);
       console.log("포인트 페이지 decodedToken", decodedToken);
 
-      // fetch(`${API.TXSERVER}/point/detail/${decodedToken.id}`, {
-      //   method: 'GET',
-      // })
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     console.log('포인트 조회 결과', data);
-      //     if (typeof data === 'number') {
-      //       setPoint(data);
-      //     } else {
-      //       console.error('포인트 데이터가 올바르지 않습니다:', data);
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     console.error('포인트 조회 실패:', error);
-      //   });
+      fetch(`${API.TXSERVER}/point/detail/${decodedToken.id}`, {
+        method: 'GET',
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('포인트 조회 결과', data);
+          if (typeof data === 'number') {
+            setPoint(data);
+          } else {
+            console.error('포인트 데이터가 올바르지 않습니다:', data);
+          }
+        })
+        .catch((error) => {
+          console.error('포인트 조회 실패:', error);
+        });
     }
   }, [accessToken]);
 
@@ -151,7 +151,7 @@ const Pricing = ({ filterFunctions }: any) => {
                     width={70}
                     height={70}
                     className="price-icon"
-                    src={item.priceIcon}
+                    src="/images/icon/payment_icon.svg"
                     alt="icon"
                   />
                 </div>
@@ -178,7 +178,7 @@ const Pricing = ({ filterFunctions }: any) => {
                             });
                           }
                         }}
-                      />
+                      /> 원
                       {errors.amount && <p className="text-danger">{errors.amount.message}</p>}
                     </div>
 

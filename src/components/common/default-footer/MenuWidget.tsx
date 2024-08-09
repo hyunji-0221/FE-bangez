@@ -3,33 +3,33 @@ import React from "react";
 const MenuWidget = () => {
   const menuSections = [
     {
-      title: "Popular Search",
+      title: "매물",
       links: [
-        { label: "Apartment for Rent", href: "#" },
-        { label: "Apartment Low to Hide", href: "#" },
-        { label: "Offices for Buy", href: "#" },
-        { label: "Offices for Rent", href: "#" },
+        { label: "매물 보기", href: "/map-v4" },
+        // { label: "Apartment Low to Hide", href: "#" },
+        // { label: "Offices for Buy", href: "#" },
+        // { label: "Offices for Rent", href: "#" },
       ],
     },
     {
-      title: "Quick Links",
+      title: "입지 정보",
       links: [
-        { label: "Terms of Use", href: "#" },
-        { label: "Privacy Policy", href: "#" },
-        { label: "Pricing Plans", href: "#" },
-        { label: "Our Services", href: "#" },
-        { label: "Contact Support", href: "#" },
-        { label: "Careers", href: "#" },
-        { label: "FAQs", href: "#" },
+        // { label: "마이페이지", href: "#" },
+        // { label: "매물 등록하기", href: "/dashboard-add-property" },
+        // { label: "Our Services", href: "#" },
+        { label: "부동산 통계 정보", href: "/statistics-board" },
+        { label: "학교 정보", href: "/school-list" },
+        // { label: "FAQs", href: "#" },
       ],
     },
     {
-      title: "Discover",
+      title: "바로 가기",
       links: [
-        { label: "Miami", href: "#" },
-        { label: "Los Angeles", href: "#" },
-        { label: "Chicago", href: "#" },
-        { label: "New York", href: "#" },
+        { label: "매물 등록하기", href: "/dashboard-add-property" },
+        { label: "방 구해요", href: "/buy-board" },
+        { label: "포인트 충전", href: "/dashboard-chargePoint" },
+        { label: "채팅 목록", href: "/dashboard-message" },
+        // { label: "New York", href: "#" },
       ],
     },
   ];

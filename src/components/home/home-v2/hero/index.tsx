@@ -5,12 +5,13 @@ const Hero = () => {
   return (
     <>
       <div className="inner-banner-style2 text-center position-relative">
-        <HeroContent />
+        {/* <HeroContent /> */}
         <h2 className="hero-title" data-aos="fade-up" data-aos-delay="150">
-          Find Your Dream Home
+          원하는 집을 찾아보세요!
         </h2>
         <p className="hero-text fz15" data-aos="fade-up" data-aos-delay="250">
-          Let’s find a home that’s perfect for you
+          원하는 조건을 선택하여 집을 찾거나 게시판에서 집을 구해보세요<br />
+          집 주변에 있는 편의시설을 확인하고, 집의 위치를 확인해볼 수 있습니다
         </p>
       </div>
       {/* End Hero content */}

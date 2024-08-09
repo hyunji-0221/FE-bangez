@@ -5,21 +5,21 @@ const Explore = () => {
   const iconboxData = [
     {
       icon: "/images/icon/property-buy-2.svg",
-      title: "Buy a property",
+      title: "게시판에서",
       text: "Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.",
-      linkText: "Find a home",
+      // linkText: "Find a home",
     },
     {
       icon: "/images/icon/property-sell-2.svg",
-      title: "Sell a property",
+      title: "원하는 조건을 선택 후",
       text: "Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.",
-      linkText: "Place an ad",
+      // linkText: "Place an ad",
     },
     {
       icon: "/images/icon/property-rent-2.svg",
-      title: "Rent a property",
+      title: "게시글 올리기!",
       text: "Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.",
-      linkText: "Find a rental",
+      // linkText: "Find a rental",
     },
   ];
 
@@ -34,15 +34,15 @@ const Explore = () => {
         >
           <div className="iconbox-style3 text-center">
             <div className="icon">
-              <Image width={316} height={150} src={item.icon} alt="icon" />
+              <Image width={316} height={150} src={item.icon} alt="icon" /> 게시판 이미지 추가하기
             </div>
             <div className="iconbox-content">
               <h4 className="title">{item.title}</h4>
               <p className="text">{item.text}</p>
-              <a href="#" className="ud-btn btn-thm3">
+              {/* <a href="#" className="ud-btn btn-thm3">
                 {item.linkText}
                 <i className="fal fa-arrow-right-long" />
-              </a>
+              </a> */}
             </div>
           </div>
         </div>

@@ -6,14 +6,13 @@ import LoginSignupModal from "@/components/common/login-signup-modal";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useUserStore } from "@/stores/useUserStore";
 
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
-const Header = () => {
-
-  const [userId, setUserId] = useState(false);
-  const [accessToken, setAccessToken] = useState<string>();
+const LoginRegiHeader = () => {
+  const user = useUserStore((state) => state.user);
 
   const [navbar, setNavbar] = useState(false);
 
@@ -25,6 +24,8 @@ const Header = () => {
     }
   };
 
+  const [accessToken, setAccessToken] = useState<string|undefined>()
+
   useEffect(() => {
     const accessToken = Cookies.get('accessToken')
     console.log('token', JSON.stringify(accessToken))
@@ -33,7 +34,6 @@ const Header = () => {
       const decodeToken = jwtDecode(accessToken as string)
       console.log('decodeToken ', decodeToken)
     }
-
 
     window.addEventListener("scroll", changeBackground);
     return () => {
@@ -44,11 +44,10 @@ const Header = () => {
   return (
     <>
       <header
-        className={`header-nav nav-homepage-style at-home2  main-menu ${navbar ? "sticky slideInDown animated" : ""
-          }`}
+        className={`header-nav nav-homepage-style light-header menu-home4 main-menu`}
       >
         <nav className="posr">
-          <div className="container maxw1600 posr">
+          <div className="container posr menu_bdrt1">
             <div className="row align-items-center justify-content-between">
               <div className="col-auto">
                 <div className="d-flex align-items-center justify-content-between">
@@ -80,27 +79,12 @@ const Header = () => {
 
               <div className="col-auto">
                 <div className="d-flex align-items-center">
-                  {/* <a
-                    className="login-info d-flex align-items-center me-3"
-                    href="tel:+012305094502"
-                  >
-                    <i className="far fa-phone fz16 me-2"></i>{" "}
-                    <span className="d-none d-xl-block">2 911 098 7654</span>
-                  </a> */}
-
-                  <Link
-                    className="ud-btn add-property menu-btn bdrs60 mx-2 mx-xl-4"
-                    href="/dashboard-add-property"
-                  >
-                    매물 등록하기
-                    <i className="fal fa-arrow-right-long" />
-                  </Link>
                   {!accessToken ?
                     <a
-                      href="/login"
-                      className="login-info d-flex align-items-center"
-                      // data-bs-toggle="modal"
-                      // data-bs-target="#loginSignupModal"
+                      href="#"
+                      className="login-info d-flex align-items-cente"
+                      data-bs-toggle="modal"
+                      data-bs-target="#loginSignupModal"
                       role="button"
                     >
                       <i className="far fa-user-circle fz16 me-2" />{" "}
@@ -118,15 +102,14 @@ const Header = () => {
                         width={25}
                         height={9}
                         className="img-1"
-                        src="/images/icon/nav-icon-white.svg"
+                        src="/images/dark-nav-icon.svg"
                         alt="humberger menu"
                       />
-
                       <Image
                         width={25}
                         height={9}
                         className="img-2"
-                        src="/images/icon/nav-icon-dark.svg"
+                        src="/images/dark-nav-icon.svg"
                         alt="humberger menu"
                       />
                     </a>}
@@ -170,4 +153,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default LoginRegiHeader;

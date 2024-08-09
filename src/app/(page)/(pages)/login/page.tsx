@@ -1,4 +1,5 @@
 import SignIn from "@/components/common/login-signup-modal/SignIn";
+import LoginRegiHeader from "@/components/login_register/LoginRegiHeader";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -10,8 +11,9 @@ export const metadata = {
 const Login = () => {
   return (
     <>
+      <LoginRegiHeader/>
       {/* Our Compare Area */}
-      <section className="our-compare pt60 pb60">
+      <section className="our-compare pt100 pb60 ">
         <Image
           width={1012}
           height={519}

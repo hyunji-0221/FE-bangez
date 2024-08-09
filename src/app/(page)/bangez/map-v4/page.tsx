@@ -8,7 +8,8 @@ import CallToActions from "@/components/common/CallToActions";
 
 // import Footer from "@/components/common/default-footer";
 
-import Footer from "@/components/home/home-v4/footer";
+// import Footer from "@/components/home/home-v4/footer";
+import Footer from "@/components/common/default-footer";
 
 import PropertyFilteringMapFive from "@/components/listing/map-style/map-v4/PropertyFilteringMapFive";
 

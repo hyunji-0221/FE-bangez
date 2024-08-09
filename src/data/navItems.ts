@@ -109,8 +109,8 @@ export const propertyItems = [
 ];
 
 export const blogItems = [
-  { href: "#", label: "FAQ" },
-  { href: "#", label: "1:1 문의내역" },
+  { href: "/statistics-board", label: "부동산 통계 정보" },
+  { href: "/school-list", label: "학교 정보" },
   // { href: "/blog-list-v3", label: "Blog List V3" },
   // { href: "/blogs/2", label: "Blog Single" },
 ];

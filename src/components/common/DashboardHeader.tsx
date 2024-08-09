@@ -88,7 +88,7 @@ const DashboardHeader = (
   // const [accessToken, setAccessToken] = useState<string>()
   const [notification, setNotification] = useState(0);
   const [userId, setUserId] = useState('')
-  
+
   useEffect(() => { //새로고침을 해야만 notification이 작동함
     setNotification(0)
     const accessToken = Cookies.get('accessToken')
@@ -154,21 +154,7 @@ const DashboardHeader = (
                   </div>
                   {/* End Logo */}
 
-                  <a
-                    className="dashboard_sidebar_toggle_icon text-thm1 vam"
-                    href="#"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#SidebarPanel"
-                    aria-controls="SidebarPanelLabel"
-                  >
-                    <Image
-                      width={25}
-                      height={9}
-                      className="img-1"
-                      src="/images/dark-nav-icon.svg"
-                      alt="humberger menu"
-                    />
-                  </a>
+
                 </div>
               </div>
               {/* End .col-auto */}
@@ -182,11 +168,11 @@ const DashboardHeader = (
               <div className="col-6 col-lg-auto">
                 <div className="text-center text-lg-end header_right_widgets">
                   <ul className="mb0 d-flex justify-content-center justify-content-sm-end p-0">
-                    <li className="d-none d-sm-block">
-                      <Link className="text-center mr15" href="/login">
-                        <span className="flaticon-email" />
-                      </Link>
-                    </li>
+                    {/* <li className="d-none d-sm-block">
+                      <Link className="text-center mr15" href="/login"> */}
+                        {/* <span className="flaticon-email" /> */}
+                      {/* </Link>
+                    </li> */}
                     {/* End email box */}
 
                     <li className="d-none d-sm-block">
@@ -202,7 +188,7 @@ const DashboardHeader = (
                     </li>
                     {/* End notification icon */}
 
-                    <li className=" user_setting">
+                    {/* <li className=" user_setting">
                       <div className="dropdown">
                         <a className="btn" href="#" data-bs-toggle="dropdown">
                           <Image
@@ -238,7 +224,30 @@ const DashboardHeader = (
                           </div>
                         </div>
                       </div>
-                    </li>
+                    </li> */}
+                    {!userId ?
+                      <a
+                        href="/login"
+                        role="button"
+                      >
+                        <span className="fw-bold" style={{fontSize:14}}>로그인</span>
+                      </a>
+                      :
+                      <a
+                        className="dashboard_sidebar_toggle_icon text-thm1 vam"
+                        href="#"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#SidebarPanel"
+                        aria-controls="SidebarPanelLabel"
+                      >
+                        <Image
+                          width={25}
+                          height={9}
+                          className="img-1"
+                          src="/images/dark-nav-icon.svg"
+                          alt="humberger menu"
+                        />
+                      </a>}
                     {/* End avatar dropdown */}
                   </ul>
                 </div>

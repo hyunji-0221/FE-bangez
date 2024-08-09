@@ -8,6 +8,9 @@ import DetailsFiled from "./details-field";
 import Amenities from "./Amenities";
 import React, { useState } from "react";
 import axios from "axios";
+import DeductionPointFetch from "@/components/pages/pricing/DedectionPoint";
+import { useUserStore } from "@/stores/useUserStore";
+import { useRouter } from "next/navigation";
 
 const AddPropertyForm: React.FC = () => {
   // 상태 변수 선언
@@ -39,9 +42,9 @@ const AddPropertyForm: React.FC = () => {
   };
 
   // 위치 정보 업데이트 핸들러
-const updateLocation = (data: { lat: string; lng: string; roadAddress: string; address: string; town: string }) => {
-  setPropertyData((prevData) => ({ ...prevData, ...data }));
-};
+  const updateLocation = (data: { lat: string; lng: string; roadAddress: string; address: string; town: string }) => {
+    setPropertyData((prevData) => ({ ...prevData, ...data }));
+  };
 
   // 편의시설 정보 업데이트 핸들러
   const updateAmenities = (data: { tagList: string[] }) => {
@@ -53,29 +56,50 @@ const updateLocation = (data: { lat: string; lng: string; roadAddress: string; a
     setPropertyData((prevData) => ({ ...prevData, ...data }));
   };
 
+  const user = useUserStore((state) => state.user);
+  const router = useRouter();
+
   // API 요청 핸들러
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const apiUrl =
-    propertyData.rletTpNm === "오피스텔"
-      ? "http://localhost:8000/land/api/officetels"
-      : "http://localhost:8000/land/api/apartments";
+      propertyData.rletTpNm === "오피스텔"
+        ? "http://localhost:8000/land/api/officetels"
+        : "http://localhost:8000/land/api/apartments";
     try {
       const response = await axios.post(apiUrl, propertyData);
       if (response.status === 200) {
         console.log("apiUrl:", apiUrl);
         console.log("Property created:", response.data);
+
         // 성공 시 처리 로직
+
+        // 포인트 차감
+        const pointResult: any = await DeductionPointFetch(user?.id);
+        console.log("DeductionPointFetch result:", pointResult); 
+
+        if (pointResult === "SUCCESS") {
+          console.log("매물이 성공적으로 등록되었습니다.")
+          alert("매물이 성공적으로 등록되었습니다.");
+        } else if (pointResult === "FAILURE") {
+          alert("포인트가 부족합니다.");
+          router.push("/dashboard-chargePint");
+        } else if (user?.id === undefined) {
+          alert("로그인이 필요합니다.");
+          router.push("/login");
+        }
+
       }
     } catch (error) {
       console.error("Error creating property:", error);
       // 오류 처리 로직
     }
+
   };
 
   return (
-<>
+    <>
       <div className="tab-content" id="nav-tabContent">
         <div
           className="tab-pane fade show active"
@@ -94,11 +118,11 @@ const updateLocation = (data: { lat: string; lng: string; roadAddress: string; a
 
             <h4 className="title fz17 mb30">시설 정보</h4>
             <Amenities updateAmenities={updateAmenities} />
-            
+
           </div>
-          
-        </div>       
-        
+
+        </div>
+
       </div>
       <button onClick={handleSubmit} type="submit" className="btn btn-primary">등록하기</button>
     </>
