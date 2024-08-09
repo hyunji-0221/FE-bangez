@@ -78,7 +78,7 @@ const MainMenu = () => {
       {/* End homeItems */}
 
       <li className="visible_list dropitem">
-        <a className="list-item" href="/map-v1">
+        <a className="list-item" href="/buy-board">
           <span className={topMenu == "home" ? "title" : "title"}>
             게시판
           </span>
@@ -166,7 +166,7 @@ const MainMenu = () => {
       {/* End property Items */}
 
       <li className="visible_list dropitem">
-        <a className="list-item" href="#">
+        <a className="list-item" href="/statistics-board">
           <span className={topMenu == "blog" ? "title menuActive" : "title"}>
             입지정보
           </span>

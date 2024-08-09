@@ -53,12 +53,12 @@ const ChatBoxForm = ({ ChatBoxFormModels }: { ChatBoxFormModels: UserChatBoxCont
         {...register("message", { required: true })}
         className="form-control"
         type="search"
-        placeholder="Type a Message"
+        placeholder="내용을 입력하세요"
         aria-label="Search"
         required
       />
       <button type="submit" className="btn ud-btn btn-thm my-button">
-        Send Message
+        전송
         <i className="fal fa-arrow-right-long" />
       </button>
     </form>

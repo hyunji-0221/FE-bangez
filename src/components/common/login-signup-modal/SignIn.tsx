@@ -48,8 +48,10 @@ const SignIn = () => {
           const decodedToken: CustomJwtPayload = jwtDecode(accessToken);
           const id = decodedToken.id;
           console.log('Decoded Token:', decodedToken);
+          router.push('/');
+        }else{
+          alert('아이디 혹은 비밀번호가 일치하지 않습니다.');
         }
-        router.push('/');
       })
       .catch(error => {
         console.log('error', error)
@@ -75,7 +77,7 @@ const SignIn = () => {
         <label className="form-label fw600 dark-color">비밀번호</label>
         <input
           {...register("password", { required: true })}
-          type="text"
+          type="password"
           className="form-control"
           placeholder="비밀번호"
           required

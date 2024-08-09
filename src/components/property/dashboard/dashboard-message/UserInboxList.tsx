@@ -11,12 +11,14 @@ const UserItem: React.FC<{
   room: ChatRoomModel
   , setRoomId: Dispatch<SetStateAction<string>>
   , setReceiverId: Dispatch<SetStateAction<string>>
-}> = ({ room, setRoomId, setReceiverId }) => {
+  , setTitle: Dispatch<SetStateAction<string>>
+}> = ({ room, setRoomId, setReceiverId, setTitle }) => {
   return (
     <div className="list-item">
       <button className="my-chat_roomListBtn" onClick={() => {
         setRoomId(room.id);
         setReceiverId(room.receiverId);
+        setTitle(room.roomTitle);
       }}>
         <div className="d-flex align-items-center position-relative">
           <Image
@@ -49,7 +51,8 @@ const UserItem: React.FC<{
 const UserInboxList: React.FC<{
   setRoomId: Dispatch<SetStateAction<string>>
   , setReceiverId: Dispatch<SetStateAction<string>>
-}> = ({ setRoomId, setReceiverId }) => {
+  , setTitle: Dispatch<SetStateAction<string>>
+}> = ({ setRoomId, setReceiverId, setTitle }) => {
 
   const [userId, setUserId] = useState<string|undefined>();
 
@@ -96,7 +99,7 @@ const UserInboxList: React.FC<{
             senderId: room.senderId,
             receiverId: room.receiverId,
             createDate: room.createDate
-          }} setRoomId={setRoomId} setReceiverId={setReceiverId} />
+          }} setRoomId={setRoomId} setReceiverId={setReceiverId} setTitle={setTitle}/>
         ))}
 
     </>

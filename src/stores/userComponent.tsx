@@ -15,6 +15,7 @@ const SomeComponent: React.FC = () => {
     <div>
       <p>UserId: {user.id}</p>
       <p>Email: {user.email}</p>
+      <p>Username: {user.name}</p>
     </div>
   );
 };

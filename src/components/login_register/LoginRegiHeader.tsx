@@ -80,16 +80,10 @@ const LoginRegiHeader = () => {
               <div className="col-auto">
                 <div className="d-flex align-items-center">
                   {!accessToken ?
-                    <a
-                      href="#"
-                      className="login-info d-flex align-items-cente"
-                      data-bs-toggle="modal"
-                      data-bs-target="#loginSignupModal"
-                      role="button"
-                    >
+                    <div className="login-info d-flex align-items-cente">
                       <i className="far fa-user-circle fz16 me-2" />{" "}
-                      <span className="d-none d-xl-block">로그인</span>
-                    </a>
+                      <a href="/login" className="d-none d-xl-block">로그인</a>
+                    </div>
                     :
                     <a
                       className="sidemenu-btn filter-btn-right"

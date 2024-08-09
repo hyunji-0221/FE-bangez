@@ -7,13 +7,14 @@ export type ChatBoxTypes = {
     message: string
 }
 
-export interface UserChatUserId{
+export interface UserChatUserId {
     senderId: string,
 }
 
 export interface UserChatBoxContentModel extends UserChatUserId {
     roomId: string,
     receiverId: string
+    title: string
 }
 
 export interface ChatModel extends UserChatBoxContentModel {
@@ -23,15 +24,15 @@ export interface ChatModel extends UserChatBoxContentModel {
 }
 
 export interface ChatRoomModel {
-    id:string,
-    roomTitle:string,
-    senderId:string,
-    receiverId:string,
-    createDate:Date
+    id: string,
+    roomTitle: string,
+    senderId: string,
+    receiverId: string,
+    createDate: Date
 }
 
 export interface CustomJwtPayload extends JwtPayload {
-    id : string
+    id: string
 }
 
 export interface UserId {
@@ -41,5 +42,5 @@ export interface UserId {
 export interface UserInboxProps {
     setRoomId: React.Dispatch<React.SetStateAction<string>>,
     setReceiverId: React.Dispatch<React.SetStateAction<string>>,
-    UserId: {userId: string}
+    UserId: { userId: string }
 }

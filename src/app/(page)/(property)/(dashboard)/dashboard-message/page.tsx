@@ -16,15 +16,13 @@ import Cookies from 'js-cookie';
 import {jwtDecode} from "jwt-decode";
 import { CustomJwtPayload } from "@/types/ChatData";
 
-// export const metadata = {
-//   title: "Dashboard Message || Homez - Real Estate NextJS Template",
-// };
 
 const DashboardMessage = () => {
 
   const [roomId, setRoomId] = useState('')
   const [receiverId, setReceiverId] = useState('')
   const [userId , setUserId] = useState('')
+  const [title, setTitle] = useState('')
 
 
   useEffect(() => {
@@ -63,8 +61,8 @@ const DashboardMessage = () => {
 
                 <div className="col-lg-12">
                   <div className="dashboard_title_area">
-                    <h2>채팅</h2>
-                    <p className="text">매물에 대해서 자세히 이야기 해보세요!</p>
+                    <h2>Messages</h2>
+                    <p className="text">We are glad to see you again!</p>
                   </div>
                 </div>
                 {/* col-lg-12 */}
@@ -83,7 +81,7 @@ const DashboardMessage = () => {
                       {/* End search box */}
 
                       <div className="chat-member-list pr20">
-                        <UserInboxList setRoomId={setRoomId} setReceiverId={setReceiverId} />
+                        <UserInboxList setRoomId={setRoomId} setReceiverId={setReceiverId} setTitle={setTitle}/>
                       </div>
                     </div>
                   </div>
@@ -104,7 +102,9 @@ const DashboardMessage = () => {
                         /> : null}
                         <div className="meta d-sm-flex justify-content-sm-between align-items-center">
                           <div className="authors">
-                            <h6 className="name mb-0">{receiverId}</h6>
+                            <h6 className="name mb-0">
+                              {title}
+                              </h6>
                             {/* <p className="preview">Active</p> */}
                           </div>
                           <div>
@@ -121,13 +121,13 @@ const DashboardMessage = () => {
                     {/* End .user_heading */}
 
                     <div className="inbox_chatting_box">
-                      <UserChatBoxContent UserChatBoxContentModels={{ roomId: `${roomId}`, senderId: `${userId}`, receiverId: "2" }} />
+                      <UserChatBoxContent UserChatBoxContentModels={{ roomId: `${roomId}`, senderId: `${userId}`, receiverId: "2", title:`${title}` }} />
                     </div>
                     {/* End inbox-chatting */}
 
                     <div className="mi_text">
                       <div className="message_input">
-                        <ChatBoxForm ChatBoxFormModels={{ roomId: `${roomId}`, senderId: `${userId}`, receiverId: "2" }} />
+                        <ChatBoxForm ChatBoxFormModels={{ roomId: `${roomId}`, senderId: `${userId}`, receiverId: "2", title:`${title}` }} />
                       </div>
                     </div>
                     {/* End button */}

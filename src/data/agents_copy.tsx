@@ -3,7 +3,7 @@ module.exports = [
     id: 1,
     city: "New York",
     category: "Office",
-    name: "매물 또는",
+    name: "매물 상세정보,",
     image: "/images/team/team-1.jpg",
   },
   {

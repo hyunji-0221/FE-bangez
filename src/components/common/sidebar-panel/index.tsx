@@ -2,13 +2,30 @@ import { useUserStore } from "@/stores/useUserStore";
 import ContactInfo from "./ContactInfo";
 import MenuItems from "./MenuItems";
 import SocialLinks from "./SocialLinks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import Cookies from 'js-cookie';
+import {jwtDecode} from 'jwt-decode';
+import { CustomJwtPayload } from "@/types/ChatData";
 
 const SidebarPanel = () => {
 
   const user = useUserStore((state) => state.user);
 
   const [accessToken, setAccessToken] = useState<string | undefined>();
+  useEffect(() => {
+    const token = Cookies.get('accessToken');
+    setAccessToken(token);
+    
+    if (token) {
+      try {
+        const decodedToken: CustomJwtPayload = jwtDecode(token);
+        console.log('decodeToken ', decodedToken);
+      } catch (error) {
+        console.error('Failed to decode token:', error);
+      }
+    };
+  }, []);
   return (
     <div className="rightside-hidden-bar">
       <div className="hsidebar-header">
@@ -19,7 +36,7 @@ const SidebarPanel = () => {
         >
           <span className="far fa-times"></span>
         </div>
-        {!accessToken ?
+        {accessToken ?
           <h4 className="title">안녕하세요, {user?.name}님!</h4>
           :
           <h4 className="title"><a href="/login" className="">로그인</a></h4>}
