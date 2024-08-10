@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSearchParams } from 'next/navigation'; // next/navigation에서 useSearchParams 사용
 import TopFilterBar2 from './TopFilterBar2';
 import AdvanceFilterModal from '@/components/common/advance-filter-two';
 import TopFilterBar from './TopFilterBar';
 import FeaturedListings from './FeatuerdListings'; //목록
 import PaginationTwo from '../../PaginationTwo';
-import Map from '../Map';
+import Map from '../MapTest';
 import { Property } from '@/module/property/Property';
 import { API } from '@/app/api/common/API';
 
@@ -31,50 +32,54 @@ const fetchProperties = async (): Promise<Property[]> => {
 };
 
 const PropertyFilteringMapFive: React.FC = () => {
+  const searchParams = useSearchParams(); // useSearchParams 훅 사용
+  const typeParam = searchParams.get('type'); // 쿼리 파라미터에서 'type' 가져오기
+  
+  const initialListingStatus = typeParam ? typeParam.toString() : '전체'; // 기본 상태를 '전체'로 설정
   const [properties, setProperties] = useState<Property[]>([]);
   const [filteredData, setFilteredData] = useState<Property[]>([]);
-  const [currentSortingOption, setCurrentSortingOption] = useState('Newest');
+  const [currentSortingOption, setCurrentSortingOption] = useState('최신순');
   const [sortedFilteredData, setSortedFilteredData] = useState<Property[]>([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [colstyle, setColstyle] = useState(false);
   const [pageItems, setPageItems] = useState<Property[]>([]);
   const [pageContentTrac, setPageContentTrac] = useState<number[]>([]);
-  const [listingStatus, setListingStatus] = useState('All');
+  const [listingStatus, setListingStatus] = useState(initialListingStatus); // 쿼리 파라미터 기반 초기 상태 설정
   const [propertyTypes, setPropertyTypes] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<number[]>([0, 100000]);
   const [bedrooms, setBedrooms] = useState(0);
   const [bathroms, setBathroms] = useState(0);
-  const [location, setLocation] = useState('All Cities');
+  const [location, setLocation] = useState('전체');
   const [squirefeet, setSquirefeet] = useState<number[]>([]);
   const [yearBuild, setyearBuild] = useState<number[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Set the number of items per page
+  // 페이지 당 항목 수 설정
   const pageCapacity = 8;
 
   const resetFilter = () => {
-    setListingStatus('All');
+    setListingStatus('전체');
     setPropertyTypes([]);
     setPriceRange([0, 100000]);
     setBedrooms(0);
     setBathroms(0);
-    setLocation('All Cities');
+    setLocation('전체');
     setSquirefeet([]);
     setyearBuild([0, 2050]);
     setCategories([]);
-    setCurrentSortingOption('Newest');
+    setCurrentSortingOption('최신순');
     document.querySelectorAll<HTMLInputElement>('.filterInput').forEach((element) => {
       element.value = '';
     });
 
     document.querySelectorAll<HTMLSelectElement>('.filterSelect').forEach((element) => {
-      element.value = 'All Cities';
+      element.value = '전체';
     });
   };
 
   const filterFunctions = {
-    handlelistingStatus: (elm: string) => setListingStatus((prev) => (prev === elm ? 'All' : elm)),
+    handlelistingStatus: (elm: string) => setListingStatus((prev) => (prev === elm ? '전체' : elm)),
     handlepropertyTypes: (elm: string) =>
       setPropertyTypes((prev) => (prev.includes(elm) ? prev.filter((el) => el !== elm) : [...prev, elm])),
     handlepriceRange: setPriceRange,
@@ -103,16 +108,20 @@ const PropertyFilteringMapFive: React.FC = () => {
     const fetchAndSetProperties = async () => {
       const properties = await fetchProperties();
       setProperties(properties);
-      setFilteredData(properties);
+      setFilteredData(properties.filter(property => property.rletTpNm === initialListingStatus)); // 초기 필터링 설정
     };
 
     fetchAndSetProperties();
-  }, []);
+  }, [initialListingStatus]);
 
   useEffect(() => {
     const refItems = properties.filter((elm) => {
-      if (listingStatus === 'All') {
+      if (listingStatus === '전체') {
         return true;
+      } else if (listingStatus === '아파트') {
+        return elm.rletTpNm === '아파트';
+      } else if (listingStatus === '오피스텔') {
+        return elm.rletTpNm === '오피스텔';
       } else if (listingStatus === '매매') {
         return elm.tradTpNm === '매매';
       } else if (listingStatus === '전세') {
@@ -131,16 +140,17 @@ const PropertyFilteringMapFive: React.FC = () => {
           Number(elm.prc) >= priceRange[0] &&
           Number(elm.prc) <= priceRange[1],
       );
-      filteredArrays.push(filtered);}
+      filteredArrays.push(filtered);
+    }
 
-      if (squirefeet.length > 0 && squirefeet[1]) {
-        const filtered = refItems.filter(
-          (elm) =>
-            (elm.spc1 * 0.3025) >= squirefeet[0] &&
-            (elm.spc1 * 0.3025) <= squirefeet[1],
-        );
-        filteredArrays.push(filtered);
-      }
+    if (squirefeet.length > 0 && squirefeet[1]) {
+      const filtered = refItems.filter(
+        (elm) =>
+          (elm.spc1 * 0.3025) >= squirefeet[0] &&
+          (elm.spc1 * 0.3025) <= squirefeet[1],
+      );
+      filteredArrays.push(filtered);
+    }
 
     if (propertyTypes.length > 0) {
       filteredArrays.push(refItems.filter((elm) => propertyTypes.includes(elm.rletTpNm)));
@@ -168,7 +178,7 @@ const PropertyFilteringMapFive: React.FC = () => {
   ]);
 
   useEffect(() => {
-    if (currentSortingOption === 'Newest') {
+    if (currentSortingOption === '최신순') {
       setSortedFilteredData(
         [...filteredData].sort((a, b) => {
           const dateA = a.atclCfmYmd ? parseInt(a.atclCfmYmd.substring(0, 4)) : 0;
@@ -176,9 +186,9 @@ const PropertyFilteringMapFive: React.FC = () => {
           return dateB - dateA;
         })
       );
-    } else if (currentSortingOption === 'Price Low') {
+    } else if (currentSortingOption === '가격 낮은 순') {
       setSortedFilteredData([...filteredData].sort((a, b) => a.prc - b.prc));
-    } else if (currentSortingOption === 'Price High') {
+    } else if (currentSortingOption === '가격 높은 순') {
       setSortedFilteredData([...filteredData].sort((a, b) => b.prc - a.prc));
     }
   }, [filteredData, currentSortingOption]);
@@ -221,7 +231,7 @@ const PropertyFilteringMapFive: React.FC = () => {
             </div>
             <div className="col-xl-5">
               <div className="half_map_area_content mt30">
-                <h4 className="mb-1">Seoul Homes for Sale</h4>
+                <h4 className="mb-1">서울시 매물 정보</h4>
                 <div className="row align-items-center mb10">
                   <TopFilterBar pageContentTrac={pageContentTrac} colstyle={colstyle} setColstyle={setColstyle} setCurrentSortingOption={setCurrentSortingOption} />
                 </div>

@@ -12,7 +12,7 @@ export const homeItems = [
 
 export const boardItems = [
   { href: "/buy-board", label: "방 구해요" },
-  { href: "/sell-board/apt", label: "방 내놓아요" },
+  { href: "/sell-board", label: "방 내놓아요" },
   // { href: "#", label: "Home v4" },
   // { href: "#", label: "Home v5" },
   // { href: "#", label: "Home v6" },
@@ -111,7 +111,7 @@ export const propertyItems = [
 export const blogItems = [
   { href: "/statistics-board", label: "부동산 통계 정보" },
   { href: "/school-list", label: "학교 정보" },
-  // { href: "/blog-list-v3", label: "Blog List V3" },
+  { href: "/citypark-list", label: "공원 찾기" },
   // { href: "/blogs/2", label: "Blog Single" },
 ];
 

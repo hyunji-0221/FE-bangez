@@ -1,5 +1,6 @@
+
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,7 +12,31 @@ interface GalleryBoxProps {
 }
 
 const GalleryBox: React.FC<GalleryBoxProps> = ({ property }) => {
-  const imageUrls = property.image ? [property.image] : ["/images/listings/listing-single-slide4.jpg"];
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+
+  useEffect(() => {
+    // 폴더에 있는 이미지 파일명 목록 생성
+    const imageFiles = [
+      '/images/listings/make1/1.jpg',
+      '/images/listings/make1/2.jpg',
+      '/images/listings/make1/3.jpg',
+      '/images/listings/make1/4.jpg',
+      '/images/listings/make1/5.jpg',
+      '/images/listings/make1/6.jpg',
+      '/images/listings/make1/7.jpg',
+      '/images/listings/make1/8.jpg',
+      '/images/listings/make1/9.jpg',
+      '/images/listings/make1/10.jpg',
+    ];
+
+    // 랜덤하게 이미지 선택
+    const randomImage = imageFiles[Math.floor(Math.random() * imageFiles.length)];
+
+    // property.image가 있는 경우 해당 이미지와 랜덤 이미지를 함께 사용
+    const initialImages = property.image ? [property.image, randomImage] : [randomImage];
+    
+    setImageUrls(initialImages);
+  }, [property.image]);
 
   return (
     <>

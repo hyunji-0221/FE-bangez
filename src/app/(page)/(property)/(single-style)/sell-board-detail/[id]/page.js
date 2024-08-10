@@ -1,36 +1,95 @@
-// "use client";
+"use client";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import DefaultHeader from "@/components/common/DefaultHeader";
 import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
-import EnergyClass from "@/components/property/property-single-style/common/EnergyClass";
-import FloorPlans from "@/components/property/property-single-style/common/FloorPlans";
-import HomeValueChart from "@/components/property/property-single-style/common/HomeValueChart";
-import InfoWithForm from "@/components/property/property-single-style/common/more-info";
-import NearbySimilarProperty from "@/components/property/property-single-style/common/NearbySimilarProperty";
-import OverView from "@/components/property/property-single-style/common/OverView";
-import PropertyAddress from "@/components/property/property-single-style/common/PropertyAddress";
-import PropertyDetails from "@/components/property/property-single-style/common/PropertyDetails";
-import PropertyFeaturesAminites from "@/components/property/property-single-style/common/PropertyFeaturesAminites";
-import PropertyHeader from "@/components/property/property-single-style/common/PropertyHeader";
-import PropertyNearby from "@/components/property/property-single-style/common/PropertyNearby";
-import PropertyVideo from "@/components/property/property-single-style/common/PropertyVideo";
-import PropertyViews from "@/components/property/property-single-style/common/property-view";
-import ProperytyDescriptions from "@/components/property/property-single-style/common/ProperytyDescriptions";
-import ReviewBoxForm from "@/components/property/property-single-style/common/ReviewBoxForm";
-import VirtualTour360 from "@/components/property/property-single-style/common/VirtualTour360";
-import AllReviews from "@/components/property/property-single-style/common/reviews";
-import ContactWithAgent from "@/components/property/property-single-style/sidebar/ContactWithAgent";
-import ScheduleTour from "@/components/property/property-single-style/sidebar/ScheduleTour";
-import PropertyGallery from "@/components/property/property-single-style/single-v10/PropertyGallery";
-import React from "react";
-import MortgageCalculator from "@/components/property/property-single-style/common/MortgageCalculator";
-import WalkScore from "@/components/property/property-single-style/common/WalkScore";
+import NearbySimilarProperty from "@/components/property/property-single-style/common-sell-board/NearbySimilarProperty";
+import OverView from "@/components/property/property-single-style/common-sell-board/OverView";
+import PropertyAddress from "@/components/property/property-single-style/common-sell-board/PropertyAddress";
+import PropertyDetails from "@/components/property/property-single-style/common-sell-board/PropertyDetails";
+import PropertyFeaturesAminites from "@/components/property/property-single-style/common-sell-board/PropertyFeaturesAminites";
+import PropertyHeader from "@/components/property/property-single-style/common-sell-board/PropertyHeader";
+import ProperytyDescriptions from "@/components/property/property-single-style/common-sell-board/ProperytyDescriptions";
+import ContactWithAgent from "@/components/property/property-single-style/sidebar-sell-board/ContactWithAgent";
+import PropertyGallery from "@/components/property/property-single-style/single-v10-sell-board/PropertyGallery";
 
-export const metadata = {
-  title: "Property Single V10 || Homez - Real Estate NextJS Template",
-};
+import { API } from "@/app/api/common/API";
 
 const SingleV10 = ({ params }) => {
+  const router = useRouter();
+  const [propertyData, setPropertyData] = useState(null);
+  const [similarProperties, setSimilarProperties] = useState([]);
+
+  const handleDelete = async () => {
+    const confirmation = confirm("정말로 삭제하시겠습니까?");
+    if (confirmation) {
+      try {
+        const response = await fetch(`${API.USERSERVER}/sell-article/delete?id=${params.id}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          alert("삭제되었습니다.");
+          router.push("/sell-board"); // 삭제 후 리다이렉트할 경로 설정
+        } else {
+          alert("삭제 실패. 다시 시도해 주세요.");
+          console.log(response);
+        }
+      } catch (error) {
+        console.error("삭제 중 오류가 발생했습니다:", error);
+        alert("삭제 중 오류가 발생했습니다. 다시 시도해 주세요.");
+      }
+    }
+  };
+
+  // 현재 매물 데이터 fetch 함수
+  const fetchPropertyData = async () => {
+    try {
+      const response = await fetch(`${API.USERSERVER}/sell-article/detail?id=${params.id}`);
+      if (response.ok) {
+        const data = await response.json();
+        // 편의시설 데이터를 파싱하여 배열로 만듭니다.
+        if (data.convenient && data.convenient.length > 0) {
+          data.parsedConvenient = data.convenient[0].replace(/\[|\]/g, '').split(',').map(item => item.trim());
+        }
+        setPropertyData(data);
+      } else {
+        console.error("Failed to fetch property data");
+      }
+    } catch (error) {
+      console.error("Error fetching property data:", error);
+    }
+  };
+
+  // 유사 매물 데이터 fetch 함수
+  const fetchSimilarProperties = async () => {
+    try {
+      const response = await fetch(`${API.USERSERVER}/sell-article/list`);
+      if (response.ok) {
+        const data = await response.json();
+        setSimilarProperties(data);
+      } else {
+        console.error("Failed to fetch similar properties");
+      }
+    } catch (error) {
+      console.error("Error fetching similar properties:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPropertyData();
+    fetchSimilarProperties();
+  }, []);
+
+  if (!propertyData || !similarProperties.length) {
+    return <div>Loading...</div>;
+  }
+
+  const handleEdit = () => {
+    router.push(`/sell-board-update/${params.id}`); // 수정하기 페이지로 이동
+  };
+
   return (
     <>
       {/* Main Header Nav */}
@@ -57,7 +116,7 @@ const SingleV10 = ({ params }) => {
           <div className="row wrap">
             <div className="col-lg-8">
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Overview</h4>
+                <h4 className="title fz17 mb30">기본 정보</h4>
                 <div className="row">
                   <OverView />
                 </div>
@@ -65,11 +124,11 @@ const SingleV10 = ({ params }) => {
               {/* End .ps-widget */}
 
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Property Description</h4>
+                <h4 className="title fz17 mb30">소개</h4>
                 <ProperytyDescriptions />
                 {/* End property description */}
 
-                <h4 className="title fz17 mb30 mt50">Property Details</h4>
+                <h4 className="title fz17 mb30 mt50">상세 정보</h4>
                 <div className="row">
                   <PropertyDetails />
                 </div>
@@ -77,7 +136,7 @@ const SingleV10 = ({ params }) => {
               {/* End .ps-widget */}
 
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30 mt30">Address</h4>
+                <h4 className="title fz17 mb30 mt30">주소</h4>
                 <div className="row">
                   <PropertyAddress />
                 </div>
@@ -85,111 +144,9 @@ const SingleV10 = ({ params }) => {
               {/* End .ps-widget */}
 
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Features &amp; Amenities</h4>
+                <h4 className="title fz17 mb30">특징 &amp; 편의시설</h4>
                 <div className="row">
                   <PropertyFeaturesAminites />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Energy Class</h4>
-                <div className="row">
-                  <EnergyClass />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Floor Plans</h4>
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="accordion-style1 style2">
-                      <FloorPlans />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 ">
-                <h4 className="title fz17 mb30">Video</h4>
-                <div className="row">
-                  <PropertyVideo />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">360° Virtual Tour</h4>
-                <div className="row">
-                  <VirtualTour360 />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">What&apos;s Nearby?</h4>
-                <div className="row">
-                  <PropertyNearby />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Walkscore</h4>
-                <div className="row">
-                  <div className="col-md-12">
-                    <h4 className="fw400 mb20">
-                      10425 Tabor St Los Angeles CA 90034 USA
-                    </h4>
-                    <WalkScore />
-                  </div>
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Mortgage Calculator</h4>
-                <div className="row">
-                  <MortgageCalculator />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <div className="row">
-                  <PropertyViews />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Home Value</h4>
-                <div className="row">
-                  <HomeValueChart />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Get More Information</h4>
-                <InfoWithForm />
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <div className="row">
-                  {/* <AllComments /> */}
-                  <AllReviews />
-                </div>
-              </div>
-              {/* End .ps-widget */}
-
-              <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Leave A Review</h4>
-                <div className="row">
-                  <ReviewBoxForm />
                 </div>
               </div>
               {/* End .ps-widget */}
@@ -197,20 +154,15 @@ const SingleV10 = ({ params }) => {
             {/* End .col-8 */}
 
             <div className="col-lg-4">
-              <div className="column">
-                <div className="position-relative bdrs12 p30 mb30 bgc-f7">
-                  <h4 className="form-title mb5">Schedule a tour</h4>
-                  <p className="text">Choose your preferred day</p>
-                  <ScheduleTour />
+              <div className="agen-personal-info position-relative bgc-f7 bdrs12 p30 mb30">
+                <div className="widget-wrapper mb-0">
+                  <h6 className="title fz17 mb30">문의 하기</h6>
+                  <ContactWithAgent />
                 </div>
-                {/* End .Schedule a tour */}
-
-                <div className="agen-personal-info position-relative bgc-f7 bdrs12 p30 mb30">
-                  <div className="widget-wrapper mb-0">
-                    <h6 className="title fz17 mb30">Get More Information</h6>
-                    <ContactWithAgent />
-                  </div>
-                </div>
+              </div>
+              <div className="d-flex justify-content-between mr-2">
+                <button className="ud-btn btn-thm mx-4" onClick={handleEdit}>수정하기</button>
+                <button className="ud-btn btn-thm mx-4" onClick={handleDelete}>삭제하기</button>
               </div>
             </div>
           </div>
@@ -219,10 +171,8 @@ const SingleV10 = ({ params }) => {
           <div className="row mt30 align-items-center justify-content-between">
             <div className="col-auto">
               <div className="main-title">
-                <h2 className="title">Discover Our Featured Listings</h2>
-                <p className="paragraph">
-                  Aliquam lacinia diam quis lacus euismod
-                </p>
+                <h2 className="title">이런 매물도 추천 드려요!</h2>
+                <p className="paragraph">이 집을 본 사람들이 찾아본 매물</p>
               </div>
             </div>
             {/* End header */}
@@ -257,7 +207,7 @@ const SingleV10 = ({ params }) => {
           <div className="row">
             <div className="col-lg-12">
               <div className="property-city-slider">
-                <NearbySimilarProperty />
+                <NearbySimilarProperty similarProperties={similarProperties} />
               </div>
             </div>
           </div>

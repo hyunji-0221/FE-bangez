@@ -6,6 +6,7 @@ import PriceRange from "@/components/listing/sidebar/PriceRange";
 import Bedroom from "@/components/listing/sidebar/Bedroom";
 import Bathroom from "@/components/listing/sidebar/Bathroom";
 import ListingStatus from "./ListingStatus";
+import ListingRegion from "./ListingRegion";
 
 export const TopFilterBar = ({filterFunctions,setCurrentSortingOption,colstyle,setColstyle}: any) => {
   
@@ -28,6 +29,26 @@ export const TopFilterBar = ({filterFunctions,setCurrentSortingOption,colstyle,s
                   <h6 className="list-title">행정구역 목록</h6>
                   <div className="radio-element">
                     <ListingStatus filterFunctions={filterFunctions} />
+                  </div>
+                </div>
+
+              </div>
+            </li>
+
+            <li className="list-inline-item position-relative">
+              <button
+                type="button"
+                className="open-btn mb15 dropdown-toggle"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+              >
+                학교종류 <i className="fa fa-angle-down ms-2" />
+              </button>
+              <div className="dropdown-menu">
+                <div className="widget-wrapper bdrb1 pb25 mb0 pl20">
+                  <h6 className="list-title">학교 종류</h6>
+                  <div className="radio-element">
+                    <ListingRegion filterFunctions={filterFunctions} />
                   </div>
                 </div>
 

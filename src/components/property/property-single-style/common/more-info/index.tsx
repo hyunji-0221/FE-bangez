@@ -3,6 +3,10 @@ import Select, { StylesConfig } from "react-select";
 import SingleAgentInfo from "./SingleAgentInfo";
 import { Property } from "@/module/property/Property"; // Assuming this is the correct path
 
+import { useUserStore } from "@/stores/useUserStore";
+import { useRouter } from "next/navigation";
+import { API } from "@/app/api/common/API";
+
 interface InfoWithFormProps {
   property: Property;
 }
@@ -26,6 +30,32 @@ const InfoWithForm: React.FC<InfoWithFormProps> = ({ property }) => {
   //       : undefined,
   //   }),
   // };
+
+  const user = useUserStore((state) => state.user);
+  const receiverId = 60
+  const router = useRouter()
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log("Request Information button clicked", user?.id, receiverId);
+    try {
+      fetch(`${API.CHATSERVER}/open-room/${user?.id}/${receiverId}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          roomTitle:'매물 정보'
+        }),
+      }).then(res => {
+        if (res.ok) {
+          alert('채팅방 열기 성공')
+          router.push('/dashboard-message')
+        } else {
+          alert('채팅방 열기 실패')
+        }
+      })
+    } catch (error) {
+      console.log('채팅방 열기 에러', error)
+    }
+  }
 
   return (
     <>
@@ -122,7 +152,7 @@ const InfoWithForm: React.FC<InfoWithFormProps> = ({ property }) => {
             {/* End .col */}
 
             <div className="btn-area mt20">
-              <button className="ud-btn btn-white2">
+              <button onClick={handleClick} className="ud-btn btn-white2">
                 Request Information <i className="fal fa-arrow-right-long" />
               </button>
             </div>

@@ -21,7 +21,9 @@ export function SchoolFiltering() {
   const [pageItems, setPageItems] = useState<Listing[]>([]);
   const [pageContentTrac, setPageContentTrac] = useState<number[]>([]);
   
-  const [listingStatus, setListingStatus] = useState('All');
+  const [listingStatus, setListingStatus] = useState('모든 지역');
+  const [listingRegion, setListingRegion] = useState('모든 학교');
+
   const [propertyTypes, setPropertyTypes] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState([0, 100000]);
   const [bedrooms, setBedrooms] = useState(0);
@@ -31,28 +33,11 @@ export function SchoolFiltering() {
   const [yearBuild, setYearBuild] = useState([0, 2050]);
   const [categories, setCategories] = useState<string[]>([]);
 
-  const resetFilter = () => {
-    setListingStatus('All');
-    setPropertyTypes([]);
-    setPriceRange([0, 100000]);
-    setBedrooms(0);
-    setBathrooms(0);
-    setLocation('All Cities');
-    setSquareFeet([]);
-    setYearBuild([0, 2050]);
-    setCategories([]);
-    
-    document.querySelectorAll(".filterInput").forEach((element) => {
-      (element as HTMLInputElement).value = '';
-    });
-    
-    document.querySelectorAll(".filterSelect").forEach((element) => {
-      (element as HTMLSelectElement).value = 'All Cities';
-    });
-  }
   
   const filterFunctions = {
-    handlelistingStatus: (elm: string) => setListingStatus(prev => prev === elm ? 'All' : elm),
+    handlelistingStatus: (elm: string) => setListingStatus(prev => prev === elm ? '모든 지역' : elm),
+    handlelistingRegion: (elm: string) => setListingRegion(prev => prev === elm ? '모든 학교' : elm),
+
     handlepropertyTypes: (elm: string) => {
       if (elm === 'All') {
         setPropertyTypes([]);
@@ -60,29 +45,14 @@ export function SchoolFiltering() {
         setPropertyTypes(prev => prev.includes(elm) ? prev.filter(el => el !== elm) : [...prev, elm]);
       }
     },
-    handlepriceRange: (elm: number[]) => setPriceRange(elm),
-    handlebedrooms: (elm: number) => setBedrooms(elm),
-    handlebathrooms: (elm: number) => setBathrooms(elm),
-    handlelocation: (elm: string) => setLocation(elm),
-    handlesquareFeet: (elm: number[]) => setSquareFeet(elm),
-    handleyearBuild: (elm: number[]) => setYearBuild(elm),
-    handlecategories: (elm: string) => {
-      if (elm === 'All') {
-        setCategories([]);
-      } else {
-        setCategories(prev => prev.includes(elm) ? prev.filter(el => el !== elm) : [...prev, elm]);
-      }
-    },
     
+
     priceRange,
     listingStatus,
+    listingRegion,
+
     propertyTypes,
-    resetFilter,
-    bedrooms,
-    bathrooms,
-    location,
-    squareFeet,
-    yearBuild,
+
     categories,
     setPropertyTypes
   }
@@ -99,20 +69,28 @@ export function SchoolFiltering() {
         }));
   
         // 필터링 로직 추가
-        const filtered = listingStatus === 'All'
-          ? transformedData
-          : transformedData.filter((item: { address: string; }) => {
-              const parts = item.address.split(' ');
-              return parts[1] === listingStatus;
-            });
-  
-        setFilteredData(filtered);
+        const filtered = listingStatus === '모든 지역'
+        ? transformedData
+        : transformedData.filter((item: { address: string; }) => {
+            const parts = item.address.split(' ');
+            return parts[1] === listingStatus;
+          });
+      
+      const secFiltered = listingRegion === '모든 학교'
+        ? filtered
+        : filtered.filter((item: { schoolType: string; }) => {
+            return item.schoolType === listingRegion;
+          });
+      
+      setFilteredData(secFiltered);
+      
+      
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
     };
     fetchData();
-  }, [listingStatus, propertyTypes, priceRange, bedrooms, bathrooms, location, squareFeet, yearBuild, categories]);
+  }, [listingStatus, listingRegion, propertyTypes, priceRange, bedrooms, bathrooms, location, squareFeet, yearBuild, categories]);
   
 
   useEffect(() => {
@@ -135,13 +113,11 @@ export function SchoolFiltering() {
             <h5 className="offcanvas-title" id="listingSidebarFilterLabel">Listing Filter</h5>
             <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
-          <div className="offcanvas-body p-0">
-            <ListingSidebar filterFunctions={filterFunctions} />
-          </div>
+
         </div>
 
         {/* Advance Feature Modal */}
-        <h5>현재 선택된 지역구 : {listingStatus}</h5>
+        <h5>현재 {listingStatus}의 {listingRegion}를 보는 중 입니다.</h5>
 
 
         <div className="row">

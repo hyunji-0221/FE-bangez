@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 import { Property } from '@/module/property/Property';
 import { useParams, useSearchParams } from 'next/navigation';
 import FloorPlans from "@/components/property/property-single-style/common/FloorPlans";
+import ContactWithAgent from "@/components/property/property-single-style/sidebar/ContactWithAgent";
 
 const SingleV5: React.FC = () => {
   const { id } = useParams();
@@ -54,7 +55,7 @@ const SingleV5: React.FC = () => {
     <>
       <DefaultHeader />
       <MobileMenu />
-{/* 대문 */}
+      {/* 대문 */}
       <section className="p-0 bgc-white">
         <PropertyGallery property={property} />
       </section>
@@ -68,7 +69,7 @@ const SingleV5: React.FC = () => {
           <div className="row mt50 mt30-lg">
             <div className="col-lg-6">
               <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                <h4 className="title fz17 mb30">Overview                  
+                <h4 className="title fz17 mb30">Overview
                 </h4>
                 <div className="row">
                   <OverView property={property} />
@@ -107,7 +108,7 @@ const SingleV5: React.FC = () => {
                 <div className="row">
                   <div className="col-md-12">
                     <div className="accordion-style1 style2">
-                    <FloorPlans imageUrl={property.imageUrl} />
+                      <FloorPlans imageUrl={property.imageUrl} />
                     </div>
                   </div>
                 </div>
@@ -115,15 +116,12 @@ const SingleV5: React.FC = () => {
               {/* End .ps-widget */}
 
               <div className="column">
-                {/* <div className="default-box-shadow1 bdrs12 bdr1 p30 mb30-md bgc-white position-relative">
-                  <h4 className="form-title mb5">Schedule a tour</h4>
-                  <p className="text">Choose your preferred day</p>
-                  <ScheduleTour property={property} />
-                </div> */}
-
-                <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                  <h4 className="title fz17 mb30">문의하기</h4>
-                  <InfoWithForm property={property} />
+                
+                <div className="agen-personal-info position-relative bgc-white default-box-shadow1 bdrs12 p30 mt30">
+                  <div className="widget-wrapper mb-0">
+                    <h6 className="title fz17 mb30">판매자 정보</h6>
+                    <ContactWithAgent />
+                  </div>
                 </div>
               </div>
             </div>

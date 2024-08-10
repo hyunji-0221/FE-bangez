@@ -1,25 +1,16 @@
 
+
 'use client'
 
 import React from "react";
 import PropertyType from "../../sidebar/PropertyType";
 import PriceRange from "../../sidebar/PriceRange";
-import Bedroom from "../../sidebar/Bedroom";
-import Bathroom from "../../sidebar/Bathroom";
 import ListingStatus from "../../sidebar/ListingStatus";
 
 const TopFilterBar2 = ({filterFunctions}) => {
   return (
     <>
-      <li className="list-inline-item position-relative">
-        <input
-          type="text"
-          className="form-control search-field"
-           onChange={(e)=>filterFunctions && filterFunctions.setSearchQuery(e.target.value)}
-        
-          placeholder="지역, 지하철, 동 또는 단지명을 입력하세요"
-        />
-      </li>
+      
       <li className="list-inline-item position-relative">
         <button
           type="button"

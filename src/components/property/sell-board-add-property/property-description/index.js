@@ -108,6 +108,7 @@ const PropertyDescription = ({ data, onChange }) => {
               지역
             </label>
             <Select
+              placeholder="지역 선택"
               defaultValue={PropertyStatus.find(option => option.value === data.location)}
               onChange={(selected) => onChange({ location: selected.value })}
               options={PropertyStatus}

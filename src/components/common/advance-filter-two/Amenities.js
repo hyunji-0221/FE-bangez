@@ -3,22 +3,22 @@
 const Amenities = ({filterFunctions}) => {
   const amenities = [
     [
-      { label: "Attic" },
-    { label: "Basketball court", defaultChecked: true },
-    { label: "Air Conditioning", defaultChecked: true },
-    { label: "Lawn", defaultChecked: true },
+      { label: "탑층"},
+    { label: "고층"},
+    { label: "중층"},
+    { label: "저층"},
     ],
     [
-      { label: "TV Cable" },
-      { label: "Dryer" },
-      { label: "Outdoor Shower" },
-    { label: "Washer" },
+      { label: "복층" },
+      { label: "급매" },
+      { label: "확장형" },
+    { label: "역세권" },
     ],
     [
-      { label: "Lake view" },
-      { label: "Wine cellar" },
-      { label: "Front yard" },
-      { label: "Refrigerator" },
+      { label: "올수리" },
+      { label: "마당" },
+      { label: "테라스" },
+      { label: "주차가능" },
     ],
   ];
 

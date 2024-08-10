@@ -9,7 +9,7 @@ const TopFilterBar = ({setCurrentSortingOption,colstyle,setColstyle,pageContentT
       <div className="col-sm-6">
         <div className="text-center text-sm-start">
           <p className="pagination_page_count mb-0">
-            Showing {pageContentTrac[0]}–{pageContentTrac[2] < pageContentTrac[1] ? pageContentTrac[2] : pageContentTrac[1]} of {pageContentTrac[2]} results
+          {pageContentTrac[2]}개 중 {pageContentTrac[0]}–{pageContentTrac[2] < pageContentTrac[1] ? pageContentTrac[2] : pageContentTrac[1]} 결과
           </p>
         </div>
       </div>
@@ -18,13 +18,13 @@ const TopFilterBar = ({setCurrentSortingOption,colstyle,setColstyle,pageContentT
       <div className="col-sm-6">
         <div className="page_control_shorting d-flex align-items-center justify-content-center justify-content-sm-end">
           <div className="pcs_dropdown pr10 d-flex align-items-center">
-            <span style={{ minWidth: "60px" }}>Sort by</span>
+            <span style={{ minWidth: "60px" }}>정렬</span>
             <select className="form-select"  onChange={(e)=>setCurrentSortingOption && setCurrentSortingOption(e.target.value)}>
-              <option>Newest</option>
-              <option>Best Seller</option>
-              <option>Best Match</option>
-              <option>Price Low</option>
-              <option>Price High</option>
+              <option>최신순</option>
+              <option>인기순</option>
+              <option>추천순</option>
+              <option>낮은 가격 순</option>
+              <option>높은 가격 순</option>
             </select>
           </div>
           

@@ -5,7 +5,7 @@ import Footer from "@/components/property/dashboard/Footer";
 import AddPropertyTabContent from "@/components/property/sell-board-add-property/index";
 
 export const metadata = {
-  title: "BangEZ",
+  title: "Dashboard Add Property || Homez - Real Estate NextJS Template",
 };
 
 const DashboardAddProperty = () => {

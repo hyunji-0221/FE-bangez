@@ -122,3 +122,20 @@ export async function getPark() {
         console.error("fetchCount 실패 :", error);
     }
 }
+
+export async function getCityParks() {
+    const url = `${API.ANALYSERVER}/api/city_park/statistics`
+    console.log('url', url)
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+        });
+        if (!response.ok){
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error){
+        console.error("fetchCount 실패 :", error);
+    }
+}

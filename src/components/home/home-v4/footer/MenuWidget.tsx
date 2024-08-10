@@ -1,4 +1,3 @@
-'use client'
 import React from "react";
 import Cookies from 'js-cookie';
 import { API } from "@/app/api/common/API";
@@ -23,32 +22,6 @@ const MenuWidget = () => {
       ],
     },
   ];
-
-  const handleLogout = async (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-
-    try {
-      const refresh = Cookies.get('refreshToken');
-      const response = await fetch(`${API.GATE}/auth/logout`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${refresh?.trim()}`,
-        },
-        credentials: 'include',
-      });
-
-      if (response.ok) {
-        Cookies.remove('accessToken');
-        Cookies.remove('refreshToken');
-        window.location.reload();
-      } else {
-        console.error('Failed to logout');
-      }
-    } catch (error) {
-      console.error('An error occurred during logout', error);
-    }
-  }
 
   return (
     <>
@@ -97,15 +70,7 @@ const MenuWidget = () => {
               <li>
                 <a href="dashboard-chargePoint">포인트 충전</a>
               </li>
-              {accessToken ?
-                <li>
-                  <a type="button" onClick={handleLogout}>로그아웃</a>
-                </li>
-                :
-                <li>
-                  <a href="/login">로그인</a>
-                </li>
-              }
+              
             </ul>
           </div>
         </div>

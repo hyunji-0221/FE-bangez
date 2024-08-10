@@ -26,7 +26,7 @@ const DashboardMyProperties = () => {
 
       {/* dashboard_content_wrapper */}
       <div className="dashboard_content_wrapper">
-        <div className="dashboard dashboard_wrapper pt30 pr30 pl30 pb30">
+        <div className="my-dashboard dashboard_wrapper pt30 pr30 pl30 pb30">
             <div className="dashboard__content bgc-f7">
               <div className="row pb40">
                 <div className="col-lg-12">
@@ -72,7 +72,7 @@ const DashboardMyProperties = () => {
         </div>
       </div>
       {/* dashboard_content_wrapper */}
-      <section className="footer-style1 at-home4 pt60 pb-0">
+      <section className="footer-style1 at-others pt60 pb-0">
         <Footer />
       </section>
     </>

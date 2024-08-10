@@ -34,7 +34,7 @@ const Map: React.FC<MapProps> = ({ properties }) => {
       if (mapRef.current && !isMapInitialized.current) {
         const options = {
           center: new window.kakao.maps.LatLng(37.4966645, 127.0629804),
-          level: 7,
+          level: 9,
         };
         mapInstance.current = new window.kakao.maps.Map(mapRef.current, options);
         clustererInstance.current = new window.kakao.maps.MarkerClusterer({
@@ -78,8 +78,6 @@ const Map: React.FC<MapProps> = ({ properties }) => {
     if (mapInstance.current && clustererInstance.current) {
       const map = mapInstance.current;
       const clusterer = clustererInstance.current;
-
-      
 
       const markers = properties.map((property) => {
         const markerPosition = new window.kakao.maps.LatLng(parseFloat(property.lat), parseFloat(property.lng));

@@ -225,6 +225,9 @@ li {
 .footer-style1.at-home4 {
     background-color: #ffffff;
 }
+.footer-style1.at-others {
+    background-color: #f7f7f7;
+}
 .footer-style1.at-home6 {
     background-color: transparent;
     background-image: url(../images/home/footer-bg-6.jpg);
@@ -625,6 +628,12 @@ li {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+}
+.my-dashboard {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: #f7f7f7;
 }
 .dashboard.dsh_board_sidebar_hidden .dashboard__sidebar {
     -webkit-transform: translateX(-100%);

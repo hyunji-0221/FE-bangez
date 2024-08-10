@@ -3,7 +3,7 @@
 import React from "react";
 
 const ListingStatus = ({ filterFunctions }: any) => {
-  const options = [
+  const wardOptions = [
     { id: "flexRadioDefault0", label: "전부", defaultChecked: true },
     { id: "flexRadioDefault1", label: "종로구" },
     { id: "flexRadioDefault2", label: "중구" },
@@ -34,7 +34,7 @@ const ListingStatus = ({ filterFunctions }: any) => {
 
   return (
     <>
-      {options.map((option) => (
+      {wardOptions.map((option) => (
         <div
           className="form-check d-flex align-items-center mb10"
           key={option.id}
@@ -51,8 +51,10 @@ const ListingStatus = ({ filterFunctions }: any) => {
           </label>
         </div>
       ))}
+
     </>
   );
 };
 
 export default ListingStatus;
+
