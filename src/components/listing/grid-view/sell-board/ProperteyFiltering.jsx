@@ -1,4 +1,5 @@
 'use client' // 이 파일이 클라이언트 측에서 실행되어야 함을 명시
+import { API } from "@/app/api/common/API";
 
 import React, { useState, useEffect } from "react"; // React 라이브러리에서 필요한 훅을 불러옴
 import ListingSidebar from "../../sell-board-sidebar"; // 사이드바 컴포넌트를 불러옴
@@ -17,11 +18,12 @@ export default function PropertyFiltering() {
   const [pageItems, setPageItems] = useState([]); // 현재 페이지에 표시될 매물 아이템들을 저장할 상태
   const [pageContentTrac, setPageContentTrac] = useState([]); // 페이지 내 아이템 트래킹을 위한 상태
 
+
   // 컴포넌트가 처음 렌더링될 때 매물 데이터를 fetch로 가져옴
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8082/sell-article/list'); // API 호출
+        const response = await fetch(`${API.USERSERVER}/sell-article/list`); // API 호출
         const data = await response.json(); // JSON 형태로 응답을 파싱
         setListings(data); // 가져온 데이터를 상태에 저장
         console.log(data); // 디버깅을 위한 콘솔 로그

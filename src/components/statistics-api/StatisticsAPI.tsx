@@ -124,7 +124,7 @@ export async function getPark() {
 }
 
 export async function getCityParks() {
-    const url = `${API.ANALYSERVER}/api/city_park/statistics`
+    const url = `${API.ANALYSERVER}/api/city-park/statistics`
     console.log('url', url)
     try {
         const response = await fetch(url, {

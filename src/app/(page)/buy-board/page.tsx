@@ -55,7 +55,7 @@ const DashboardMyProperties = () => {
                       <PropertyDataTable />
 
                       <div className="mt30">
-                        <Pagination />
+                        {/* <Pagination /> */}
                       </div>
                     </div>
                   </div>

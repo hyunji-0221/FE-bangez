@@ -10588,3 +10588,45 @@ input:focus-visible {
     color: white;
     background-color: #f1416c;
 }
+.overlay-wrap {
+    position: relative;
+    bottom: 80px;
+    width: 250px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  .overlay-info {
+    padding: 10px;
+  }
+  .overlay-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .overlay-close {
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .overlay-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .overlay-desc {
+    margin-left: 10px;
+  }
+  .overlay-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .overlay-price {
+    font-weight: bold;
+    color: #E74C3C;
+  }

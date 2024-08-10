@@ -3,7 +3,6 @@ import Footer from "@/components/common/default-footer";
 import MobileMenu from "@/components/common/mobile-menu";
 import ProperteyFiltering from "@/components/listing/grid-view/sell-board/ProperteyFiltering";
 import React from "react";
-
 export const metadata = {
     title: "Grid Full 3 Column || Homez - Real Estate NextJS Template",
 };

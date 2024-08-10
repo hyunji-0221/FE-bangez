@@ -103,7 +103,7 @@ const GridFull3Col = () => {
               key={index} 
               onClick={() => handleButtonClick(district)} // 버튼 클릭 시 선택된 구와 좌표 설정
               style={{ 
-                marginBottom: '23px', 
+                marginBottom: '10px', 
                 padding: '10px', 
                 backgroundColor: 'grey', 
                 color: 'white', 
@@ -142,7 +142,7 @@ const GridFull3Col = () => {
               key={index} 
               onClick={() => handleButtonClick(district)} // 버튼 클릭 시 선택된 구와 좌표 설정
               style={{ 
-                marginBottom: '23px', 
+                marginBottom: '10px', 
                 padding: '10px', 
                 backgroundColor: 'grey', 
                 color: 'white', 

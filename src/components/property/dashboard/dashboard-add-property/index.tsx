@@ -83,6 +83,8 @@ const AddPropertyForm: React.FC = () => {
         if (pointResult === "SUCCESS") {
           console.log("매물이 성공적으로 등록되었습니다.")
           alert("매물이 성공적으로 등록되었습니다.");
+          router.push(`/single-v5/${response.data.id}?rletTpNm=${response.data.rletTpNm}`);
+
         } else if (pointResult === "FAILURE") {
           alert("포인트가 부족합니다.");
           router.push("/dashboard-chargePint");

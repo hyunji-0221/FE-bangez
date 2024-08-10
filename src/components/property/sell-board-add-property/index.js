@@ -50,7 +50,7 @@ const AddPropertyTabContent = () => {
     try {
       console.log("보내는 데이터",propertyData.postTitle)
 
-      const response = await fetch('http://localhost:8082/sell-article/save', { // 백엔드 API 엔드포인트에 맞게 수정
+      const response = await fetch(`${API.USERSERVER}/sell-article/save`, { // 백엔드 API 엔드포인트에 맞게 수정
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
