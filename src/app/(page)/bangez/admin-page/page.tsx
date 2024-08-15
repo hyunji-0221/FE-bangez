@@ -9,7 +9,7 @@
 // import TopStateBlock from "@/components/statistics/TopStateBlock";
 // import { useEffect, useState } from "react";
 
-// const DashboardHome = () => {
+const AdminPage = () => {
 
 //   const [count, setCount] = useState()
 
@@ -37,58 +37,59 @@
 // return () => clearInterval(intervalId);
 // }, [])
 
-//   return (
-//     <>
-//       {/* Main Header Nav */}
-//       <DashboardHeader />
-//       {/* End Main Header Nav */}
+  return (
+    <>
+      {/* Main Header Nav */}
+      {/* <DashboardHeader /> */}
+      {/* End Main Header Nav */}
 
-//       {/* Mobile Nav  */}
-//       <MobileMenu />
-//       {/* End Mobile Nav  */}
+      {/* Mobile Nav  */}
+      {/* <MobileMenu /> */}
+      {/* End Mobile Nav  */}
 
-//       {/* dashboard_content_wrapper */}
-//       <div className="dashboard_content_wrapper">
-//         <div className="dashboard dashboard_wrapper pr30 pr0-xl" style={{ display: 'flex' }}>
-//           <SidebarDashboard />
-//           {/* End .dashboard__sidebar */}
+      {/* dashboard_content_wrapper */}
+      {/* <div className="dashboard_content_wrapper">
+        <div className="dashboard dashboard_wrapper pr30 pr0-xl" style={{ display: 'flex' }}> */}
+          {/* <SidebarDashboard /> */}
+          {/* End .dashboard__sidebar */}
 
-//           <div className="dashboard__main pl0-md">
-//             <div className="dashboard__content bgc-f7">
-//               <div className="row pb1">
-//                 <div className="col-lg-12">
-//                   <DboardMobileNavigation />
+          {/* <div className="dashboard__main pl0-md">
+            <div className="dashboard__content bgc-f7">
+              <div className="row pb1">
+                <div className="col-lg-12">
+                  <DboardMobileNavigation /> */}
 
-//                 </div>
-//                 {/* End .col-12 */}
+                {/* </div> */}
+                {/* End .col-12 */}
 
-//                 <div className="col-lg-12">
-//                   <div className="dashboard_title_area">
-//                     <h2> 관리자 페이지 </h2>
-//                     <p className="text">최종 업데이트 날짜 : {formattedDate}</p>
-//                   </div>
-//                 </div>
-//                 {/* col-lg-12 */}
-//               </div>
-//               {/* End .row */}
+                {/* <div className="col-lg-12">
+                  <div className="dashboard_title_area">
+                    <h2> 관리자 페이지 </h2>
+                    <p className="text">최종 업데이트 날짜 : {formattedDate}</p>
+                  </div>
+                </div> */}
+                {/* col-lg-12 */}
+              {/* </div> */}
+              {/* End .row */}
 
-//               <div className="row">
-//                 <TopStateBlock />
-//               </div>
-//               {/* End .row */}
+              {/* <div className="row"> */}
+                {/* <TopStateBlock /> */}
+              {/* </div> */}
+              {/* End .row */}
 
      
 
-//             </div>
-//             {/* End .dashboard__content */}
-//             <Footer />
-//           </div>
-//           {/* End .dashboard__main */}
-//         </div>
-//       </div>
-//       {/* dashboard_content_wrapper */}
-//     </>
-//   );
-// };
+            {/* </div> */}
+            {/* End .dashboard__content */}
+            {/* <Footer /> */}
+          {/* </div> */}
+          {/* End .dashboard__main */}
+        {/* </div>
+      </div> */}
+      {/* dashboard_content_wrapper */}
+      
+    </>
+  );
+};
 
-// export default DashboardHome;
+export default AdminPage;
