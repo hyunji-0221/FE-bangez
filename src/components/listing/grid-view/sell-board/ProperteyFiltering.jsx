@@ -25,7 +25,7 @@ export default function PropertyFiltering() {
       try {
         const response = await fetch(`${API.USERSERVER}/sell-article/list`); // API 호출
         const data = await response.json(); // JSON 형태로 응답을 파싱
-        setListings(data); // 가져온 데이터를 상태에 저장
+        setListings(data.slice().reverse()); // 가져온 데이터를 상태에 저장
         console.log(data); // 디버깅을 위한 콘솔 로그
         console.log("페이지 아이템", pageItems); // 디버깅을 위한 콘솔 로그
       } catch (error) {

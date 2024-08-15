@@ -1,11 +1,6 @@
 import DashboardHeader from "@/components/common/DashboardHeader";
 import MobileMenu from "@/components/common/mobile-menu";
-import Pagination from "@/components/property/Pagination";
-import DboardMobileNavigation from "@/components/property/dashboard/DboardMobileNavigation";
 import Footer from "@/components/property/dashboard/Footer";
-import SidebarDashboard from "@/components/property/dashboard/SidebarDashboard";
-import ListingsFavourites from "@/components/property/dashboard/dashboard-my-favourites/ListingsFavourites";
-
 import Pricing from "@/components/pages/pricing/Pricing";
 
 export const metadata = {
@@ -16,7 +11,7 @@ const DashboardChargePoint = () => {
   return (
     <>
       {/* Main Header Nav */}
-      <DashboardHeader />
+      <DashboardHeader/>
       {/* End Main Header Nav */}
 
       {/* Mobile Nav  */}

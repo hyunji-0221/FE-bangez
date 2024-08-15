@@ -9,10 +9,10 @@ const PropertyHeader = ({ id }) => {
     <>
       <div className="col-lg-8">
         <div className="single-property-content mb30-md">
-          <h2 className="sp-lg-title">매매 테스트</h2>
+          <h2 className="sp-lg-title">한강뷰 아파트 판매합니다.</h2>
           <div className="pd-meta mb15 d-md-flex align-items-center">
             <p className="text fz15 mb-0 bdrr1 pr10 bdrrn-sm">
-              서울특별시 강남구 신사동
+              서울특별시 강남구
             </p>
             <a
               className="ff-heading text-thm fz15 bdrr1 pr10 ml0-sm ml10 bdrrn-sm"
@@ -26,9 +26,8 @@ const PropertyHeader = ({ id }) => {
               href="#"
             >
               <i className="far fa-clock pe-2" />
-              {Number(new Date().getFullYear()) -
-                Number(data.yearBuilding)}{" "}
-              일 전
+              
+              0시간 전
             </a>
             <a className="ff-heading ml10 ml0-sm fz15" href="#">
               <i className="flaticon-fullscreen pe-2 align-text-top" />

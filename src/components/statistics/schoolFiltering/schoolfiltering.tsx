@@ -6,6 +6,7 @@ import ListingSidebar from "@/components/listing/sidebar-apt";
 import FeaturedListings from "./FeatuerdListings";
 import { getSchool } from "@/components/statistics-api/StatisticsAPI";
 import TopFilterBar from './TopFilterBar';
+import Pagination from '../pagination';
 
 interface Listing {
     address: string;
@@ -129,7 +130,7 @@ export function SchoolFiltering() {
         </div>
 
         <div className="row">
-          <PaginationTwo pageCapacity={9} data={filteredData} pageNumber={pageNumber} setPageNumber={setPageNumber} />
+          <Pagination pageCapacity={9} data={filteredData} pageNumber={pageNumber} setPageNumber={setPageNumber} />
         </div>
       </div>
     </section>

@@ -6,13 +6,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { EventSourcePolyfill } from "event-source-polyfill";
 import { getAuthHeader } from "@/module/login/Header";
 
-import Cookies from 'js-cookie';
-import { jwtDecode } from "jwt-decode";
 
 const UserChatBoxContent = ({ UserChatBoxContentModels }: { UserChatBoxContentModels: UserChatBoxContentModel }) => {
   const roomId = UserChatBoxContentModels.roomId
   const userId = UserChatBoxContentModels.senderId
-  const receiverId = UserChatBoxContentModels.receiverId
+  const title = UserChatBoxContentModels.title
 
   const [prevMessages, setPrevMessages] = useState<ChatModel[]>([])
 
@@ -25,26 +23,17 @@ const UserChatBoxContent = ({ UserChatBoxContentModels }: { UserChatBoxContentMo
 
 
   useEffect(() => {
-    console.log('roomId', roomId)
     setPrevMessages([])
-    if (roomId === '') return
-    fetch(`${API.CHATSERVER}/read/${roomId}/${userId}`, {
-      method: 'GET'
-    }).then(res => {
-      console.log('채팅 내용 : ', res)
-    }).catch(error => {
-      console.log('채팅 내용 에러 발생', error)
-    })
-
+    
     const eventSource = new EventSourcePolyfill(`${API.CHATSERVER}/sse/${roomId}`, {
       headers: getAuthHeader(), 
-      withCredentials: true
+      withCredentials: true,
+      heartbeatTimeout: 86400000,
     });
     eventSource.onopen = (event) => {
-      console.log('Connection opened:', event);
+      console.log("Server Connected:", event);
     };
     eventSource.onmessage = (event) => {
-      console.log('Message received:', event.data);
       setPrevMessages(prevMessage => [...prevMessage, JSON.parse(event.data)]);
     };
     eventSource.addEventListener('error', (e: any) => {
@@ -61,18 +50,27 @@ const UserChatBoxContent = ({ UserChatBoxContentModels }: { UserChatBoxContentMo
 
   useEffect(() => {
     scrollToBottom();
+    if (roomId === '') return
+    fetch(`${API.CHATSERVER}/read/${roomId}/${userId}`, {
+      method: 'GET'
+    }).then(res => {
+      console.log('채팅 내용 : ', res)
+    }).catch(error => {
+      console.log('채팅 내용 에러 발생', error)
+    })
+
   }, [prevMessages])
 
   return (
     <ul ref={messageEndRef} className="chatting_content" >
       {prevMessages.map((message, index) => (
-        <ChatMessage key={index} message={message} userId={userId} />
+        <ChatMessage key={index} message={message} userId={userId} title={title}/>
       ))}
     </ul>
   );
 };
 
-const ChatMessage: React.FC<{ message: ChatModel, userId: string }> = ({ message, userId }) => {
+const ChatMessage: React.FC<{ message: ChatModel, userId: string, title:string }> = ({ message, userId, title }) => {
   return (
     <li className={message.senderId === userId ? 'reply float-end' : 'sent float-start'}>
       <div
@@ -96,8 +94,9 @@ const ChatMessage: React.FC<{ message: ChatModel, userId: string }> = ({ message
               <small>{new Date(message.timeStamp)?.toLocaleTimeString('ko-KR', { hour12: true }).slice(0, 8)}</small>
             )
             : (<>
-              {/*{message.name}*/}
-              {message.senderId} <small className="ml10">{new Date(message.timeStamp)?.toLocaleTimeString('ko-KR', { hour12: true }).slice(0, 8)}</small>
+              {title}
+              {/* {message.senderId}  */}
+              <small className="ml10">{new Date(message.timeStamp)?.toLocaleTimeString('ko-KR', { hour12: true }).slice(0, 8)}</small>
             </>)}
         </div>
 

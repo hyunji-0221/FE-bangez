@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
 import {jwtDecode} from "jwt-decode";
 import { CustomJwtPayload } from "@/types/ChatData";
+import { EventSourcePolyfill } from "event-source-polyfill";
+import { useRouter } from "next/navigation";
 
 
 const DashboardMessage = () => {
@@ -24,7 +26,6 @@ const DashboardMessage = () => {
   const [userId , setUserId] = useState('')
   const [title, setTitle] = useState('')
 
-
   useEffect(() => {
     const access = Cookies.get('accessToken')
     if(access){
@@ -33,7 +34,67 @@ const DashboardMessage = () => {
       setUserId(id)
     }
   },[])
+
+  // const [notification, setNotification] = useState(0);
   
+  // useEffect(() => { //새로고침을 해야만 notification이 작동함
+  //   setNotification(0)
+  //   const accessToken = Cookies.get('accessToken')
+
+  //   if (accessToken !== undefined) {
+  //     const decodeToken: CustomJwtPayload = jwtDecode(accessToken as string)
+  //     setUserId(decodeToken.id)
+  //   }
+  //   // const eventSource = new EventSource(`${API.CHATSERVER}/notifications/${userId}`);
+  //   if (userId === '') return;
+  //   const eventSource = new EventSourcePolyfill(`${API.CHATSERVER}/notifications/${userId}`, {
+  //     headers: {
+  //       'Authorization': `Bearer ${accessToken}`,
+  //     },
+  //     withCredentials: true
+  //   });
+  //   eventSource.onopen = (event) => {
+  //     console.log('Connection opened:', event);
+  //   };
+
+  //   eventSource.addEventListener('notification', (event: any) => {
+  //     console.log('Notification event:', event.data);
+  //     setNotification(prev => prev + 1);
+  //   });
+
+  //   // eventSource.addEventListener('messageRead', (event:any) => {
+  //   //   console.log('Message read event:', event.data);
+  //   //   setNotification(prev => prev + 1);
+  //   // });
+
+  //   eventSource.addEventListener('error', (e: any) => {
+  //     console.log("An error occurred while attempting to connect.");
+  //     console.error("Error event details:", e);
+  //     console.error("EventSource readyState:", e.target.readyState);
+  //     console.error("EventSource URL:", e.target.url);
+  //     eventSource.close();
+  //   });
+
+  //   return () => {
+  //     eventSource.close(); // Clean up on unmount
+  //   };
+  // }, [userId, ]);
+
+  const router = useRouter();
+  const handleDeleteConversation = () => {
+    if(confirm('채팅방을 삭제하시겠습니까?')){
+      fetch(`${API.CHATSERVER}/delete-room/${roomId}`,{
+        method:'DELETE'
+      }).then(res => {
+        console.log('삭제 성공', res)
+        router.push('/dashboard/message')
+      }).catch(error => {
+        console.log('삭제 실패', error)
+      })
+    }else{
+      return
+    }
+  }
 
   return (
     <>
@@ -108,12 +169,12 @@ const DashboardMessage = () => {
                             {/* <p className="preview">Active</p> */}
                           </div>
                           <div>
-                            {/* <a
+                            {roomId && <a
                               className="text-decoration-underline fz14 fw600 dark-color ff-heading"
-                              href="#"
+                              onClick={handleDeleteConversation}
                             >
-                              Delete Conversation
-                            </a> */}
+                              대화 삭제하기
+                            </a>}
                           </div>
                         </div>
                       </div>
@@ -121,7 +182,7 @@ const DashboardMessage = () => {
                     {/* End .user_heading */}
 
                     <div className="inbox_chatting_box">
-                      <UserChatBoxContent UserChatBoxContentModels={{ roomId: `${roomId}`, senderId: `${userId}`, receiverId: "2", title:`${title}` }} />
+                      <UserChatBoxContent UserChatBoxContentModels={{ roomId: `${roomId}`, senderId: `${userId}`, receiverId: "", title:`${title}` }} />
                     </div>
                     {/* End inbox-chatting */}
 

@@ -42,11 +42,11 @@ const InfoWithForm: React.FC<InfoWithFormProps> = ({ property }) => {
       fetch(`${API.CHATSERVER}/open-room/${user?.id}/${receiverId}`, {
         method: 'POST',
         body: JSON.stringify({
-          roomTitle:'매물 정보'
+          roomTitle:'송파레이크파크호반써밋1차'
         }),
       }).then(res => {
         if (res.ok) {
-          alert('채팅방 열기 성공')
+          // alert('채팅방 열기 성공')
           router.push('/dashboard-message')
         } else {
           alert('채팅방 열기 실패')

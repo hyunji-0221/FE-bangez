@@ -5,6 +5,7 @@ import PropertyDescription from "./property-description";
 import DetailsFiled from "./details-field";
 import { useRouter } from 'next/navigation';
 
+import { API } from "@/app/api/common/API";
 
 const AddPropertyTabContent = () => {
   const [propertyData, setPropertyData] = useState({

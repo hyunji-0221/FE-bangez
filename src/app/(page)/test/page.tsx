@@ -9,7 +9,7 @@ import { API } from "@/app/api/common/API";
 const Test: React.FC = () => {
 
     const user = useUserStore((state) => state.user);
-    const receiverId = 61
+    const receiverId = 62
     const router = useRouter()
 
     console.log('user:', user?.id);
@@ -19,14 +19,19 @@ const Test: React.FC = () => {
         e.preventDefault();
         console.log("Request Information button clicked", user?.id, receiverId);
         try {
-          fetch(`${API.CHATSERVER}/open-room/${user?.id}/${receiverId}`, {
+          // fetch(`${API.CHATSERVER}/open-room/${user?.id}/${receiverId}`, {
+          fetch(`${API.CHATSERVER}/open-room`, {
             method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
-              roomTitle:'매물 정보'
+              senderId: user?.id,
+              receiverId: receiverId,
+              roomTitle:''
             }),
           }).then(res => {
             if (res.ok) {
-              alert('채팅방 열기 성공')
               router.push('/dashboard-message')
             } else {
               alert('채팅방 열기 실패')

@@ -73,9 +73,9 @@ const PropertyHeader = ({ id }) => {
             <h3 className="price mb-0">{data.price}</h3>
             <p className="text space fz15">
               $
-              {(
+              {/* {(
                 Number(data.price.split("$")[1].split(",").join("")) / data.sqft
-              ).toFixed(2)}
+              ).toFixed(2)} */}
               /sq ft
             </p>
           </div>

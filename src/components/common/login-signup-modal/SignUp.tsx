@@ -88,6 +88,16 @@ const SignUp = () => {
         />
       </div>
       {/* End PassCheck */}
+      <div className="mb20">
+        <label className="form-label fw600 dark-color">회원 이름</label>
+        <input
+          {...register("email", {required: true})}
+          type="email"
+          className="form-control"
+          placeholder="이름"
+        />
+      </div>
+      {/* End EnterName */}
 
       <div className="d-grid mb20">
         <button className="ud-btn btn-thm" type="submit">

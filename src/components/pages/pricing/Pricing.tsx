@@ -101,15 +101,14 @@ const Pricing = ({ filterFunctions }: any) => {
       async (rsp: any) => {
         console.log('결제 후 rsp', rsp);
         if (rsp.success) {
-          alert('결제 성공');
           await fetch(`${API.TXSERVER}/add/${rsp.imp_uid}/${decodedToken.id}`, {
             method: "POST",
           }).then(res => res.json())
             .then(res => {
               console.log(res.response.amount);
               if (rsp.paid_amount === res.response.amount) {
-                alert('결제 성공');
-                setPoint(prev => prev + (res.response.amount / 1000) * 10); // 포인트 업데이트
+                alert('결제가 성공적으로 완료되었습니다.');
+                setPoint(prev => prev + (res.response.amount / 1000) * 10); 
               } else {
                 alert('결제 실패: 금액 불일치');
               }

@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined';
 import { API } from "@/app/api/common/API";
+import {Notification } from "@/types/ChatData";
 
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
@@ -16,81 +17,14 @@ import { EventSourcePolyfill } from "event-source-polyfill";
 import { CustomJwtPayload } from "@/types/ChatData";
 import { set } from "react-hook-form";
 
-const DashboardHeader = (
-  // { SenderUserId }: { SenderUserId: UserChatUserId }
-) => {
-  const pathname = usePathname();
+const DashboardHeader = () => {
+  // console.log('notification', notification)
 
-  const menuItems = [
-    {
-      title: "MAIN",
-      items: [
-        {
-          icon: "flaticon-discovery",
-          text: "Dashboard",
-          href: "/dashboard-home",
-        },
-        {
-          icon: "flaticon-chat-1",
-          text: "Message",
-          href: "/dashboard-message",
-        },
-      ],
-    },
-    {
-      title: "MANAGE LISTINGS",
-      items: [
-        {
-          icon: "flaticon-new-tab",
-          text: "Add New Property",
-          href: "/dashboard-add-property",
-        },
-        {
-          icon: "flaticon-home",
-          text: "My Properties",
-          href: "/dashboard-my-properties",
-        },
-        {
-          icon: "flaticon-like",
-          text: "My Favorites",
-          href: "/dashboard-my-favourites",
-        },
-        {
-          icon: "flaticon-search-2",
-          text: "Saved Search",
-          href: "/dashboard-saved-search",
-        },
-        {
-          icon: "flaticon-review",
-          text: "Reviews",
-          href: "/dashboard-review"
-        },
-      ],
-    },
-    {
-      title: "MANAGE ACCOUNT",
-      items: [
-        {
-          icon: "flaticon-protection",
-          text: "My Package",
-          href: "/dashboard-my-package",
-        },
-        {
-          icon: "flaticon-user",
-          text: "My Profile",
-          href: "/dashboard-my-profile",
-        },
-        { icon: "flaticon-exit", text: "Logout", href: "/login" },
-      ],
-    },
-  ];
-
-  // const [accessToken, setAccessToken] = useState<string>()
   const [notification, setNotification] = useState(0);
-  const [userId, setUserId] = useState('')
+  const [userId, setUserId] = useState('');
 
   useEffect(() => { //새로고침을 해야만 notification이 작동함
-    setNotification(0)
+  //   setNotification(0)
     const accessToken = Cookies.get('accessToken')
 
     if (accessToken !== undefined) {
@@ -130,9 +64,8 @@ const DashboardHeader = (
     return () => {
       eventSource.close(); // Clean up on unmount
     };
-
-
   }, [userId]);
+
 
   return (
     <>
@@ -170,13 +103,13 @@ const DashboardHeader = (
                   <ul className="mb0 d-flex justify-content-center justify-content-sm-end p-0">
                     {/* <li className="d-none d-sm-block">
                       <Link className="text-center mr15" href="/login"> */}
-                        {/* <span className="flaticon-email" /> */}
-                      {/* </Link>
+                    {/* <span className="flaticon-email" /> */}
+                    {/* </Link>
                     </li> */}
                     {/* End email box */}
 
                     <li className="d-none d-sm-block">
-                      <a className="text-center mr20 notif" href="#">
+                      <a className="text-center mr20 notif" href="/dashboard-message">
                         {/* <span className="flaticon-bell" /> */}
                         {
                           !notification ?
@@ -230,7 +163,7 @@ const DashboardHeader = (
                         href="/login"
                         role="button"
                       >
-                        <span className="fw-bold" style={{fontSize:14}}>로그인</span>
+                        <span className="fw-bold" style={{ fontSize: 14 }}>로그인</span>
                       </a>
                       :
                       <a

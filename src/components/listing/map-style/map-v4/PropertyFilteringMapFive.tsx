@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation'; // next/navigation에서 useSearchParams 사용
@@ -11,30 +10,24 @@ import PaginationTwo from '../../PaginationTwo';
 import Map from '../MapTest';
 import { Property } from '@/module/property/Property';
 import { API } from '@/app/api/common/API';
-
 const fetchProperties = async (): Promise<Property[]> => {
   try {
     const API_OFFICETELS = `${API.LANDSERVER}/officetels`;
     const API_APARTMENTS = `${API.LANDSERVER}/apartments`;
-
     const [officetelsResponse, apartmentsResponse] = await Promise.all([
       axios.get(API_OFFICETELS),
       axios.get(API_APARTMENTS),
     ]);
-
     let properties = [...officetelsResponse.data, ...apartmentsResponse.data];
-
     return properties;
   } catch (error) {
     console.error('Failed to fetch data from the server', error);
     return [];
   }
 };
-
 const PropertyFilteringMapFive: React.FC = () => {
   const searchParams = useSearchParams(); // useSearchParams 훅 사용
   const typeParam = searchParams.get('type'); // 쿼리 파라미터에서 'type' 가져오기
-  
   const initialListingStatus = typeParam ? typeParam.toString() : '전체'; // 기본 상태를 '전체'로 설정
   const [properties, setProperties] = useState<Property[]>([]);
   const [filteredData, setFilteredData] = useState<Property[]>([]);
@@ -54,10 +47,8 @@ const PropertyFilteringMapFive: React.FC = () => {
   const [yearBuild, setyearBuild] = useState<number[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-
   // 페이지 당 항목 수 설정
   const pageCapacity = 8;
-
   const resetFilter = () => {
     setListingStatus('전체');
     setPropertyTypes([]);
@@ -72,12 +63,10 @@ const PropertyFilteringMapFive: React.FC = () => {
     document.querySelectorAll<HTMLInputElement>('.filterInput').forEach((element) => {
       element.value = '';
     });
-
     document.querySelectorAll<HTMLSelectElement>('.filterSelect').forEach((element) => {
       element.value = '전체';
     });
   };
-
   const filterFunctions = {
     handlelistingStatus: (elm: string) => setListingStatus((prev) => (prev === elm ? '전체' : elm)),
     handlepropertyTypes: (elm: string) =>
@@ -103,17 +92,14 @@ const PropertyFilteringMapFive: React.FC = () => {
     setPropertyTypes,
     setSearchQuery,
   };
-
   useEffect(() => {
     const fetchAndSetProperties = async () => {
       const properties = await fetchProperties();
       setProperties(properties);
       setFilteredData(properties.filter(property => property.rletTpNm === initialListingStatus)); // 초기 필터링 설정
     };
-
     fetchAndSetProperties();
   }, [initialListingStatus]);
-
   useEffect(() => {
     const refItems = properties.filter((elm) => {
       if (listingStatus === '전체') {
@@ -131,37 +117,35 @@ const PropertyFilteringMapFive: React.FC = () => {
       }
       return false;
     });
-
+    // 지역 필터링 추가
+    const locationFilteredItems = location === '전체'
+      ? refItems
+      : refItems.filter((elm) => elm.town.includes(location));
     let filteredArrays: Property[][] = [];
-
     if (priceRange.length > 0) {
-      const filtered = refItems.filter(
+      const filtered = locationFilteredItems.filter(
         (elm) =>
           Number(elm.prc) >= priceRange[0] &&
-          Number(elm.prc) <= priceRange[1],
+          Number(elm.prc) <= priceRange[1]
       );
       filteredArrays.push(filtered);
     }
-
     if (squirefeet.length > 0 && squirefeet[1]) {
-      const filtered = refItems.filter(
+      const filtered = locationFilteredItems.filter(
         (elm) =>
           (elm.spc1 * 0.3025) >= squirefeet[0] &&
-          (elm.spc1 * 0.3025) <= squirefeet[1],
+          (elm.spc1 * 0.3025) <= squirefeet[1]
       );
       filteredArrays.push(filtered);
     }
-
     if (propertyTypes.length > 0) {
-      filteredArrays.push(refItems.filter((elm) => propertyTypes.includes(elm.rletTpNm)));
+      filteredArrays.push(locationFilteredItems.filter((elm) => propertyTypes.includes(elm.rletTpNm)));
     }
-    filteredArrays.push(refItems.filter((el) => el.spc1 >= bedrooms));
-    filteredArrays.push(refItems.filter((el) => el.spc2 >= bathroms));
-
-    const commonItems = refItems.filter((item) =>
+    filteredArrays.push(locationFilteredItems.filter((el) => el.spc1 >= bedrooms));
+    filteredArrays.push(locationFilteredItems.filter((el) => el.spc2 >= bathroms));
+    const commonItems = locationFilteredItems.filter((item) =>
       filteredArrays.every((array) => array.includes(item))
     );
-
     setFilteredData(commonItems);
   }, [
     properties,
@@ -176,7 +160,6 @@ const PropertyFilteringMapFive: React.FC = () => {
     categories,
     searchQuery,
   ]);
-
   useEffect(() => {
     if (currentSortingOption === '최신순') {
       setSortedFilteredData(
@@ -192,12 +175,10 @@ const PropertyFilteringMapFive: React.FC = () => {
       setSortedFilteredData([...filteredData].sort((a, b) => b.prc - a.prc));
     }
   }, [filteredData, currentSortingOption]);
-
   useEffect(() => {
     setPageItems(sortedFilteredData.slice((pageNumber - 1) * pageCapacity, pageNumber * pageCapacity));
     setPageContentTrac([((pageNumber - 1) * pageCapacity) + 1, pageNumber * pageCapacity, sortedFilteredData.length]);
   }, [pageNumber, sortedFilteredData, pageCapacity]);
-
   return (
     <>
       <section className="advance-search-menu bg-white position-relative default-box-shadow2 pt15 pb5 bb1 dn-992">
@@ -220,7 +201,6 @@ const PropertyFilteringMapFive: React.FC = () => {
           </div>
         </div>
       </section>
-
       <section className="p-0 bgc-f7">
         <div className="container-fluid">
           <div className="row" data-aos="fade-up" data-aos-duration="200">
@@ -249,5 +229,4 @@ const PropertyFilteringMapFive: React.FC = () => {
     </>
   );
 };
-
 export default PropertyFilteringMapFive;

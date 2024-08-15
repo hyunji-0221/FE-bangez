@@ -88,7 +88,7 @@ const GridFull3Col = () => {
         width: '90%', 
         maxWidth: '1200px', 
         margin: 'auto', 
-        height: '80vh' 
+        height: '81vh' 
       }}>
         {/* 왼쪽 필터 버튼 컬럼 */}
         <div style={{ 

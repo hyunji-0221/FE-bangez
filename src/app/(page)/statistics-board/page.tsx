@@ -71,7 +71,7 @@ const DashboardHome = () => {
                 <div className="col-xl-5"  >
                   <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                     <h4 className="title fz17 mb25">최근 1년간 아파트 거래량 순위</h4>
-                    <div style={{ height: '100%', width: '100%', overflow: 'auto' }}>
+                    <div style={{ height: '390px', width: '100%', overflow: 'auto' }}>
                       <PropertyDataTable />
                     </div>
                   </div>
@@ -92,7 +92,9 @@ const DashboardHome = () => {
                   </div>
                   <div className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
                     {/* <h4 className="title fz17 mb25">지역별 평당 가격 범위</h4> */}
-                    <BoxChart />
+                    <div className="row" style={{ height: '100%' }}>
+                      <BoxChart />
+                    </div>
                   </div>
                 </div>
                 {/* End .col-xl-4 */}

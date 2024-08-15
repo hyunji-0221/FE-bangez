@@ -23,8 +23,8 @@ const TopFilterBar = ({setCurrentSortingOption,colstyle,setColstyle,pageContentT
               <option>최신순</option>
               <option>인기순</option>
               <option>추천순</option>
-              <option>낮은 가격 순</option>
-              <option>높은 가격 순</option>
+              <option>가격 낮은 순</option>
+              <option>가격 높은 순</option>
             </select>
           </div>
           

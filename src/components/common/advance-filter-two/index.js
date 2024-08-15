@@ -95,7 +95,7 @@ const AdvanceFilterModal = ({ filterFunctions }) => {
         {/* End modal-header */}
 
         <div className="modal-body pb-0">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-lg-12">
               <div className="widget-wrapper">
                 <h6 className="list-title mb20">가격 범위  (만 원)</h6>
@@ -104,11 +104,11 @@ const AdvanceFilterModal = ({ filterFunctions }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* End .row */}
 
           <div className="row">
-            <div className="col-sm-6">
+            {/* <div className="col-sm-6">
               <div className="widget-wrapper">
                 <h6 className="list-title">매물 유형</h6>
                 <div className="form-style2 input-group">
@@ -126,10 +126,10 @@ const AdvanceFilterModal = ({ filterFunctions }) => {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* End .col-6 */}
 
-            <div className="col-sm-6">
+            {/* <div className="col-sm-6">
               <div className="widget-wrapper">
                 <h6 className="list-title">거래 유형</h6>
                 <div className="form-style2 input-group">
@@ -147,7 +147,7 @@ const AdvanceFilterModal = ({ filterFunctions }) => {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* End .col-6 */}
           </div>
           {/* End .row */}

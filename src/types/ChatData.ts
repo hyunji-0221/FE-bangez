@@ -44,3 +44,8 @@ export interface UserInboxProps {
     setReceiverId: React.Dispatch<React.SetStateAction<string>>,
     UserId: { userId: string }
 }
+
+export type Notification = {
+    userId: string,
+    notification: number
+}
